@@ -7,21 +7,34 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library("dplyr")
+library("tidyverse")
+library("lubridate")
+
+getwd()
+raw1<-read.csv("../Data/Original/Shifted/S1.6.csv")
+raw2<-read.csv("../Data/Original/Shifted/S2.6.csv")
+raw3<-read.csv("../Data/Original/Shifted/S3.6.csv")
+raw4<-read.csv("../Data/Original/Shifted/S4.6.csv")
+
+names(raw1)[1]<-"Index"
 ```
 
-## R Markdown
+```{r more setup}
+raw1$Date<-as.Date(raw1$Date, format = "%m/%d/%Y")
+raw2$Date<-as.Date(raw2$Date, format = "%m/%d/%Y")
+raw3$Date<-as.Date(raw3$Date, format = "%m/%d/%Y")
+raw4$Date<-as.Date(raw4$Date, format = "%m/%d/%Y")
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+raw1<-raw1%>%mutate_if(is.character, as.numeric)
+raw2<-raw2%>%mutate_if(is.character, as.numeric)
+raw3<-raw3%>%mutate_if(is.character, as.numeric)
+raw4<-raw4%>%mutate_if(is.character, as.numeric)
 ```
 
-## Including Plots
+```{r K2Sap}
 
-You can also embed plots, for example:
+```
 
 ```{r pressure, echo=FALSE}
 plot(pressure)
