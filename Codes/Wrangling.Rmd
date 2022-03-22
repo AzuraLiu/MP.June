@@ -33,11 +33,176 @@ raw4<-raw4%>%mutate_if(is.character, as.numeric)
 ```
 
 ```{r K2Sap}
+library(dplyr)
+Sap1<- raw1 %>% 
+  mutate_at(vars(7:38),
+            .funs = funs((.^1.231) * 119))
+
+Sap2<- raw2 %>% 
+  mutate_at(vars(7:38),
+            .funs = funs((.^1.231) * 119))
+
+Sap3<- raw3 %>% 
+  mutate_at(vars(7:38),
+            .funs = funs((.^1.231) * 119))
+
+Sap4<- raw4 %>% 
+  mutate_at(vars(7:38),
+            .funs = funs((.^1.231) * 119))
+
+write.csv(Sap1, row.names = FALSE, file ="../Data/Processed/KtoSap/Sap1.csv")
+write.csv(Sap2, row.names = FALSE, file ="../Data/Processed/KtoSap/Sap2.csv")
+write.csv(Sap3, row.names = FALSE, file ="../Data/Processed/KtoSap/Sap3.csv")
+write.csv(Sap4, row.names = FALSE, file ="../Data/Processed/KtoSap/Sap4.csv")
+```
+
+```{r 24hr}
+Sap1.24<-aggregate(Sap1[,c(5,7:38)], by = list(Sap1$Date, Sap1$DOY),FUN = "sum")%>%
+  mutate(Interval = "24hr")%>%
+  select(1,2,36,3:35)
+names(Sap1.24)[1]<-"Date"
+names(Sap1.24)[2]<-"DOY"
+
+Sap2.24<-aggregate(Sap2[,c(5,7:38)], by = list(Sap2$Date, Sap2$DOY),FUN = "sum")%>%
+  mutate(Interval = "24hr")%>%
+  select(1,2,36,3:35)
+names(Sap2.24)[1]<-"Date"
+names(Sap2.24)[2]<-"DOY"
+
+Sap3.24<-aggregate(Sap3[,c(5,7:38)], by = list(Sap3$Date, Sap3$DOY),FUN = "sum")%>%
+  mutate(Interval = "24hr")%>%
+  select(1,2,36,3:35)
+names(Sap3.24)[1]<-"Date"
+names(Sap3.24)[2]<-"DOY"
+
+Sap4.24<-aggregate(Sap4[,c(5,7:38)], by = list(Sap4$Date, Sap4$DOY),FUN = "sum")%>%
+  mutate(Interval = "24hr")%>%
+  select(1,2,36,3:35)
+names(Sap4.24)[1]<-"Date"
+names(Sap4.24)[2]<-"DOY"
+
+write.csv(Sap1.24, row.names = FALSE, file ="../Data/Processed/Sums/24hr/Sap1.24.csv")
+write.csv(Sap2.24, row.names = FALSE, file ="../Data/Processed/Sums/24hr/Sap2.24.csv")
+write.csv(Sap3.24, row.names = FALSE, file ="../Data/Processed/Sums/24hr/Sap3.24.csv")
+write.csv(Sap4.24, row.names = FALSE, file ="../Data/Processed/Sums/24hr/Sap4.24.csv")
 
 ```
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+```{r assign dn}
+Sap1.cat<-Sap1%>%
+  mutate( cut(Sap1$Time,breaks = c(-1,630, 2000,Inf), labels = c("Night", "Daytime", "Night")))
+names(Sap1.cat)[39]<-"Cat"
+
+Sap2.cat<-Sap2%>%
+  mutate( cut(Sap2$Time,breaks = c(-1,630, 2000,Inf), labels = c("Night", "Daytime", "Night")))
+names(Sap2.cat)[39]<-"Cat"
+
+Sap3.cat<-Sap3%>%
+  mutate( cut(Sap3$Time,breaks = c(-1,630, 2000,Inf), labels = c("Night", "Daytime", "Night")))
+names(Sap3.cat)[39]<-"Cat"
+
+Sap4.cat<-Sap4%>%
+  mutate( cut(Sap4$Time,breaks = c(-1,630, 2000,Inf), labels = c("Night", "Daytime", "Night")))
+names(Sap4.cat)[39]<-"Cat"
 ```
+
+```{r sum dn}
+Sap1.dn<-aggregate(Sap1.cat[,c(5,7:38)], by = list(Sap1.cat$Date,Sap1.cat$DOY, Sap1.cat$Cat),FUN = "sum")
+names(Sap1.dn)[1]<-"Date"
+names(Sap1.dn)[2]<-"DOY"
+names(Sap1.dn)[3]<-"Interval"
+
+
+Sap2.dn<-aggregate(Sap2.cat[,c(5,7:38)], by = list(Sap2.cat$Date,Sap2.cat$DOY, Sap2.cat$Cat),FUN = "sum")
+names(Sap2.dn)[1]<-"Date"
+names(Sap2.dn)[2]<-"DOY"
+names(Sap2.dn)[3]<-"Interval"
+
+
+Sap3.dn<-aggregate(Sap3.cat[,c(5,7:38)], by = list(Sap3.cat$Date,Sap3.cat$DOY, Sap3.cat$Cat),FUN = "sum")
+names(Sap3.dn)[1]<-"Date"
+names(Sap3.dn)[2]<-"DOY"
+names(Sap3.dn)[3]<-"Interval"
+
+Sap4.dn<-aggregate(Sap4.cat[,c(5,7:38)], by = list(Sap4.cat$Date,Sap4.cat$DOY, Sap4.cat$Cat),FUN = "sum")
+names(Sap4.dn)[1]<-"Date"
+names(Sap4.dn)[2]<-"DOY"
+names(Sap4.dn)[3]<-"Interval"
+```
+
+```{r separate dn}
+Sap1.day<-Sap1.dn%>%
+  filter(Interval == "Daytime")
+Sap2.day<-Sap2.dn%>%
+  filter(Interval == "Daytime")
+Sap3.day<-Sap3.dn%>%
+  filter(Interval == "Daytime")
+Sap4.day<-Sap4.dn%>%
+  filter(Interval == "Daytime")
+
+write.csv(Sap1.day, row.names = FALSE, file ="../Data/Processed/Sums/Daytime/Sap1.day.csv")
+write.csv(Sap2.day, row.names = FALSE, file ="../Data/Processed/Sums/Daytime/Sap2.day.csv")
+write.csv(Sap3.day, row.names = FALSE, file ="../Data/Processed/Sums/Daytime/Sap3.day.csv")
+write.csv(Sap4.day, row.names = FALSE, file ="../Data/Processed/Sums/Daytime/Sap4.day.csv")
+
+Sap1.night<-Sap1.dn%>%
+  filter(Interval == "Night")
+Sap2.night<-Sap2.dn%>%
+  filter(Interval == "Night")
+Sap3.night<-Sap3.dn%>%
+  filter(Interval == "Night")
+Sap4.night<-Sap4.dn%>%
+  filter(Interval == "Night")
+
+write.csv(Sap1.night, row.names = FALSE, file ="../Data/Processed/Sums/Night/Sap1.night.csv")
+write.csv(Sap2.night, row.names = FALSE, file ="../Data/Processed/Sums/Night/Sap2.night.csv")
+write.csv(Sap3.night, row.names = FALSE, file ="../Data/Processed/Sums/Night/Sap3.night.csv")
+write.csv(Sap4.night, row.names = FALSE, file ="../Data/Processed/Sums/Night/Sap4.night.csv")
+```
+
+```{r combine}
+Sap1.Sum<-rbind(Sap1.24,Sap1.dn)
+Sap2.Sum<-rbind(Sap2.24,Sap2.dn)
+Sap3.Sum<-rbind(Sap3.24,Sap3.dn)
+Sap4.Sum<-rbind(Sap4.24,Sap4.dn)
+
+write.csv(Sap1.Sum, row.names = FALSE, file ="../Data/Processed/Sums/Sap1.Sum.csv")
+write.csv(Sap2.Sum, row.names = FALSE, file ="../Data/Processed/Sums/Sap2.Sum.csv")
+write.csv(Sap3.Sum, row.names = FALSE, file ="../Data/Processed/Sums/Sap3.Sum.csv")
+write.csv(Sap4.Sum, row.names = FALSE, file ="../Data/Processed/Sums/Sap4.Sum.csv")
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
