@@ -1,0 +1,406 @@
+$`1`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[1L]] and dots[[2L]][[1L]]
+t = -0.0011408, df = 10, p-value = 0.9991
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21933.12  21910.67
+sample estimates:
+mean of x mean of y 
+ 9565.051  9576.275 
+
+
+$`2`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[2L]] and dots[[2L]][[2L]]
+t = 0.01618, df = 10, p-value = 0.9874
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21634.19  21950.70
+sample estimates:
+mean of x mean of y 
+ 9858.390  9700.135 
+
+
+$`3`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[3L]] and dots[[2L]][[3L]]
+t = 0.046737, df = 10, p-value = 0.9636
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21332.22  22246.32
+sample estimates:
+mean of x mean of y 
+10045.313  9588.266 
+
+
+$`4`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[4L]] and dots[[2L]][[4L]]
+t = 0.032595, df = 10, p-value = 0.9746
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21865.98  22515.23
+sample estimates:
+mean of x mean of y 
+ 9316.639  8992.014 
+
+
+$`5`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[5L]] and dots[[2L]][[5L]]
+t = -0.00037798, df = 10, p-value = 0.9997
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -22981.12  22973.33
+sample estimates:
+mean of x mean of y 
+ 7891.485  7895.383 
+
+
+$`6`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[6L]] and dots[[2L]][[6L]]
+t = 0.026062, df = 10, p-value = 0.9797
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21764.21  22279.38
+sample estimates:
+mean of x mean of y 
+ 9550.288  9292.702 
+
+
+$`7`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[7L]] and dots[[2L]][[7L]]
+t = -0.019062, df = 10, p-value = 0.9852
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -22148.47  21772.73
+sample estimates:
+mean of x mean of y 
+ 9445.344  9633.216 
+
+
+$`8`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[8L]] and dots[[2L]][[8L]]
+t = 0.0059912, df = 10, p-value = 0.9953
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -22216.61  22336.41
+sample estimates:
+mean of x mean of y 
+ 9050.928  8991.029 
+
+
+$`9`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[9L]] and dots[[2L]][[9L]]
+t = 0.029387, df = 10, p-value = 0.9771
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21440.72  22013.84
+sample estimates:
+mean of x mean of y 
+10032.217  9745.655 
+
+
+$`10`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[10L]] and dots[[2L]][[10L]]
+t = 0.032701, df = 10, p-value = 0.9746
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21324.60  21959.86
+sample estimates:
+mean of x mean of y 
+10197.282  9879.652 
+
+
+$`11`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[11L]] and dots[[2L]][[11L]]
+t = 0.010833, df = 10, p-value = 0.9916
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21581.36  21792.24
+sample estimates:
+mean of x mean of y 
+10009.727  9904.284 
+
+
+$`12`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[12L]] and dots[[2L]][[12L]]
+t = 0.015169, df = 10, p-value = 0.9882
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21782.12  22080.73
+sample estimates:
+mean of x mean of y 
+ 9640.232  9490.926 
+
+
+$`13`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[13L]] and dots[[2L]][[13L]]
+t = 0.0078577, df = 10, p-value = 0.9939
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -22166.04  22322.93
+sample estimates:
+mean of x mean of y 
+ 9105.911  9027.464 
+
+
+$`14`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[14L]] and dots[[2L]][[14L]]
+t = 0.022286, df = 10, p-value = 0.9827
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21647.24  22084.66
+sample estimates:
+mean of x mean of y 
+ 9784.732  9566.024 
+
+
+$`15`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[15L]] and dots[[2L]][[15L]]
+t = 0.012063, df = 10, p-value = 0.9906
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -22109.48  22350.18
+sample estimates:
+mean of x mean of y 
+ 9151.876  9031.525 
+
+
+$`16`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[16L]] and dots[[2L]][[16L]]
+t = 0.00087522, df = 10, p-value = 0.9993
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -22436.80  22454.43
+sample estimates:
+mean of x mean of y 
+ 8758.235  8749.418 
+
+
+$`17`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[17L]] and dots[[2L]][[17L]]
+t = 0.0072239, df = 10, p-value = 0.9944
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -22215.68  22360.20
+sample estimates:
+mean of x mean of y 
+ 9050.329  8978.069 
+
+
+$`18`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[18L]] and dots[[2L]][[18L]]
+t = 0.011677, df = 10, p-value = 0.9909
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -22029.03  22261.14
+sample estimates:
+mean of x mean of y 
+ 9306.969  9190.912 
+
+
+$`19`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[19L]] and dots[[2L]][[19L]]
+t = -0.042657, df = 10, p-value = 0.9668
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -22733.36  21879.27
+sample estimates:
+mean of x mean of y 
+ 8769.764  9196.810 
+
+
+$`20`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[20L]] and dots[[2L]][[20L]]
+t = -0.061535, df = 10, p-value = 0.9521
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -22768.27  21544.48
+sample estimates:
+mean of x mean of y 
+ 8922.774  9534.667 
+
+
+$`21`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[21L]] and dots[[2L]][[21L]]
+t = 0.011544, df = 10, p-value = 0.991
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21940.02  22168.54
+sample estimates:
+mean of x mean of y 
+ 9442.446  9328.186 
+
+
+$`22`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[22L]] and dots[[2L]][[22L]]
+t = -0.069597, df = 10, p-value = 0.9459
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -22791.71  21411.01
+sample estimates:
+mean of x mean of y 
+ 8972.232  9662.581 
+
+
+$`23`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[23L]] and dots[[2L]][[23L]]
+t = -0.032319, df = 10, p-value = 0.9749
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -22317.96  21679.77
+sample estimates:
+mean of x mean of y 
+ 9323.212  9642.307 
+
+
+$`24`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[24L]] and dots[[2L]][[1L]]
+t = 0.0074436, df = 10, p-value = 0.9942
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21829.64  21975.98
+sample estimates:
+mean of x mean of y 
+ 9649.446  9576.275 
+
+
+$`25`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[25L]] and dots[[2L]][[2L]]
+t = -0.015219, df = 10, p-value = 0.9882
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -22045.09  21745.98
+sample estimates:
+mean of x mean of y 
+ 9550.582  9700.135 
+
+
+$`26`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[26L]] and dots[[2L]][[3L]]
+t = 0.038085, df = 10, p-value = 0.9704
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21449.98  22196.02
+sample estimates:
+mean of x mean of y 
+ 9961.283  9588.266 
+
+
+$`27`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[27L]] and dots[[2L]][[4L]]
+t = 0.062507, df = 10, p-value = 0.9514
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21485.45  22725.73
+sample estimates:
+mean of x mean of y 
+ 9612.154  8992.014 
+
+
+$`28`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[28L]] and dots[[2L]][[5L]]
+t = 0.20888, df = 10, p-value = 0.8387
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -20244.91  24433.31
+sample estimates:
+mean of x mean of y 
+ 9989.585  7895.383 
+
+
+$`29`
+
+	Two Sample t-test
+
+data:  dots[[1L]][[29L]] and dots[[2L]][[6L]]
+t = 0.075904, df = 10, p-value = 0.941
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -21136.08  22626.91
+sample estimates:
+mean of x mean of y 
+10038.119  9292.702 
+
+
