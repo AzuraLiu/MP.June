@@ -41,7 +41,7 @@ HCO1.1<-ggplot(S1.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HCOS1, color = "HCOS1",shape = "."))+
   geom_point(aes(y=HCON1, color = "HCON1",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO1.1
 ggsave("../Data/Plots/NS/S1/HCO1.1.jpg", HCO1.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -50,7 +50,7 @@ HCO1.2<-ggplot(S1.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HCOS1, color = "HCOS1",shape = "."))+
   geom_point(aes(y=HCON1, color = "HCON1",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO1.2
 ggsave("../Data/Plots/NS/S1/HCO1.2.jpg", HCO1.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -59,7 +59,7 @@ HCO1.3<-ggplot(S1.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HCOS1, color = "HCOS1",shape = "."))+
   geom_point(aes(y=HCON1, color = "HCON1",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO1.3
 ggsave("../Data/Plots/NS/S1/HCO1.3.jpg", HCO1.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -71,7 +71,7 @@ HCO2.1<-ggplot(S1.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HCOS2, color = "HCOS2",shape = "."))+
   geom_point(aes(y=HCON2, color = "HCON2",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO2.1
 ggsave("../Data/Plots/NS/S1/HCO2.1.jpg", HCO2.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -80,7 +80,7 @@ HCO2.2<-ggplot(S1.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HCOS2, color = "HCOS2",shape = "."))+
   geom_point(aes(y=HCON2, color = "HCON2",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO2.2
 ggsave("../Data/Plots/NS/S1/HCO2.2.jpg", HCO2.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -89,7 +89,7 @@ HCO2.3<-ggplot(S1.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HCOS2, color = "HCOS2",shape = "."))+
   geom_point(aes(y=HCON2, color = "HCON2",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO2.3
 ggsave("../Data/Plots/NS/S1/HCO2.3.jpg", HCO2.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -100,7 +100,7 @@ HCO4.1<-ggplot(S1.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HCOS4, color = "HCOS4",shape = "."))+
   geom_point(aes(y=HCON4, color = "HCON4",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO4.1
 ggsave("../Data/Plots/NS/S1/HCO4.1.jpg", HCO4.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -109,7 +109,7 @@ HCO4.2<-ggplot(S1.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HCOS4, color = "HCOS4",shape = "."))+
   geom_point(aes(y=HCON4, color = "HCON4",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO4.2
 ggsave("../Data/Plots/NS/S1/HCO4.2.jpg", HCO4.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -118,7 +118,7 @@ HCO4.3<-ggplot(S1.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HCOS4, color = "HCOS4",shape = "."))+
   geom_point(aes(y=HCON4, color = "HCON4",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO4.3
 ggsave("../Data/Plots/NS/S1/HCO4.3.jpg", HCO4.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -128,7 +128,7 @@ HCO6.1<-ggplot(S1.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HCOS6, color = "HCOS6",shape = "."))+
   geom_point(aes(y=HCON6, color = "HCON6",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO6.1
 ggsave("../Data/Plots/NS/S1/HCO6.1.jpg", HCO6.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -137,7 +137,7 @@ HCO6.2<-ggplot(S1.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HCOS6, color = "HCOS6",shape = "."))+
   geom_point(aes(y=HCON6, color = "HCON6",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO6.2
 ggsave("../Data/Plots/NS/S1/HCO6.2.jpg", HCO6.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -146,7 +146,7 @@ HCO6.3<-ggplot(S1.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HCOS6, color = "HCOS6",shape = "."))+
   geom_point(aes(y=HCON6, color = "HCON6",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO6.3
 ggsave("../Data/Plots/NS/S1/HCO6.3.jpg", HCO6.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -156,7 +156,7 @@ HCO8.1<-ggplot(S1.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HCOS8, color = "HCOS8",shape = "."))+
   geom_point(aes(y=HCON8, color = "HCON8",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO8.1
 ggsave("../Data/Plots/NS/S1/HCO8.1.jpg", HCO8.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -165,7 +165,7 @@ HCO8.2<-ggplot(S1.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HCOS8, color = "HCOS8",shape = "."))+
   geom_point(aes(y=HCON8, color = "HCON8",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO8.2
 ggsave("../Data/Plots/NS/S1/HCO8.2.jpg", HCO8.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -174,7 +174,7 @@ HCO8.3<-ggplot(S1.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HCOS8, color = "HCOS8",shape = "."))+
   geom_point(aes(y=HCON8, color = "HCON8",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HCO8.3
 ggsave("../Data/Plots/NS/S1/HCO8.3.jpg", HCO8.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -185,7 +185,7 @@ LOO10.1<-ggplot(S1.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LOOS10, color = "LOOS10",shape = "."))+
   geom_point(aes(y=LOON10, color = "LOON10",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO10.1
 ggsave("../Data/Plots/NS/S1/LOO10.1.jpg", LOO10.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -194,7 +194,7 @@ LOO10.2<-ggplot(S1.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LOOS10, color = "LOOS10",shape = "."))+
   geom_point(aes(y=LOON10, color = "LOON10",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO10.2
 ggsave("../Data/Plots/NS/S1/LOO10.2.jpg", LOO10.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -203,7 +203,7 @@ LOO10.3<-ggplot(S1.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LOOS10, color = "LOOS10",shape = "."))+
   geom_point(aes(y=LOON10, color = "LOON10",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO10.3
 ggsave("../Data/Plots/NS/S1/LOO10.3.jpg", LOO10.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -215,7 +215,7 @@ LOO11.1<-ggplot(S1.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LOOS11, color = "LOOS11",shape = "."))+
   geom_point(aes(y=LOON11, color = "LOON11",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO11.1
 ggsave("../Data/Plots/NS/S1/LOO11.1.jpg", LOO11.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -224,7 +224,7 @@ LOO11.2<-ggplot(S1.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LOOS11, color = "LOOS11",shape = "."))+
   geom_point(aes(y=LOON11, color = "LOON11",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO11.2
 ggsave("../Data/Plots/NS/S1/LOO11.2.jpg", LOO11.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -233,7 +233,7 @@ LOO11.3<-ggplot(S1.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LOOS11, color = "LOOS11",shape = "."))+
   geom_point(aes(y=LOON11, color = "LOON11",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO11.3
 ggsave("../Data/Plots/NS/S1/LOO11.3.jpg", LOO11.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -245,7 +245,7 @@ LOO12.1<-ggplot(S1.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LOOS12, color = "LOOS12",shape = "."))+
   geom_point(aes(y=LOON12, color = "LOON12",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO12.1
 ggsave("../Data/Plots/NS/S1/LOO12.1.jpg", LOO12.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -254,7 +254,7 @@ LOO12.2<-ggplot(S1.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LOOS12, color = "LOOS12",shape = "."))+
   geom_point(aes(y=LOON12, color = "LOON12",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO12.2
 ggsave("../Data/Plots/NS/S1/LOO12.2.jpg", LOO12.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -263,7 +263,7 @@ LOO12.3<-ggplot(S1.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LOOS12, color = "LOOS12",shape = "."))+
   geom_point(aes(y=LOON12, color = "LOON12",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO12.3
 ggsave("../Data/Plots/NS/S1/LOO12.3.jpg", LOO12.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -275,7 +275,7 @@ LOO14.1<-ggplot(S1.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LOOS14, color = "LOOS14",shape = "."))+
   geom_point(aes(y=LOON14, color = "LOON14",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO14.1
 ggsave("../Data/Plots/NS/S1/LOO14.1.jpg", LOO14.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -284,7 +284,7 @@ LOO14.2<-ggplot(S1.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LOOS14, color = "LOOS14",shape = "."))+
   geom_point(aes(y=LOON14, color = "LOON14",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO14.2
 ggsave("../Data/Plots/NS/S1/LOO14.2.jpg", LOO14.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -293,7 +293,7 @@ LOO14.3<-ggplot(S1.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LOOS14, color = "LOOS14",shape = "."))+
   geom_point(aes(y=LOON14, color = "LOON14",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO14.3
 ggsave("../Data/Plots/NS/S1/LOO14.3.jpg", LOO14.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -306,7 +306,7 @@ LOO15.1<-ggplot(S1.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LOOS15, color = "LOOS15",shape = "."))+
   geom_point(aes(y=LOON15, color = "LOON15",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO15.1
 ggsave("../Data/Plots/NS/S1/LOO15.1.jpg", LOO15.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -315,7 +315,7 @@ LOO15.2<-ggplot(S1.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LOOS15, color = "LOOS15",shape = "."))+
   geom_point(aes(y=LOON15, color = "LOON15",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO15.2
 ggsave("../Data/Plots/NS/S1/LOO15.2.jpg", LOO15.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -324,7 +324,7 @@ LOO15.3<-ggplot(S1.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LOOS15, color = "LOOS15",shape = "."))+
   geom_point(aes(y=LOON15, color = "LOON15",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO15.3
 ggsave("../Data/Plots/NS/S1/LOO15.3.jpg", LOO15.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -337,7 +337,7 @@ LOO17.1<-ggplot(S1.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LOOS17, color = "LOOS17",shape = "."))+
   geom_point(aes(y=LOON17, color = "LOON17",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO17.1
 ggsave("../Data/Plots/NS/S1/LOO17.1.jpg", LOO17.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -346,7 +346,7 @@ LOO17.2<-ggplot(S1.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LOOS17, color = "LOOS17",shape = "."))+
   geom_point(aes(y=LOON17, color = "LOON17",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO17.2
 ggsave("../Data/Plots/NS/S1/LOO17.2.jpg", LOO17.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -355,7 +355,7 @@ LOO17.3<-ggplot(S1.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LOOS17, color = "LOOS17",shape = "."))+
   geom_point(aes(y=LOON17, color = "LOON17",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LOO17.3
 ggsave("../Data/Plots/NS/S1/LOO17.3.jpg", LOO17.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -371,7 +371,7 @@ LCO1.1<-ggplot(S2.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LCOS1, color = "LCOS1",shape = "."))+
   geom_point(aes(y=LCON1, color = "LCON1",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO1.1
 ggsave("../Data/Plots/NS/S2/LCO1.1.jpg", LCO1.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -380,7 +380,7 @@ LCO1.2<-ggplot(S2.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LCOS1, color = "LCOS1",shape = "."))+
   geom_point(aes(y=LCON1, color = "LCON1",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO1.2
 ggsave("../Data/Plots/NS/S2/LCO1.2.jpg", LCO1.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -389,7 +389,7 @@ LCO1.3<-ggplot(S2.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LCOS1, color = "LCOS1",shape = "."))+
   geom_point(aes(y=LCON1, color = "LCON1",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO1.3
 ggsave("../Data/Plots/NS/S2/LCO1.3.jpg", LCO1.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -402,7 +402,7 @@ LCO2.1<-ggplot(S2.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LCOS2, color = "LCOS2",shape = "."))+
   geom_point(aes(y=LCON2, color = "LCON2",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO2.1
 ggsave("../Data/Plots/NS/S2/LCO2.1.jpg", LCO2.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -411,7 +411,7 @@ LCO2.2<-ggplot(S2.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LCOS2, color = "LCOS2",shape = "."))+
   geom_point(aes(y=LCON2, color = "LCON2",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO2.2
 ggsave("../Data/Plots/NS/S2/LCO2.2.jpg", LCO2.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -420,7 +420,7 @@ LCO2.3<-ggplot(S2.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LCOS2, color = "LCOS2",shape = "."))+
   geom_point(aes(y=LCON2, color = "LCON2",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO2.3
 ggsave("../Data/Plots/NS/S2/LCO2.3.jpg", LCO2.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -434,7 +434,7 @@ LCO4.1<-ggplot(S2.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LCOS4, color = "LCOS4",shape = "."))+
   geom_point(aes(y=LCON4, color = "LCON4",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO4.1
 ggsave("../Data/Plots/NS/S2/LCO4.1.jpg", LCO4.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -443,7 +443,7 @@ LCO4.2<-ggplot(S2.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LCOS4, color = "LCOS4",shape = "."))+
   geom_point(aes(y=LCON4, color = "LCON4",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO4.2
 ggsave("../Data/Plots/NS/S2/LCO4.2.jpg", LCO4.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -452,7 +452,7 @@ LCO4.3<-ggplot(S2.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LCOS4, color = "LCOS4",shape = "."))+
   geom_point(aes(y=LCON4, color = "LCON4",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO4.3
 ggsave("../Data/Plots/NS/S2/LCO4.3.jpg", LCO4.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -466,7 +466,7 @@ LCO6.1<-ggplot(S2.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LCOS6, color = "LCOS6",shape = "."))+
   geom_point(aes(y=LCON6, color = "LCON6",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO6.1
 ggsave("../Data/Plots/NS/S2/LCO6.1.jpg", LCO6.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -475,7 +475,7 @@ LCO6.2<-ggplot(S2.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LCOS6, color = "LCOS6",shape = "."))+
   geom_point(aes(y=LCON6, color = "LCON6",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO6.2
 ggsave("../Data/Plots/NS/S2/LCO6.2.jpg", LCO6.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -484,7 +484,7 @@ LCO6.3<-ggplot(S2.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LCOS6, color = "LCOS6",shape = "."))+
   geom_point(aes(y=LCON6, color = "LCON6",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO6.3
 ggsave("../Data/Plots/NS/S2/LCO6.3.jpg", LCO6.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -496,7 +496,7 @@ LCO8.1<-ggplot(S2.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LCOS8, color = "LCOS8",shape = "."))+
   geom_point(aes(y=LCON8, color = "LCON8",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO8.1
 ggsave("../Data/Plots/NS/S2/LCO8.1.jpg", LCO8.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -505,7 +505,7 @@ LCO8.2<-ggplot(S2.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LCOS8, color = "LCOS8",shape = "."))+
   geom_point(aes(y=LCON8, color = "LCON8",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO8.2
 ggsave("../Data/Plots/NS/S2/LCO8.2.jpg", LCO8.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -514,7 +514,7 @@ LCO8.3<-ggplot(S2.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LCOS8, color = "LCOS8",shape = "."))+
   geom_point(aes(y=LCON8, color = "LCON8",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LCO8.3
 ggsave("../Data/Plots/NS/S2/LCO8.3.jpg", LCO8.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -528,7 +528,7 @@ HOO10.1<-ggplot(S2.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HOOS10, color = "HOOS10",shape = "."))+
   geom_point(aes(y=HOON10, color = "HOON10",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO10.1
 ggsave("../Data/Plots/NS/S2/HOO10.1.jpg", HOO10.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -537,7 +537,7 @@ HOO10.2<-ggplot(S2.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HOOS10, color = "HOOS10",shape = "."))+
   geom_point(aes(y=HOON10, color = "HOON10",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO10.2
 ggsave("../Data/Plots/NS/S2/HOO10.2.jpg", HOO10.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -546,7 +546,7 @@ HOO10.3<-ggplot(S2.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HOOS10, color = "HOOS10",shape = "."))+
   geom_point(aes(y=HOON10, color = "HOON10",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO10.3
 ggsave("../Data/Plots/NS/S2/HOO10.3.jpg", HOO10.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -558,7 +558,7 @@ HOO11.1<-ggplot(S2.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HOOS11, color = "HOOS11",shape = "."))+
   geom_point(aes(y=HOON11, color = "HOON11",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO11.1
 ggsave("../Data/Plots/NS/S2/HOO11.1.jpg", HOO11.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -567,7 +567,7 @@ HOO11.2<-ggplot(S2.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HOOS11, color = "HOOS11",shape = "."))+
   geom_point(aes(y=HOON11, color = "HOON11",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO11.2
 ggsave("../Data/Plots/NS/S2/HOO11.2.jpg", HOO11.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -576,7 +576,7 @@ HOO11.3<-ggplot(S2.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HOOS11, color = "HOOS11",shape = "."))+
   geom_point(aes(y=HOON11, color = "HOON11",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO11.3
 ggsave("../Data/Plots/NS/S2/HOO11.3.jpg", HOO11.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -588,7 +588,7 @@ HOO12.1<-ggplot(S2.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HOOS12, color = "HOOS12",shape = "."))+
   geom_point(aes(y=HOON12, color = "HOON12",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO12.1
 ggsave("../Data/Plots/NS/S2/HOO12.1.jpg", HOO12.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -597,7 +597,7 @@ HOO12.2<-ggplot(S2.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HOOS12, color = "HOOS12",shape = "."))+
   geom_point(aes(y=HOON12, color = "HOON12",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO12.2
 ggsave("../Data/Plots/NS/S2/HOO12.2.jpg", HOO12.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -606,7 +606,7 @@ HOO12.3<-ggplot(S2.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HOOS12, color = "HOOS12",shape = "."))+
   geom_point(aes(y=HOON12, color = "HOON12",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO12.3
 ggsave("../Data/Plots/NS/S2/HOO12.3.jpg", HOO12.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -619,7 +619,7 @@ HOO14.1<-ggplot(S2.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HOOS14, color = "HOOS14",shape = "."))+
   geom_point(aes(y=HOON14, color = "HOON14",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO14.1
 ggsave("../Data/Plots/NS/S2/HOO14.1.jpg", HOO14.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -628,7 +628,7 @@ HOO14.2<-ggplot(S2.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HOOS14, color = "HOOS14",shape = "."))+
   geom_point(aes(y=HOON14, color = "HOON14",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO14.2
 ggsave("../Data/Plots/NS/S2/HOO14.2.jpg", HOO14.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -637,7 +637,7 @@ HOO14.3<-ggplot(S2.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HOOS14, color = "HOOS14",shape = "."))+
   geom_point(aes(y=HOON14, color = "HOON14",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO14.3
 ggsave("../Data/Plots/NS/S2/HOO14.3.jpg", HOO14.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -650,7 +650,7 @@ HOO16.1<-ggplot(S2.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HOOS16, color = "HOOS16",shape = "."))+
   geom_point(aes(y=HOON16, color = "HOON16",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO16.1
 ggsave("../Data/Plots/NS/S2/HOO16.1.jpg", HOO16.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -659,7 +659,7 @@ HOO16.2<-ggplot(S2.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HOOS16, color = "HOOS16",shape = "."))+
   geom_point(aes(y=HOON16, color = "HOON16",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO16.2
 ggsave("../Data/Plots/NS/S2/HOO16.2.jpg", HOO16.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -668,7 +668,7 @@ HOO16.3<-ggplot(S2.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HOOS16, color = "HOOS16",shape = "."))+
   geom_point(aes(y=HOON16, color = "HOON16",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO16.3
 ggsave("../Data/Plots/NS/S2/HOO16.3.jpg", HOO16.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -679,7 +679,7 @@ HOO17.1<-ggplot(S2.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HOOS17, color = "HOOS17",shape = "."))+
   geom_point(aes(y=HOON17, color = "HOON17",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO17.1
 ggsave("../Data/Plots/NS/S2/HOO17.1.jpg", HOO17.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -688,7 +688,7 @@ HOO17.2<-ggplot(S2.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HOOS17, color = "HOOS17",shape = "."))+
   geom_point(aes(y=HOON17, color = "HOON17",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO17.2
 ggsave("../Data/Plots/NS/S2/HOO17.2.jpg", HOO17.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -697,7 +697,7 @@ HOO17.3<-ggplot(S2.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HOOS17, color = "HOOS17",shape = "."))+
   geom_point(aes(y=HOON17, color = "HOON17",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HOO17.3
 ggsave("../Data/Plots/NS/S2/HOO17.3.jpg", HOO17.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -715,7 +715,7 @@ LAO1.1<-ggplot(S3.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LAOS1, color = "LAOS1",shape = "."))+
   geom_point(aes(y=LAON1, color = "LAON1",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO1.1
 ggsave("../Data/Plots/NS/S3/LAO1.1.jpg", LAO1.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -724,7 +724,7 @@ LAO1.2<-ggplot(S3.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LAOS1, color = "LAOS1",shape = "."))+
   geom_point(aes(y=LAON1, color = "LAON1",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO1.2
 ggsave("../Data/Plots/NS/S3/LAO1.2.jpg", LAO1.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -733,7 +733,7 @@ LAO1.3<-ggplot(S3.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LAOS1, color = "LAOS1",shape = "."))+
   geom_point(aes(y=LAON1, color = "LAON1",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO1.3
 ggsave("../Data/Plots/NS/S3/LAO1.3.jpg", LAO1.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -746,7 +746,7 @@ LAO2.1<-ggplot(S3.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LAOS2, color = "LAOS2",shape = "."))+
   geom_point(aes(y=LAON2, color = "LAON2",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO2.1
 ggsave("../Data/Plots/NS/S3/LAO2.1.jpg", LAO2.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -755,7 +755,7 @@ LAO2.2<-ggplot(S3.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LAOS2, color = "LAOS2",shape = "."))+
   geom_point(aes(y=LAON2, color = "LAON2",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO2.2
 ggsave("../Data/Plots/NS/S3/LAO2.2.jpg", LAO2.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -764,7 +764,7 @@ LAO2.3<-ggplot(S3.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LAOS2, color = "LAOS2",shape = "."))+
   geom_point(aes(y=LAON2, color = "LAON2",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO2.3
 ggsave("../Data/Plots/NS/S3/LAO2.3.jpg", LAO2.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -778,7 +778,7 @@ LAO4.1<-ggplot(S3.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LAOS4, color = "LAOS4",shape = "."))+
   geom_point(aes(y=LAON4, color = "LAON4",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO4.1
 ggsave("../Data/Plots/NS/S3/LAO4.1.jpg", LAO4.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -787,7 +787,7 @@ LAO4.2<-ggplot(S3.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LAOS4, color = "LAOS4",shape = "."))+
   geom_point(aes(y=LAON4, color = "LAON4",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO4.2
 ggsave("../Data/Plots/NS/S3/LAO4.2.jpg", LAO4.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -796,7 +796,7 @@ LAO4.3<-ggplot(S3.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LAOS4, color = "LAOS4",shape = "."))+
   geom_point(aes(y=LAON4, color = "LAON4",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO4.3
 ggsave("../Data/Plots/NS/S3/LAO4.3.jpg", LAO4.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -810,7 +810,7 @@ LAO6.1<-ggplot(S3.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LAOS6, color = "LAOS6",shape = "."))+
   geom_point(aes(y=LAON6, color = "LAON6",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO6.1
 ggsave("../Data/Plots/NS/S3/LAO6.1.jpg", LAO6.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -819,7 +819,7 @@ LAO6.2<-ggplot(S3.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LAOS6, color = "LAOS6",shape = "."))+
   geom_point(aes(y=LAON6, color = "LAON6",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO6.2
 ggsave("../Data/Plots/NS/S3/LAO6.2.jpg", LAO6.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -828,7 +828,7 @@ LAO6.3<-ggplot(S3.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LAOS6, color = "LAOS6",shape = "."))+
   geom_point(aes(y=LAON6, color = "LAON6",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO6.3
 ggsave("../Data/Plots/NS/S3/LAO6.3.jpg", LAO6.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -840,7 +840,7 @@ LAO8.1<-ggplot(S3.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LAOS8, color = "LAOS8",shape = "."))+
   geom_point(aes(y=LAON8, color = "LAON8",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO8.1
 ggsave("../Data/Plots/NS/S3/LAO8.1.jpg", LAO8.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -849,7 +849,7 @@ LAO8.2<-ggplot(S3.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LAOS8, color = "LAOS8",shape = "."))+
   geom_point(aes(y=LAON8, color = "LAON8",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO8.2
 ggsave("../Data/Plots/NS/S3/LAO8.2.jpg", LAO8.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -858,7 +858,7 @@ LAO8.3<-ggplot(S3.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LAOS8, color = "LAOS8",shape = "."))+
   geom_point(aes(y=LAON8, color = "LAON8",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LAO8.3
 ggsave("../Data/Plots/NS/S3/LAO8.3.jpg", LAO8.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -871,7 +871,7 @@ LBO10.1<-ggplot(S3.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LBOS10, color = "LBOS10",shape = "."))+
   geom_point(aes(y=LBON10, color = "LBON10",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO10.1
 ggsave("../Data/Plots/NS/S3/LBO10.1.jpg", LBO10.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -880,7 +880,7 @@ LBO10.2<-ggplot(S3.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LBOS10, color = "LBOS10",shape = "."))+
   geom_point(aes(y=LBON10, color = "LBON10",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO10.2
 ggsave("../Data/Plots/NS/S3/LBO10.2.jpg", LBO10.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -889,7 +889,7 @@ LBO10.3<-ggplot(S3.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LBOS10, color = "LBOS10",shape = "."))+
   geom_point(aes(y=LBON10, color = "LBON10",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO10.3
 ggsave("../Data/Plots/NS/S3/LBO10.3.jpg", LBO10.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -901,7 +901,7 @@ LBO11.1<-ggplot(S3.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LBOS11, color = "LBOS11",shape = "."))+
   geom_point(aes(y=LBON11, color = "LBON11",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO11.1
 ggsave("../Data/Plots/NS/S3/LBO11.1.jpg", LBO11.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -910,7 +910,7 @@ LBO11.2<-ggplot(S3.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LBOS11, color = "LBOS11",shape = "."))+
   geom_point(aes(y=LBON11, color = "LBON11",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO11.2
 ggsave("../Data/Plots/NS/S3/LBO11.2.jpg", LBO11.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -919,7 +919,7 @@ LBO11.3<-ggplot(S3.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LBOS11, color = "LBOS11",shape = "."))+
   geom_point(aes(y=LBON11, color = "LBON11",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO11.3
 ggsave("../Data/Plots/NS/S3/LBO11.3.jpg", LBO11.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -931,7 +931,7 @@ LBO12.1<-ggplot(S3.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LBOS12, color = "LBOS12",shape = "."))+
   geom_point(aes(y=LBON12, color = "LBON12",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO12.1
 ggsave("../Data/Plots/NS/S3/LBO12.1.jpg", LBO12.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -940,7 +940,7 @@ LBO12.2<-ggplot(S3.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LBOS12, color = "LBOS12",shape = "."))+
   geom_point(aes(y=LBON12, color = "LBON12",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO12.2
 ggsave("../Data/Plots/NS/S3/LBO12.2.jpg", LBO12.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -949,7 +949,7 @@ LBO12.3<-ggplot(S3.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LBOS12, color = "LBOS12",shape = "."))+
   geom_point(aes(y=LBON12, color = "LBON12",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO12.3
 ggsave("../Data/Plots/NS/S3/LBO12.3.jpg", LBO12.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -962,7 +962,7 @@ LBO14.1<-ggplot(S3.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LBOS14, color = "LBOS14",shape = "."))+
   geom_point(aes(y=LBON14, color = "LBON14",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO14.1
 ggsave("../Data/Plots/NS/S3/LBO14.1.jpg", LBO14.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -971,7 +971,7 @@ LBO14.2<-ggplot(S3.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LBOS14, color = "LBOS14",shape = "."))+
   geom_point(aes(y=LBON14, color = "LBON14",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO14.2
 ggsave("../Data/Plots/NS/S3/LBO14.2.jpg", LBO14.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -980,7 +980,7 @@ LBO14.3<-ggplot(S3.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LBOS14, color = "LBOS14",shape = "."))+
   geom_point(aes(y=LBON14, color = "LBON14",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO14.3
 ggsave("../Data/Plots/NS/S3/LBO14.3.jpg", LBO14.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -993,7 +993,7 @@ LBO16.1<-ggplot(S3.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LBOS16, color = "LBOS16",shape = "."))+
   geom_point(aes(y=LBON16, color = "LBON16",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO16.1
 ggsave("../Data/Plots/NS/S3/LBO16.1.jpg", LBO16.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -1002,7 +1002,7 @@ LBO16.2<-ggplot(S3.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LBOS16, color = "LBOS16",shape = "."))+
   geom_point(aes(y=LBON16, color = "LBON16",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO16.2
 ggsave("../Data/Plots/NS/S3/LBO16.2.jpg", LBO16.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -1011,7 +1011,7 @@ LBO16.3<-ggplot(S3.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LBOS16, color = "LBOS16",shape = "."))+
   geom_point(aes(y=LBON16, color = "LBON16",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO16.3
 ggsave("../Data/Plots/NS/S3/LBO16.3.jpg", LBO16.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -1022,7 +1022,7 @@ LBO17.1<-ggplot(S3.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=LBOS17, color = "LBOS17",shape = "."))+
   geom_point(aes(y=LBON17, color = "LBON17",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO17.1
 ggsave("../Data/Plots/NS/S3/LBO17.1.jpg", LBO17.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -1031,7 +1031,7 @@ LBO17.2<-ggplot(S3.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=LBOS17, color = "LBOS17",shape = "."))+
   geom_point(aes(y=LBON17, color = "LBON17",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO17.2
 ggsave("../Data/Plots/NS/S3/LBO17.2.jpg", LBO17.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -1040,7 +1040,7 @@ LBO17.3<-ggplot(S3.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=LBOS17, color = "LBOS17",shape = "."))+
   geom_point(aes(y=LBON17, color = "LBON17",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 LBO17.3
 ggsave("../Data/Plots/NS/S3/LBO17.3.jpg", LBO17.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -1058,7 +1058,7 @@ HBO9.1<-ggplot(S4.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HBOS9, color = "HBOS9",shape = "."))+
   geom_point(aes(y=HBON9, color = "HBON9",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO9.1
 ggsave("../Data/Plots/NS/S4/HBO9.1.jpg", HBO9.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -1067,7 +1067,7 @@ HBO9.2<-ggplot(S4.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HBOS9, color = "HBOS9",shape = "."))+
   geom_point(aes(y=HBON9, color = "HBON9",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO9.2
 ggsave("../Data/Plots/NS/S4/HBO9.2.jpg", HBO9.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -1076,7 +1076,7 @@ HBO9.3<-ggplot(S4.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HBOS9, color = "HBOS9",shape = "."))+
   geom_point(aes(y=HBON9, color = "HBON9",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO9.3
 ggsave("../Data/Plots/NS/S4/HBO9.3.jpg", HBO9.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -1087,7 +1087,7 @@ HBO10.1<-ggplot(S4.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HBOS10, color = "HBOS10",shape = "."))+
   geom_point(aes(y=HBON10, color = "HBON10",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO10.1
 ggsave("../Data/Plots/NS/S4/HBO10.1.jpg", HBO10.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -1096,7 +1096,7 @@ HBO10.2<-ggplot(S4.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HBOS10, color = "HBOS10",shape = "."))+
   geom_point(aes(y=HBON10, color = "HBON10",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO10.2
 ggsave("../Data/Plots/NS/S4/HBO10.2.jpg", HBO10.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -1105,7 +1105,7 @@ HBO10.3<-ggplot(S4.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HBOS10, color = "HBOS10",shape = "."))+
   geom_point(aes(y=HBON10, color = "HBON10",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO10.3
 ggsave("../Data/Plots/NS/S4/HBO10.3.jpg", HBO10.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -1117,7 +1117,7 @@ HBO12.1<-ggplot(S4.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HBOS12, color = "HBOS12",shape = "."))+
   geom_point(aes(y=HBON12, color = "HBON12",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO12.1
 ggsave("../Data/Plots/NS/S4/HBO12.1.jpg", HBO12.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -1126,7 +1126,7 @@ HBO12.2<-ggplot(S4.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HBOS12, color = "HBOS12",shape = "."))+
   geom_point(aes(y=HBON12, color = "HBON12",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO12.2
 ggsave("../Data/Plots/NS/S4/HBO12.2.jpg", HBO12.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -1135,7 +1135,7 @@ HBO12.3<-ggplot(S4.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HBOS12, color = "HBOS12",shape = "."))+
   geom_point(aes(y=HBON12, color = "HBON12",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO12.3
 ggsave("../Data/Plots/NS/S4/HBO12.3.jpg", HBO12.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -1148,7 +1148,7 @@ HBO14.1<-ggplot(S4.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HBOS14, color = "HBOS14",shape = "."))+
   geom_point(aes(y=HBON14, color = "HBON14",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO14.1
 ggsave("../Data/Plots/NS/S4/HBO14.1.jpg", HBO14.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -1157,7 +1157,7 @@ HBO14.2<-ggplot(S4.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HBOS14, color = "HBOS14",shape = "."))+
   geom_point(aes(y=HBON14, color = "HBON14",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO14.2
 ggsave("../Data/Plots/NS/S4/HBO14.2.jpg", HBO14.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -1166,7 +1166,7 @@ HBO14.3<-ggplot(S4.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HBOS14, color = "HBOS14",shape = "."))+
   geom_point(aes(y=HBON14, color = "HBON14",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO14.3
 ggsave("../Data/Plots/NS/S4/HBO14.3.jpg", HBO14.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -1179,7 +1179,7 @@ HBO16.1<-ggplot(S4.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HBOS16, color = "HBOS16",shape = "."))+
   geom_point(aes(y=HBON16, color = "HBON16",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO16.1
 ggsave("../Data/Plots/NS/S4/HBO16.1.jpg", HBO16.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -1188,7 +1188,7 @@ HBO16.2<-ggplot(S4.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HBOS16, color = "HBOS16",shape = "."))+
   geom_point(aes(y=HBON16, color = "HBON16",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO16.2
 ggsave("../Data/Plots/NS/S4/HBO16.2.jpg", HBO16.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -1197,7 +1197,7 @@ HBO16.3<-ggplot(S4.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HBOS16, color = "HBOS16",shape = "."))+
   geom_point(aes(y=HBON16, color = "HBON16",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HBO16.3
 ggsave("../Data/Plots/NS/S4/HBO16.3.jpg", HBO16.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -1210,7 +1210,7 @@ HAO1.1<-ggplot(S4.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HAOS1, color = "HAOS1",shape = "."))+
   geom_point(aes(y=HAON1, color = "HAON1",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO1.1
 ggsave("../Data/Plots/NS/S4/HAO1.1.jpg", HAO1.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -1219,7 +1219,7 @@ HAO1.2<-ggplot(S4.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HAOS1, color = "HAOS1",shape = "."))+
   geom_point(aes(y=HAON1, color = "HAON1",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO1.2
 ggsave("../Data/Plots/NS/S4/HAO1.2.jpg", HAO1.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -1228,7 +1228,7 @@ HAO1.3<-ggplot(S4.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HAOS1, color = "HAOS1",shape = "."))+
   geom_point(aes(y=HAON1, color = "HAON1",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO1.3
 ggsave("../Data/Plots/NS/S4/HAO1.3.jpg", HAO1.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -1240,7 +1240,7 @@ HAO2.1<-ggplot(S4.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HAOS2, color = "HAOS2",shape = "."))+
   geom_point(aes(y=HAON2, color = "HAON2",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO2.1
 ggsave("../Data/Plots/NS/S4/HAO2.1.jpg", HAO2.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -1249,7 +1249,7 @@ HAO2.2<-ggplot(S4.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HAOS2, color = "HAOS2",shape = "."))+
   geom_point(aes(y=HAON2, color = "HAON2",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO2.2
 ggsave("../Data/Plots/NS/S4/HAO2.2.jpg", HAO2.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -1258,7 +1258,7 @@ HAO2.3<-ggplot(S4.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HAOS2, color = "HAOS2",shape = "."))+
   geom_point(aes(y=HAON2, color = "HAON2",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO2.3
 ggsave("../Data/Plots/NS/S4/HAO2.3.jpg", HAO2.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -1269,7 +1269,7 @@ HAO3.1<-ggplot(S4.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HAOS3, color = "HAOS3",shape = "."))+
   geom_point(aes(y=HAON3, color = "HAON3",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO3.1
 ggsave("../Data/Plots/NS/S4/HAO3.1.jpg", HAO3.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -1278,7 +1278,7 @@ HAO3.2<-ggplot(S4.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HAOS3, color = "HAOS3",shape = "."))+
   geom_point(aes(y=HAON3, color = "HAON3",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO3.2
 ggsave("../Data/Plots/NS/S4/HAO3.2.jpg", HAO3.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -1287,7 +1287,7 @@ HAO3.3<-ggplot(S4.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HAOS3, color = "HAOS3",shape = "."))+
   geom_point(aes(y=HAON3, color = "HAON3",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO3.3
 ggsave("../Data/Plots/NS/S4/HAO3.3.jpg", HAO3.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -1297,7 +1297,7 @@ HAO4.1<-ggplot(S4.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HAOS4, color = "HAOS4",shape = "."))+
   geom_point(aes(y=HAON4, color = "HAON4",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO4.1
 ggsave("../Data/Plots/NS/S4/HAO4.1.jpg", HAO4.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -1306,7 +1306,7 @@ HAO4.2<-ggplot(S4.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HAOS4, color = "HAOS4",shape = "."))+
   geom_point(aes(y=HAON4, color = "HAON4",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO4.2
 ggsave("../Data/Plots/NS/S4/HAO4.2.jpg", HAO4.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -1315,7 +1315,7 @@ HAO4.3<-ggplot(S4.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HAOS4, color = "HAOS4",shape = "."))+
   geom_point(aes(y=HAON4, color = "HAON4",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO4.3
 ggsave("../Data/Plots/NS/S4/HAO4.3.jpg", HAO4.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -1325,7 +1325,7 @@ HAO6.1<-ggplot(S4.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HAOS6, color = "HAOS6",shape = "."))+
   geom_point(aes(y=HAON6, color = "HAON6",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO6.1
 ggsave("../Data/Plots/NS/S4/HAO6.1.jpg", HAO6.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -1334,7 +1334,7 @@ HAO6.2<-ggplot(S4.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HAOS6, color = "HAOS6",shape = "."))+
   geom_point(aes(y=HAON6, color = "HAON6",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO6.2
 ggsave("../Data/Plots/NS/S4/HAO6.2.jpg", HAO6.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -1343,7 +1343,7 @@ HAO6.3<-ggplot(S4.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HAOS6, color = "HAOS6",shape = "."))+
   geom_point(aes(y=HAON6, color = "HAON6",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO6.3
 ggsave("../Data/Plots/NS/S4/HAO6.3.jpg", HAO6.3, height = 2, width = 45, units = "in", dpi = 500)
@@ -1353,7 +1353,7 @@ HAO8.1<-ggplot(S4.f10, aes(Index))+
   scale_x_continuous(breaks = c(96,192,288,384,480,576,672,768,864))+
   geom_point(aes(y=HAOS8, color = "HAOS8",shape = "."))+
   geom_point(aes(y=HAON8, color = "HAON8",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO8.1
 ggsave("../Data/Plots/NS/S4/HAO8.1.jpg", HAO8.1, height = 2, width = 45, units = "in", dpi = 500)
@@ -1362,7 +1362,7 @@ HAO8.2<-ggplot(S4.s10, aes(Index))+
   scale_x_continuous(breaks = c(1056,1152,1248,1344,1440,1536,1632,1728,1824))+
   geom_point(aes(y=HAOS8, color = "HAOS8",shape = "."))+
   geom_point(aes(y=HAON8, color = "HAON8",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO8.2
 ggsave("../Data/Plots/NS/S4/HAO8.2.jpg", HAO8.2, height = 2, width = 45, units = "in", dpi = 500)
@@ -1371,7 +1371,7 @@ HAO8.3<-ggplot(S4.t10, aes(Index))+
   scale_x_continuous(breaks = c(2016,2112,2208,2304,2400,2496,2592,2688,2784))+
   geom_point(aes(y=HAOS8, color = "HAOS8",shape = "."))+
   geom_point(aes(y=HAON8, color = "HAON8",shape = "."))+
-  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  #geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
   xlab("Entries")+ylab("Sapflux")
 HAO8.3
 ggsave("../Data/Plots/NS/S4/HAO8.3.jpg", HAO8.3, height = 2, width = 45, units = "in", dpi = 500)
