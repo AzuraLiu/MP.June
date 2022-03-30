@@ -17,7 +17,6 @@ raw2<-read.csv("../Data/Processed/KtoSap/Sap2.csv")
 raw3<-read.csv("../Data/Processed/KtoSap/Sap3.csv")
 raw4<-read.csv("../Data/Processed/KtoSap/Sap4.csv")
 
-names(raw1)[1]<-"Index"
 ```
 
 ```{r more setup}
