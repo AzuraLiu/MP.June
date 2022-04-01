@@ -12,10 +12,10 @@ library("tidyverse")
 library("lubridate")
 
 getwd()
-raw1<-read.csv("../Data/Original/Shifted/S1.6.csv")
-raw2<-read.csv("../Data/Original/Shifted/S2.6.csv")
-raw3<-read.csv("../Data/Original/Shifted/S3.6.csv")
-raw4<-read.csv("../Data/Original/Shifted/S4.6.csv")
+raw1<-read.csv("../Data/Original/Coded/S1.6.csv")
+raw2<-read.csv("../Data/Original/Coded/S2.6.csv")
+raw3<-read.csv("../Data/Original/Coded/S3.6.csv")
+raw4<-read.csv("../Data/Original/Coded/S4.6.csv")
 
 names(raw1)[1]<-"Index"
 ```
