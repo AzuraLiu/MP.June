@@ -1,0 +1,109 @@
+---
+title: "Sum.GapFill"
+author: "Azura Liu"
+date: '2022-03-22'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("dplyr")
+library("tidyverse")
+library("lubridate")
+
+getwd()
+Sap1<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap1.csv")
+Sap2<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap2.csv")
+Sap3<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap3.csv")
+Sap4<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap4.csv")
+
+Sap1$Date<-as.Date(Sap1$Date, format = "%m/%d/%Y")
+Sap2$Date<-as.Date(Sap2$Date, format = "%m/%d/%Y")
+Sap3$Date<-as.Date(Sap3$Date, format = "%m/%d/%Y")
+Sap4$Date<-as.Date(Sap4$Date, format = "%m/%d/%Y")
+
+Sap1<-Sap1%>%mutate_if(is.character, as.numeric)
+Sap2<-Sap2%>%mutate_if(is.character, as.numeric)
+Sap3<-Sap3%>%mutate_if(is.character, as.numeric)
+Sap4<-Sap4%>%mutate_if(is.character, as.numeric)
+```
+
+```{r 24hr}
+Sap1.24<-aggregate(Sap1[,c(5,7:38)], by = list(Sap1$Date, Sap1$DOY),FUN = "sum")%>%
+  mutate(Interval = "24hr")%>%
+  select(1,2,36,3:35)
+names(Sap1.24)[1]<-"Date"
+names(Sap1.24)[2]<-"DOY"
+
+Sap2.24<-aggregate(Sap2[,c(5,7:38)], by = list(Sap2$Date, Sap2$DOY),FUN = "sum")%>%
+  mutate(Interval = "24hr")%>%
+  select(1,2,36,3:35)
+names(Sap2.24)[1]<-"Date"
+names(Sap2.24)[2]<-"DOY"
+
+Sap3.24<-aggregate(Sap3[,c(5,7:38)], by = list(Sap3$Date, Sap3$DOY),FUN = "sum")%>%
+  mutate(Interval = "24hr")%>%
+  select(1,2,36,3:35)
+names(Sap3.24)[1]<-"Date"
+names(Sap3.24)[2]<-"DOY"
+
+Sap4.24<-aggregate(Sap4[,c(5,7:38)], by = list(Sap4$Date, Sap4$DOY),FUN = "sum")%>%
+  mutate(Interval = "24hr")%>%
+  select(1,2,36,3:35)
+names(Sap4.24)[1]<-"Date"
+names(Sap4.24)[2]<-"DOY"
+```
+
+```{r assign dn}
+Sap1.cat<-Sap1%>%
+  mutate( cut(Sap1$Time,breaks = c(-1,630, 2000,Inf), labels = c("Night", "Daytime", "Night")))
+names(Sap1.cat)[39]<-"Cat"
+
+Sap2.cat<-Sap2%>%
+  mutate( cut(Sap2$Time,breaks = c(-1,630, 2000,Inf), labels = c("Night", "Daytime", "Night")))
+names(Sap2.cat)[39]<-"Cat"
+
+Sap3.cat<-Sap3%>%
+  mutate( cut(Sap3$Time,breaks = c(-1,630, 2000,Inf), labels = c("Night", "Daytime", "Night")))
+names(Sap3.cat)[39]<-"Cat"
+
+Sap4.cat<-Sap4%>%
+  mutate( cut(Sap4$Time,breaks = c(-1,630, 2000,Inf), labels = c("Night", "Daytime", "Night")))
+names(Sap4.cat)[39]<-"Cat"
+```
+
+```{r sum dn}
+Sap1.dn<-aggregate(Sap1.cat[,c(5,7:38)], by = list(Sap1.cat$Date,Sap1.cat$DOY, Sap1.cat$Cat),FUN = "sum")
+names(Sap1.dn)[1]<-"Date"
+names(Sap1.dn)[2]<-"DOY"
+names(Sap1.dn)[3]<-"Interval"
+
+
+Sap2.dn<-aggregate(Sap2.cat[,c(5,7:38)], by = list(Sap2.cat$Date,Sap2.cat$DOY, Sap2.cat$Cat),FUN = "sum")
+names(Sap2.dn)[1]<-"Date"
+names(Sap2.dn)[2]<-"DOY"
+names(Sap2.dn)[3]<-"Interval"
+
+
+Sap3.dn<-aggregate(Sap3.cat[,c(5,7:38)], by = list(Sap3.cat$Date,Sap3.cat$DOY, Sap3.cat$Cat),FUN = "sum")
+names(Sap3.dn)[1]<-"Date"
+names(Sap3.dn)[2]<-"DOY"
+names(Sap3.dn)[3]<-"Interval"
+
+Sap4.dn<-aggregate(Sap4.cat[,c(5,7:38)], by = list(Sap4.cat$Date,Sap4.cat$DOY, Sap4.cat$Cat),FUN = "sum")
+names(Sap4.dn)[1]<-"Date"
+names(Sap4.dn)[2]<-"DOY"
+names(Sap4.dn)[3]<-"Interval"
+```
+
+```{r combine}
+Sap1.Sum<-rbind(Sap1.24,Sap1.dn)
+Sap2.Sum<-rbind(Sap2.24,Sap2.dn)
+Sap3.Sum<-rbind(Sap3.24,Sap3.dn)
+Sap4.Sum<-rbind(Sap4.24,Sap4.dn)
+
+write.csv(Sap1.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Sap1.Sum.csv")
+write.csv(Sap2.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Sap2.Sum.csv")
+write.csv(Sap3.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Sap3.Sum.csv")
+write.csv(Sap4.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Sap4.Sum.csv")
+```
