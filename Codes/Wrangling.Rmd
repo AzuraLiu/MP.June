@@ -12,24 +12,24 @@ library("tidyverse")
 library("lubridate")
 
 getwd()
-raw1<-read.csv("../Data/Original/Coded/S1.6.csv")
-raw2<-read.csv("../Data/Original/Coded/S2.6.csv")
-raw3<-read.csv("../Data/Original/Coded/S3.6.csv")
-raw4<-read.csv("../Data/Original/Coded/S4.6.csv")
+raw1<-read.csv("../Data/Original/Coded/S1.5.csv")
+raw2<-read.csv("../Data/Original/Coded/S2.5.csv")
+raw3<-read.csv("../Data/Original/Coded/S3.5.csv")
+#raw4<-read.csv("../Data/Original/Coded/S4.3.csv")
 
-names(raw1)[1]<-"Index"
+#names(raw1)[1]<-"Index"
 ```
 
 ```{r more setup}
 raw1$Date<-as.Date(raw1$Date, format = "%m/%d/%Y")
 raw2$Date<-as.Date(raw2$Date, format = "%m/%d/%Y")
 raw3$Date<-as.Date(raw3$Date, format = "%m/%d/%Y")
-raw4$Date<-as.Date(raw4$Date, format = "%m/%d/%Y")
+#raw4$Date<-as.Date(raw4$Date, format = "%m/%d/%Y")
 
 raw1<-raw1%>%mutate_if(is.character, as.numeric)
 raw2<-raw2%>%mutate_if(is.character, as.numeric)
 raw3<-raw3%>%mutate_if(is.character, as.numeric)
-raw4<-raw4%>%mutate_if(is.character, as.numeric)
+#raw4<-raw4%>%mutate_if(is.character, as.numeric)
 ```
 
 ```{r K2Sap}
@@ -44,16 +44,16 @@ Sap2<- raw2 %>%
 
 Sap3<- raw3 %>% 
   mutate_at(vars(7:38),
-            .funs = funs((.^1.231) * 119))
+           .funs = funs((.^1.231) * 119))
 
-Sap4<- raw4 %>% 
-  mutate_at(vars(7:38),
-            .funs = funs((.^1.231) * 119))
+#Sap4<- raw4 %>% 
+ # mutate_at(vars(7:38),
+  #          .funs = funs((.^1.231) * 119))
 
-write.csv(Sap1, row.names = FALSE, file ="../Data/Processed/KtoSap/Sap1.csv")
-write.csv(Sap2, row.names = FALSE, file ="../Data/Processed/KtoSap/Sap2.csv")
-write.csv(Sap3, row.names = FALSE, file ="../Data/Processed/KtoSap/Sap3.csv")
-write.csv(Sap4, row.names = FALSE, file ="../Data/Processed/KtoSap/Sap4.csv")
+write.csv(Sap1, row.names = FALSE, file ="../Data/Processed/KtoSap/Sap1.5.csv")
+write.csv(Sap2, row.names = FALSE, file ="../Data/Processed/KtoSap/Sap2.5.csv")
+write.csv(Sap3, row.names = FALSE, file ="../Data/Processed/KtoSap/Sap3.5.csv")
+#write.csv(Sap4, row.names = FALSE, file ="../Data/Processed/KtoSap/Sap4.3.csv")
 ```
 
 ```{r 24hr}
@@ -75,16 +75,11 @@ Sap3.24<-aggregate(Sap3[,c(5,7:38)], by = list(Sap3$Date, Sap3$DOY),FUN = "sum")
 names(Sap3.24)[1]<-"Date"
 names(Sap3.24)[2]<-"DOY"
 
-Sap4.24<-aggregate(Sap4[,c(5,7:38)], by = list(Sap4$Date, Sap4$DOY),FUN = "sum")%>%
-  mutate(Interval = "24hr")%>%
-  select(1,2,36,3:35)
-names(Sap4.24)[1]<-"Date"
-names(Sap4.24)[2]<-"DOY"
-
-write.csv(Sap1.24, row.names = FALSE, file ="../Data/Processed/Sums/24hr/Sap1.24.csv")
-write.csv(Sap2.24, row.names = FALSE, file ="../Data/Processed/Sums/24hr/Sap2.24.csv")
-write.csv(Sap3.24, row.names = FALSE, file ="../Data/Processed/Sums/24hr/Sap3.24.csv")
-write.csv(Sap4.24, row.names = FALSE, file ="../Data/Processed/Sums/24hr/Sap4.24.csv")
+#Sap4.24<-aggregate(Sap4[,c(5,7:38)], by = list(Sap4$Date, Sap4$DOY),FUN = "sum")%>%
+ # mutate(Interval = "24hr")%>%
+  #select(1,2,36,3:35)
+#names(Sap4.24)[1]<-"Date"
+#names(Sap4.24)[2]<-"DOY"
 
 ```
 
@@ -101,9 +96,9 @@ Sap3.cat<-Sap3%>%
   mutate( cut(Sap3$Time,breaks = c(-1,630, 2000,Inf), labels = c("Night", "Daytime", "Night")))
 names(Sap3.cat)[39]<-"Cat"
 
-Sap4.cat<-Sap4%>%
-  mutate( cut(Sap4$Time,breaks = c(-1,630, 2000,Inf), labels = c("Night", "Daytime", "Night")))
-names(Sap4.cat)[39]<-"Cat"
+#Sap4.cat<-Sap4%>%
+#  mutate( cut(Sap4$Time,breaks = c(-1,630, 2000,Inf), labels = c("Night", "Daytime", "Night")))
+#names(Sap4.cat)[39]<-"Cat"
 ```
 
 ```{r sum dn}
@@ -124,10 +119,10 @@ names(Sap3.dn)[1]<-"Date"
 names(Sap3.dn)[2]<-"DOY"
 names(Sap3.dn)[3]<-"Interval"
 
-Sap4.dn<-aggregate(Sap4.cat[,c(5,7:38)], by = list(Sap4.cat$Date,Sap4.cat$DOY, Sap4.cat$Cat),FUN = "sum")
-names(Sap4.dn)[1]<-"Date"
-names(Sap4.dn)[2]<-"DOY"
-names(Sap4.dn)[3]<-"Interval"
+#Sap4.dn<-aggregate(Sap4.cat[,c(5,7:38)], by = list(Sap4.cat$Date,Sap4.cat$DOY, Sap4.cat$Cat),FUN = "sum")
+#names(Sap4.dn)[1]<-"Date"
+#names(Sap4.dn)[2]<-"DOY"
+#names(Sap4.dn)[3]<-"Interval"
 ```
 
 ```{r separate dn}
@@ -137,13 +132,8 @@ Sap2.day<-Sap2.dn%>%
   filter(Interval == "Daytime")
 Sap3.day<-Sap3.dn%>%
   filter(Interval == "Daytime")
-Sap4.day<-Sap4.dn%>%
-  filter(Interval == "Daytime")
-
-write.csv(Sap1.day, row.names = FALSE, file ="../Data/Processed/Sums/Daytime/Sap1.day.csv")
-write.csv(Sap2.day, row.names = FALSE, file ="../Data/Processed/Sums/Daytime/Sap2.day.csv")
-write.csv(Sap3.day, row.names = FALSE, file ="../Data/Processed/Sums/Daytime/Sap3.day.csv")
-write.csv(Sap4.day, row.names = FALSE, file ="../Data/Processed/Sums/Daytime/Sap4.day.csv")
+#Sap4.day<-Sap4.dn%>%
+ # filter(Interval == "Daytime")
 
 Sap1.night<-Sap1.dn%>%
   filter(Interval == "Night")
@@ -151,25 +141,21 @@ Sap2.night<-Sap2.dn%>%
   filter(Interval == "Night")
 Sap3.night<-Sap3.dn%>%
   filter(Interval == "Night")
-Sap4.night<-Sap4.dn%>%
-  filter(Interval == "Night")
+#Sap4.night<-Sap4.dn%>%
+#  filter(Interval == "Night")
 
-write.csv(Sap1.night, row.names = FALSE, file ="../Data/Processed/Sums/Night/Sap1.night.csv")
-write.csv(Sap2.night, row.names = FALSE, file ="../Data/Processed/Sums/Night/Sap2.night.csv")
-write.csv(Sap3.night, row.names = FALSE, file ="../Data/Processed/Sums/Night/Sap3.night.csv")
-write.csv(Sap4.night, row.names = FALSE, file ="../Data/Processed/Sums/Night/Sap4.night.csv")
 ```
 
 ```{r combine}
 Sap1.Sum<-rbind(Sap1.24,Sap1.dn)
 Sap2.Sum<-rbind(Sap2.24,Sap2.dn)
 Sap3.Sum<-rbind(Sap3.24,Sap3.dn)
-Sap4.Sum<-rbind(Sap4.24,Sap4.dn)
+#Sap4.Sum<-rbind(Sap4.24,Sap4.dn)
 
-write.csv(Sap1.Sum, row.names = FALSE, file ="../Data/Processed/Sums/Sap1.Sum.csv")
-write.csv(Sap2.Sum, row.names = FALSE, file ="../Data/Processed/Sums/Sap2.Sum.csv")
-write.csv(Sap3.Sum, row.names = FALSE, file ="../Data/Processed/Sums/Sap3.Sum.csv")
-write.csv(Sap4.Sum, row.names = FALSE, file ="../Data/Processed/Sums/Sap4.Sum.csv")
+write.csv(Sap1.Sum, row.names = FALSE, file ="../Data/Processed/Sums/Raw/Sap1.Sum.5.csv")
+write.csv(Sap2.Sum, row.names = FALSE, file ="../Data/Processed/Sums/Raw/Sap2.Sum.5.csv")
+write.csv(Sap3.Sum, row.names = FALSE, file ="../Data/Processed/Sums/Raw/Sap3.Sum.5.csv")
+#write.csv(Sap4.Sum, row.names = FALSE, file ="../Data/Processed/Sums/Raw/Sap4.Sum.3.csv")
 ```
 
 ```{r}
