@@ -12,10 +12,10 @@ library("tidyverse")
 library("lubridate")
 
 getwd()
-Sap1<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap1.csv")
-Sap2<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap2.csv")
-Sap3<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap3.csv")
-Sap4<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap4.csv")
+Sap1<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap1.6.csv")
+Sap2<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap2.6.csv")
+Sap3<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap3.6.csv")
+Sap4<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap4.6.csv")
 
 Sap1$Date<-as.Date(Sap1$Date, format = "%m/%d/%Y")
 Sap2$Date<-as.Date(Sap2$Date, format = "%m/%d/%Y")
@@ -102,18 +102,18 @@ Sap2.Sum<-rbind(Sap2.24,Sap2.dn)
 Sap3.Sum<-rbind(Sap3.24,Sap3.dn)
 Sap4.Sum<-rbind(Sap4.24,Sap4.dn)
 
-write.csv(Sap1.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Sap1.Sum.csv")
-write.csv(Sap2.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Sap2.Sum.csv")
-write.csv(Sap3.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Sap3.Sum.csv")
-write.csv(Sap4.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Sap4.Sum.csv")
+write.csv(Sap1.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap1.Sum.6.csv")
+write.csv(Sap2.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap2.Sum.6.csv")
+write.csv(Sap3.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap3.Sum.6.csv")
+write.csv(Sap4.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap4.Sum.6.csv")
 ```
 
 ```{r conversion}
 getwd()
-Sum1<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap1.Sum.csv")
-Sum2<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap2.Sum.csv")
-Sum3<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap3.Sum.csv")
-Sum4<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap4.Sum.csv")
+Sum1<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap1.Sum.6.csv")
+Sum2<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap2.Sum.6.csv")
+Sum3<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap3.Sum.6.csv")
+Sum4<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap4.Sum.6.csv")
 
 library(dplyr)
 Converted1<- Sum1 %>% 
@@ -132,10 +132,10 @@ Converted4<- Sum4 %>%
   mutate_at(vars(5:36),
             .funs = funs((.*15*60) /1000))
 
-write.csv(Converted1, row.names = FALSE, file ="../Data/Processed/Sums/Converted/Converted1.csv")
-write.csv(Converted2, row.names = FALSE, file ="../Data/Processed/Sums/Converted/Converted2.csv")
-write.csv(Converted3, row.names = FALSE, file ="../Data/Processed/Sums/Converted/Converted3.csv")
-write.csv(Converted4, row.names = FALSE, file ="../Data/Processed/Sums/Converted/Converted4.csv")
+write.csv(Converted1, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S1.Sum.6.csv")
+write.csv(Converted2, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S2.Sum.6.csv")
+write.csv(Converted3, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S3.Sum.6.csv")
+write.csv(Converted4, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S4.Sum.6.csv")
 
 
 
