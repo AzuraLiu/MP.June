@@ -1,0 +1,57 @@
+---
+title: "Cross Section"
+author: "Azura Liu"
+date: '2022-05-18'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("dplyr")
+library("tidyverse")
+library("lubridate")
+library("readxl")
+
+getwd()
+raw<-read_excel("../Data/Processed/Sapwood/Diameters.xlsx")
+```
+
+```{r wrangling}
+D<-raw%>%
+  pivot_longer(cols = Jan:Dec, names_to = "Month", values_to = "Diameter")%>%
+  mutate("r"= (Diameter-3)/2)%>%
+  mutate( "Total Area" = pi * (r^2))%>%
+  mutate(">40mm" = pi*(r-4)^2)%>%
+  mutate("20-40mm" = pi*((r-2)^2)-pi*(r-4)^2)%>%
+  mutate("0-20mm" = pi * (r^2)-pi*(r-2)^2)
+  
+write.csv(D, row.names = FALSE, file ="../Data/Processed/Sapwood/Cross_Section.csv")
+```
+
+```{r sapflow}
+library (readr)
+urlfile="https://raw.githubusercontent.com/AzuraLiu/MP.June/main/Data/Original/Supplements/Layout.csv"
+layout<-read_csv(url(urlfile))
+write.csv(layout, row.names = FALSE, file ="../Data/Original/layout.csv")
+
+
+S1<-read.csv("../Data/Processed/Sums/Converted/S1.Sum.6.csv")
+S2<-read.csv("../Data/Processed/Sums/Converted/S2.Sum.6.csv")
+S3<-read.csv("../Data/Processed/Sums/Converted/S3.Sum.6.csv")
+S4<-read.csv("../Data/Processed/Sums/Converted/S4.Sum.6.csv")
+
+S1.Flow<-S1%>%
+    mutate_at(vars(5:7,9:16,18:22, 25:36),
+            .funs = funs(.*D)
+  
+
+write.csv(S1.Flow, row.names = FALSE, file ="../Data/Processed/Sapflow/S1.Flow.6.csv")
+write.csv(S2.Flow, row.names = FALSE, file ="../Data/Processed/Sapflow/S2.Flow.6.csv")
+write.csv(S3.Flow, row.names = FALSE, file ="../Data/Processed/Sapflow/S3.Flow.6.csv")
+write.csv(S4.Flow, row.names = FALSE, file ="../Data/Processed/Sapflow/S4.Flow.6.csv")
+
+```
