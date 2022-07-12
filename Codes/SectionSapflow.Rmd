@@ -1,0 +1,88 @@
+---
+title: "PlotSapflow"
+author: "Azura Liu"
+date: '2022-06-13'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("dplyr")
+library("tidyverse")
+library("lubridate")
+
+getwd()
+Sections<-read_excel("../Data/Processed/Sapwood/17SectionalSums.xlsx")
+Sapflux<-read_excel("../Data/Processed/Sapflow/Jul17/Sapflux.xlsx")
+```
+
+```{r}
+
+LA<-Sapflux%>%
+  mutate(ID = "LA")%>%
+  filter(grepl("LA",Tree))%>%
+  select(36, 4:35)
+
+LAFlux<-aggregate(LA[3:33], by = list(LA$Position,LA$ID),FUN = "mean")
+
+LB<-Sapflux%>%
+  mutate(ID = "LB")%>%
+  filter(grepl("LB",Tree))%>%
+  select(36, 4:35)
+
+LBFlux<-aggregate(LB[3:33], by = list(LB$Position,LB$ID),FUN = "mean")
+
+LC<-Sapflux%>%
+  mutate(ID = "LC")%>%
+  filter(grepl("LC",Tree))%>%
+  select(36, 4:35)
+
+LCFlux<-aggregate(LC[3:33], by = list(LC$Position,LC$ID),FUN = "mean")
+
+LO<-Sapflux%>%
+  mutate(ID = "LO")%>%
+  filter(grepl("LO",Tree))%>%
+  select(36, 4:35)
+
+LOFlux<-aggregate(LO[3:33], by = list(LO$Position,LO$ID),FUN = "mean")
+
+HA<-Sapflux%>%
+  mutate(ID = "HA")%>%
+  filter(grepl("HA",Tree))%>%
+  select(36, 4:35)
+
+HAFlux<-aggregate(HA[3:33], by = list(HA$Position,HA$ID),FUN = "mean")
+
+HB<-Sapflux%>%
+  mutate(ID = "HB")%>%
+  filter(grepl("HB",Tree))%>%
+  select(36, 4:35)
+
+HBFlux<-aggregate(HB[3:33], by = list(HB$Position,HB$ID),FUN = "mean")
+
+HC<-Sapflux%>%
+  mutate(ID = "HC")%>%
+  filter(grepl("HC",Tree))%>%
+  select(36, 4:35)
+
+HCFlux<-aggregate(HC[3:33], by = list(HC$Position,HC$ID),FUN = "mean")
+
+HO<-Sapflux%>%
+  mutate(ID = "HO")%>%
+  filter(grepl("HO",Tree))%>%
+  select(36, 4:35)
+
+HOFlux<-aggregate(HO[3:33], by = list(HO$Position,HO$ID),FUN = "mean")
+
+
+SapfluxbyPop<-rbind(LAFlux,LBFlux,LCFlux,LOFlux,HAFlux,HBFlux,HCFlux,HOFlux)
+
+names(SapfluxbyPop)[1]<-"Position"
+names(SapfluxbyPop)[2]<-"ID"
+
+```
+
+```{r}
+
+
+```

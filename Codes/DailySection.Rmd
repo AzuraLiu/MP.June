@@ -1,0 +1,66 @@
+---
+title: "Diameter"
+author: "Azura Liu"
+date: '2022-06-13'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("dplyr")
+library("tidyverse")
+library("lubridate")
+
+getwd()
+diameter<-read.csv("../Data/Original/Supplements/Diameter.csv")
+diameter<-diameter[2:11]
+
+```
+
+```{r group, eval=FALSE, include=FALSE}
+D<-diameter%>%mutate("ID"= paste0(PLOT,space,clone,tree))%>%
+  pivot_wider(names_from = "year", values_from = "DBH")
+  
+
+write.csv(D, row.names = FALSE, file ="../Data/Processed/Sapwood/diameter.csv")
+```
+
+```{r sapwood}
+library("readxl")
+DailyDiameter<-read_excel("../Data/Processed/Sapwood/17Diameter.xlsx")
+
+r<-DailyDiameter%>%
+  mutate_at(vars(2:752),
+            .funs = funs((.-3) /2))
+
+SapwoodArea<-r%>%
+  mutate_at(vars(2:752),
+            .funs = funs((.^2)*pi))
+
+Outer<-r%>%  
+  add_column(Section = "Outer")%>%
+  mutate_at(vars(2:752),
+            .funs = funs((.^2)*pi-(.-2)^2*pi))
+
+Inner<-r%>%
+  add_column(Section = "Inner")%>%
+  mutate_at(vars(2:752),
+            .funs = funs(((.-2)^2)*pi-((.-4)^2)*pi))
+
+Deep<-r%>%
+  add_column(Section = "Deep")%>%
+  mutate_at(vars(2:752),
+            .funs = funs(((.-4)^2)*pi))
+
+DailySection<-rbind(Outer,Inner,Deep)  
+DailySection[DailySection < 0] <- 0 
+
+
+DailySection<-DailySection[,c(1,753,2:752)]
+
+
+#install.packages("writexl")
+library("writexl")
+write_xlsx(DailySection, "../Data/Processed/Sapwood/17SectionalArea.xlsx")
+
+```
