@@ -12,20 +12,20 @@ library("tidyverse")
 library("lubridate")
 
 getwd()
-Sap1<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap1.8.csv")
-Sap2<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap2.8.csv")
-Sap3<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap3.8.csv")
-Sap4<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap4.8.csv")
+Sap1<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap1.5.csv")
+Sap2<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap2.5.csv")
+Sap3<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap3.5.csv")
+#Sap4<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap4.8.csv")
 
 Sap1$Date<-as.Date(Sap1$Date, format = "%m/%d/%Y")
 Sap2$Date<-as.Date(Sap2$Date, format = "%m/%d/%Y")
 Sap3$Date<-as.Date(Sap3$Date, format = "%m/%d/%Y")
-Sap4$Date<-as.Date(Sap4$Date, format = "%m/%d/%Y")
+#Sap4$Date<-as.Date(Sap4$Date, format = "%m/%d/%Y")
 
 Sap1<-Sap1%>%mutate_if(is.character, as.numeric)
 Sap2<-Sap2%>%mutate_if(is.character, as.numeric)
 Sap3<-Sap3%>%mutate_if(is.character, as.numeric)
-Sap4<-Sap4%>%mutate_if(is.character, as.numeric)
+#Sap4<-Sap4%>%mutate_if(is.character, as.numeric)
 ```
 
 ```{r 24hr}
@@ -47,11 +47,11 @@ Sap3.24<-aggregate(Sap3[,c(5,7:38)], by = list(Sap3$Date, Sap3$DOY),FUN = "sum")
 names(Sap3.24)[1]<-"Date"
 names(Sap3.24)[2]<-"DOY"
 
-Sap4.24<-aggregate(Sap4[,c(5,7:38)], by = list(Sap4$Date, Sap4$DOY),FUN = "sum")%>%
-  mutate(Interval = "24hr")%>%
-  select(1,2,36,3:35)
-names(Sap4.24)[1]<-"Date"
-names(Sap4.24)[2]<-"DOY"
+#Sap4.24<-aggregate(Sap4[,c(5,7:38)], by = list(Sap4$Date, Sap4$DOY),FUN = "sum")%>%
+#  mutate(Interval = "24hr")%>%
+ # select(1,2,36,3:35)
+#names(Sap4.24)[1]<-"Date"
+#names(Sap4.24)[2]<-"DOY"
 ```
 
 ```{r assign dn}
@@ -67,9 +67,9 @@ Sap3.cat<-Sap3%>%
   mutate( cut(Sap3$Time,breaks = c(-1,630, 2000,Inf), labels = c("Night", "Daytime", "Night")))
 names(Sap3.cat)[39]<-"Cat"
 
-Sap4.cat<-Sap4%>%
-  mutate( cut(Sap4$Time,breaks = c(-1,630, 2000,Inf), labels = c("Night", "Daytime", "Night")))
-names(Sap4.cat)[39]<-"Cat"
+#Sap4.cat<-Sap4%>%
+ # mutate( cut(Sap4$Time,breaks = c(-1,630, 2000,Inf), labels = c("Night", "Daytime", "Night")))
+#names(Sap4.cat)[39]<-"Cat"
 ```
 
 ```{r sum dn}
@@ -90,30 +90,31 @@ names(Sap3.dn)[1]<-"Date"
 names(Sap3.dn)[2]<-"DOY"
 names(Sap3.dn)[3]<-"Interval"
 
-Sap4.dn<-aggregate(Sap4.cat[,c(5,7:38)], by = list(Sap4.cat$Date,Sap4.cat$DOY, Sap4.cat$Cat),FUN = "sum")
-names(Sap4.dn)[1]<-"Date"
-names(Sap4.dn)[2]<-"DOY"
-names(Sap4.dn)[3]<-"Interval"
+#Sap4.dn<-aggregate(Sap4.cat[,c(5,7:38)], by = list(Sap4.cat$Date,Sap4.cat$DOY, Sap4.cat$Cat),FUN = "sum")
+#names(Sap4.dn)[1]<-"Date"
+#names(Sap4.dn)[2]<-"DOY"
+#names(Sap4.dn)[3]<-"Interval"
 ```
 
 ```{r combine}
 Sap1.Sum<-rbind(Sap1.24,Sap1.dn)
 Sap2.Sum<-rbind(Sap2.24,Sap2.dn)
 Sap3.Sum<-rbind(Sap3.24,Sap3.dn)
-Sap4.Sum<-rbind(Sap4.24,Sap4.dn)
-
-write.csv(Sap1.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap1.Sum.8.csv")
-write.csv(Sap2.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap2.Sum.8.csv")
-write.csv(Sap3.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap3.Sum.8.csv")
-write.csv(Sap4.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap4.Sum.8.csv")
+#Sap4.Sum<-rbind(Sap4.24,Sap4.dn)
+```
+```{r}
+write.csv(Sap1.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Raw/Sap1.Sum.5.csv")
+write.csv(Sap2.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Raw/Sap2.Sum.5.csv")
+write.csv(Sap3.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Raw/Sap3.Sum.5.csv")
+#write.csv(Sap4.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/RegressedSums/Raw/Sap4.Sum.8.csv")
 ```
 
 ```{r conversion}
 getwd()
-Sum1<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap1.Sum.8.csv")
-Sum2<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap2.Sum.8.csv")
-Sum3<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap3.Sum.8.csv")
-Sum4<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap4.Sum.8.csv")
+Sum1<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap1.Sum.5.csv")
+Sum2<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap2.Sum.5.csv")
+Sum3<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap3.Sum.5.csv")
+#Sum4<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap4.Sum.8.csv")
 
 library(dplyr)
 Converted1<- Sum1 %>% 
@@ -128,14 +129,15 @@ Converted3<- Sum3 %>%
   mutate_at(vars(5:36),
             .funs = funs((.*15*60) /1000))
 
-Converted4<- Sum4 %>% 
-  mutate_at(vars(5:36),
-            .funs = funs((.*15*60) /1000))
-
-write.csv(Converted1, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S1.Sum.8.csv")
-write.csv(Converted2, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S2.Sum.8.csv")
-write.csv(Converted3, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S3.Sum.8.csv")
-write.csv(Converted4, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S4.Sum.8.csv")
+#Converted4<- Sum4 %>% 
+ # mutate_at(vars(5:36),
+  #          .funs = funs((.*15*60) /1000))
+```
+```{r}
+write.csv(Converted1, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S1.Sum.5.csv")
+write.csv(Converted2, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S2.Sum.5.csv")
+write.csv(Converted3, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S3.Sum.5.csv")
+#write.csv(Converted4, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S4.Sum.8.csv")
 
 
 
