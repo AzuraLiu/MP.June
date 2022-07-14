@@ -22,7 +22,7 @@ D<-diameter%>%mutate("ID"= paste0(PLOT,space,clone,tree))%>%
   pivot_wider(names_from = "year", values_from = "DBH")
   
 
-write.csv(D, row.names = FALSE, file ="../Data/Processed/Sapwood/diameter.csv")
+#write.csv(D, row.names = FALSE, file ="../Data/Processed/Sapwood/diameter.csv")
 ```
 
 ```{r sapwood}
@@ -61,6 +61,46 @@ DailySection<-DailySection[,c(1,753,2:752)]
 
 #install.packages("writexl")
 library("writexl")
-write_xlsx(DailySection, "../Data/Processed/Sapwood/17SectionalArea.xlsx")
+#write_xlsx(DailySection, "../Data/Processed/Sapwood/17SectionalArea.xlsx")
 
+```
+
+```{r}
+LA<-DailySection%>%
+  select(c(1:2), contains("LA"))
+
+LASum<-LA%>%
+  select(c(1:2))%>%
+  mutate(LASums =rowSums(LA[,c(3:98)]))
+
+LB<-DailySection%>%
+  select(contains("LB"))
+LBSum<-rowSums(LB)
+
+LC<-DailySection%>%
+  select(contains("LC"))
+LCSum<-rowSums(LC)
+
+LO<-DailySection%>%
+  select(contains("LO"))
+LOSum<-rowSums(LO)
+
+HA<-DailySection%>%
+  select(contains("HA"))
+HASum<-rowSums(HA)
+
+HB<-DailySection%>%
+  select(contains("HB"))
+HBSum<-rowSums(HB)
+
+HC<-DailySection%>%
+  select(contains("HC"))
+HCSum<-rowSums(HC)
+
+HO<-DailySection%>%
+  select(contains("HO"))
+HOSum<-rowSums(HO)
+
+SectionalSums<-cbind(LASum,LBSum,LCSum,LOSum,HASum,HBSum,HCSum,HOSum)
+#write_xlsx(SectionalSums, "../Data/Processed/Sapwood/17SectionalSums.xlsx")
 ```
