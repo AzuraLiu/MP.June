@@ -10,6 +10,8 @@ knitr::opts_chunk$set(echo = TRUE)
 library("dplyr")
 library("tidyverse")
 library("lubridate")
+library("readxl")
+library("writexl")
 
 getwd()
 diameter<-read.csv("../Data/Original/Supplements/Diameter.csv")
@@ -58,49 +60,261 @@ DailySection[DailySection < 0] <- 0
 
 DailySection<-DailySection[,c(1,753,2:752)]
 
-
 #install.packages("writexl")
 library("writexl")
 #write_xlsx(DailySection, "../Data/Processed/Sapwood/17SectionalArea.xlsx")
 
 ```
 
-```{r}
-LA<-DailySection%>%
-  select(c(1:2), contains("LA"))
+```{r LA}
+LA1<-DailySection%>%
+  select(c(1:2), contains("1211LA"))
+LA2<-DailySection%>%
+  select(c(1:2), contains("2211LA"))
+LA3<-DailySection%>%
+  select(c(1:2), contains("3211LA"))
+LA4<-DailySection%>%
+  select(c(1:2), contains("4211LA"))
 
-LASum<-LA%>%
+
+LASum1<-LA1%>%
   select(c(1:2))%>%
-  mutate(LASums =rowSums(LA[,c(3:98)]))
+  mutate(LASums =rowSums(LA1[,c(3:25)]))
 
-LB<-DailySection%>%
-  select(contains("LB"))
-LBSum<-rowSums(LB)
+LASum2<-LA2%>%
+  select(c(1:2))%>%
+  mutate(LASums =rowSums(LA2[,c(3:27)]))
 
-LC<-DailySection%>%
-  select(contains("LC"))
-LCSum<-rowSums(LC)
+LASum3<-LA3%>%
+  select(c(1:2))%>%
+  mutate(LASums =rowSums(LA3[,c(3:27)]))
 
-LO<-DailySection%>%
-  select(contains("LO"))
-LOSum<-rowSums(LO)
+LASum4<-LA4%>%
+  select(c(1:2))%>%
+  mutate(LASums =rowSums(LA4[,c(3:25)]))
 
-HA<-DailySection%>%
-  select(contains("HA"))
-HASum<-rowSums(HA)
+```
 
-HB<-DailySection%>%
-  select(contains("HB"))
-HBSum<-rowSums(HB)
+```{r LB}
+LB1<-DailySection%>%
+  select(contains("1311LB"))
+LB2<-DailySection%>%
+  select(contains("2311LB"))
+LB3<-DailySection%>%
+  select(contains("3311LB"))
+LB4<-DailySection%>%
+  select(contains("4311LB"))
 
-HC<-DailySection%>%
-  select(contains("HC"))
-HCSum<-rowSums(HC)
 
-HO<-DailySection%>%
-  select(contains("HO"))
-HOSum<-rowSums(HO)
+LBSum1<-LB1%>%
+  mutate(LBSums =rowSums(LB1[,c(3:24)]))%>%
+  select(LBSums)
 
-SectionalSums<-cbind(LASum,LBSum,LCSum,LOSum,HASum,HBSum,HCSum,HOSum)
+LBSum2<-LB2%>%
+  mutate(LBSums =rowSums(LB2[,c(3:25)]))%>%
+  select(LBSums)
+
+LBSum3<-LB3%>%
+  mutate(LBSums =rowSums(LB3[,c(3:25)]))%>%
+  select(LBSums)
+
+LBSum4<-LB4%>%
+  mutate(LBSums =rowSums(LB4[,c(3:20)]))%>%
+  select(LBSums)
+
+```
+
+```{r LC}
+LC1<-DailySection%>%
+    select(contains("1411LC"))
+LC2<-DailySection%>%
+    select(contains("2411LC"))
+LC3<-DailySection%>%
+    select(contains("3411LC"))
+LC4<-DailySection%>%
+    select(contains("4411LC"))
+
+
+LCSum1<-LC1%>%
+  mutate(LCSums =rowSums(LC1[,c(3:24)]))%>%
+  select( LCSums)
+
+LCSum2<-LC2%>%
+  mutate(LCSums =rowSums(LC2[,c(3:25)]))%>%
+  select( LCSums)
+
+LCSum3<-LC3%>%
+  mutate(LCSums =rowSums(LC3[,c(3:24)]))%>%
+  select( LCSums)
+
+LCSum4<-LC4%>%
+  mutate(LCSums =rowSums(LC4[,c(3:24)]))%>%
+  select( LCSums)
+```
+
+
+```{r LO}
+LO1<-DailySection%>%
+    select(contains("1611LO"))
+LO2<-DailySection%>%
+    select(contains("2611LO"))
+LO3<-DailySection%>%
+    select(contains("3611LO"))
+LO4<-DailySection%>%
+    select(contains("4611LO"))
+
+
+LOSum1<-LO1%>%
+  mutate(LOSums =rowSums(LO1[,c(3:23)]))%>%
+  select( LOSums)
+
+LOSum2<-LO2%>%
+  mutate(LOSums =rowSums(LO2[,c(3:23)]))%>%
+  select( LOSums)
+
+LOSum3<-LO3%>%
+  mutate(LOSums =rowSums(LO3[,c(3:20)]))%>%
+  select( LOSums)
+
+LOSum4<-LO4%>%
+  mutate(LOSums =rowSums(LO4[,c(3:20)]))%>%
+  select( LOSums)
+```
+
+
+```{r HA}
+HA1<-DailySection%>%
+    select(contains("1231HA"))
+HA2<-DailySection%>%
+    select(contains("2231HA"))
+HA3<-DailySection%>%
+    select(contains("3231HA"))
+HA4<-DailySection%>%
+    select(contains("4231HA"))
+
+
+HASum1<-HA1%>%
+  mutate(HASums =rowSums(HA1[,c(3:24)]))%>%
+  select( HASums)
+
+HASum2<-HA2%>%
+  mutate(HASums =rowSums(HA2[,c(3:25)]))%>%
+  select( HASums)
+
+HASum3<-HA3%>%
+  mutate(HASums =rowSums(HA3[,c(3:25)]))%>%
+  select( HASums)
+
+HASum4<-HA4%>%
+  mutate(HASums =rowSums(HA4[,c(3:25)]))%>%
+  select( HASums)
+
+```
+
+```{r HB}
+HB1<-DailySection%>%
+    select(contains("1331HB"))
+HB2<-DailySection%>%
+    select(contains("2331HB"))
+HB3<-DailySection%>%
+    select(contains("3331HB"))
+HB4<-DailySection%>%
+    select(contains("4331HB"))
+
+
+HBSum1<-HB1%>%
+  mutate(HBSums =rowSums(HB1[,c(3:24)]))%>%
+  select( HBSums)
+
+HBSum2<-HB2%>%
+  mutate(HBSums =rowSums(HB2[,c(3:24)]))%>%
+  select( HBSums)
+
+HBSum3<-HB3%>%
+  mutate(HBSums =rowSums(HB3[,c(3:24)]))%>%
+  select( HBSums)
+
+HBSum4<-HB4%>%
+  mutate(HBSums =rowSums(HB4[,c(3:24)]))%>%
+  select( HBSums)
+
+```
+
+```{r HC}
+HC1<-DailySection%>%
+    select(contains("1431HC"))
+HC2<-DailySection%>%
+    select(contains("2431HC"))
+HC3<-DailySection%>%
+    select(contains("3431HC"))
+HC4<-DailySection%>%
+    select(contains("4431HC"))
+
+
+HCSum1<-HC1%>%
+  mutate(HCSums =rowSums(HC1[,c(3:25)]))%>%
+  select(HCSums)
+
+HCSum2<-HC2%>%
+  mutate(HCSums =rowSums(HC2[,c(3:24)]))%>%
+  select(HCSums)
+
+HCSum3<-HC3%>%
+  mutate(HCSums =rowSums(HC3[,c(3:25)]))%>%
+  select(HCSums)
+
+HCSum4<-HC4%>%
+  mutate(HCSums =rowSums(HC4[,c(3:24)]))%>%
+  select(HCSums)
+```
+
+
+```{r HO}
+HO1<-DailySection%>%
+    select(contains("1631HO"))
+HO2<-DailySection%>%
+    select(contains("2631HO"))
+HO3<-DailySection%>%
+    select(contains("3631HO"))
+HO4<-DailySection%>%
+    select(contains("4631HO"))
+
+
+HOSum1<-HO1%>%
+  mutate(HOSums =rowSums(HO1[,c(3:22)]))%>%
+  select(HOSums)
+
+HOSum2<-HO2%>%
+  mutate(HOSums =rowSums(HO2[,c(3:22)]))%>%
+  select(HOSums)
+
+HOSum3<-HO3%>%
+  mutate(HOSums =rowSums(HO3[,c(3:21)]))%>%
+  select(HOSums)
+
+HOSum4<-HO4%>%
+  mutate(HOSums =rowSums(HO4[,c(3:20)]))%>%
+  select(HOSums)
+```
+
+```{r}
+SectionalSums1<-cbind(LASum1,LBSum1,LCSum1,LOSum1,HASum1,HBSum1,HCSum1,HOSum1)%>%
+  mutate(Block = 1)%>%
+  select(c(1:2,11,3:10))
+
+SectionalSums2<-cbind(LASum2,LBSum2,LCSum2,LOSum2,HASum2,HBSum2,HCSum2,HOSum2)%>%
+  mutate(Block = 2)%>%
+  select(c(1:2,11,3:10))
+
+SectionalSums3<-cbind(LASum3,LBSum3,LCSum3,LOSum3,HASum3,HBSum3,HCSum3,HOSum3)%>%
+  mutate(Block = 3)%>%
+  select(c(1:2,11,3:10))
+
+SectionalSums4<-cbind(LASum4,LBSum4,LCSum4,LOSum4,HASum4,HBSum4,HCSum4,HOSum4)%>%
+  mutate(Block = 4)%>%
+  select(c(1:2,11,3:10))
+
+SectionalSums<-rbind(SectionalSums1,SectionalSums2,SectionalSums3,SectionalSums4)
+library(writexl)
 #write_xlsx(SectionalSums, "../Data/Processed/Sapwood/17SectionalSums.xlsx")
 ```

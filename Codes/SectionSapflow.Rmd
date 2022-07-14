@@ -19,7 +19,6 @@ Sapflux<-read_excel("../Data/Processed/Sapflow/Jul17/Sapflux.xlsx")
 ```
 
 ```{r}
-
 LA<-Sapflux%>%
   mutate(ID = "LA")%>%
   filter(grepl("LA",Tree))%>%
@@ -85,14 +84,14 @@ names(SapfluxbyPop)[2]<-"ID"
 ```
 
 ```{r}
-names(Sections)[3]<-"LA"
-names(Sections)[4]<-"LB"
-names(Sections)[5]<-"LC"
-names(Sections)[6]<-"LO"
-names(Sections)[7]<-"HA"
-names(Sections)[8]<-"HB"
-names(Sections)[9]<-"HC"
-names(Sections)[10]<-"HO"
+names(Sections)[4]<-"LA"
+names(Sections)[5]<-"LB"
+names(Sections)[6]<-"LC"
+names(Sections)[7]<-"LO"
+names(Sections)[8]<-"HA"
+names(Sections)[9]<-"HB"
+names(Sections)[10]<-"HC"
+names(Sections)[11]<-"HO"
 
 
 SectionWrangle<-Sections%>%
@@ -134,99 +133,342 @@ JulyMeta<-inner_join(JulySapflow, VPD, by="DOY")
 
 ```{r}
 
-LAFlow<-JulyMeta%>%
-  filter(ID == "LA")
+LAFlow1<-JulyMeta%>%
+  filter(ID == "LA" & Block == 1)
+LAFlow2<-JulyMeta%>%
+  filter(ID == "LA" & Block == 2)
+LAFlow3<-JulyMeta%>%
+  filter(ID == "LA" & Block == 3)
+LAFlow4<-JulyMeta%>%
+  filter(ID == "LA" & Block == 4)
 
-LBFlow<-JulyMeta%>%
-  filter(ID == "LB")
 
-LCFlow<-JulyMeta%>%
-  filter(ID == "LC")
+LBFlow1<-JulyMeta%>%
+  filter(ID == "LB" & Block == 1)
+LBFlow2<-JulyMeta%>%
+  filter(ID == "LB" & Block == 2)
+LBFlow3<-JulyMeta%>%
+  filter(ID == "LB" & Block == 3)
+LBFlow4<-JulyMeta%>%
+  filter(ID == "LB" & Block == 4)
 
-LOFlow<-JulyMeta%>%
-  filter(ID == "LO")
 
-HAFlow<-JulyMeta%>%
-  filter(ID == "HA")
+LCFlow1<-JulyMeta%>%
+  filter(ID == "LC" & Block == 1)
+LCFlow2<-JulyMeta%>%
+  filter(ID == "LC" & Block == 2)
+LCFlow3<-JulyMeta%>%
+  filter(ID == "LC" & Block == 3)
+LCFlow4<-JulyMeta%>%
+  filter(ID == "LC" & Block == 4)
 
-HBFlow<-JulyMeta%>%
-  filter(ID == "HB")
 
-HCFlow<-JulyMeta%>%
-  filter(ID == "HC")
+LOFlow1<-JulyMeta%>%
+  filter(ID == "LO" & Block == 1)
+LOFlow2<-JulyMeta%>%
+  filter(ID == "LO" & Block == 2)
+LOFlow3<-JulyMeta%>%
+  filter(ID == "LO" & Block == 3)
+LOFlow4<-JulyMeta%>%
+  filter(ID == "LO" & Block == 4)
 
-HOFlow<-JulyMeta%>%
-  filter(ID == "HO")
+
+HAFlow1<-JulyMeta%>%
+  filter(ID == "HA" & Block == 1)
+HAFlow2<-JulyMeta%>%
+  filter(ID == "HA" & Block == 2)
+HAFlow3<-JulyMeta%>%
+  filter(ID == "HA" & Block == 3)
+HAFlow4<-JulyMeta%>%
+  filter(ID == "HA" & Block == 4)
+
+
+HBFlow1<-JulyMeta%>%
+  filter(ID == "HB" & Block == 1)
+HBFlow2<-JulyMeta%>%
+  filter(ID == "HB" & Block == 2)
+HBFlow3<-JulyMeta%>%
+  filter(ID == "HB" & Block == 3)
+HBFlow4<-JulyMeta%>%
+  filter(ID == "HB" & Block == 4)
+
+
+HCFlow1<-JulyMeta%>%
+  filter(ID == "HC" & Block == 1)
+HCFlow2<-JulyMeta%>%
+  filter(ID == "HC" & Block == 2)
+HCFlow3<-JulyMeta%>%
+  filter(ID == "HC" & Block == 3)
+HCFlow4<-JulyMeta%>%
+  filter(ID == "HC" & Block == 4)
+
+
+HOFlow1<-JulyMeta%>%
+  filter(ID == "HO" & Block == 1)
+HOFlow2<-JulyMeta%>%
+  filter(ID == "HO" & Block == 2)
+HOFlow3<-JulyMeta%>%
+  filter(ID == "HO" & Block == 3)
+HOFlow4<-JulyMeta%>%
+  filter(ID == "HO" & Block == 4)
 ```
 
 ```{r}
-LASapflow<-ggplot(LAFlow, aes(DOY))+
+LASapflow1<-ggplot(LAFlow1, aes(DOY))+
   scale_x_continuous()+
   geom_point(aes(y=Sapflow, color=Section))+
   geom_point(aes(y=VPD, color = "VPD"))+
-  ggtitle("LA Plot Level Sapflow")
+  ggtitle("LA1 Plot Level Sapflow")
 
-ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LA.jpg", LASapflow, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LA1.jpg", LASapflow1, height = 7, width = 10, units = "in", dpi = 500)
 
-LBSapflow<-ggplot(LBFlow, aes(DOY))+
+LASapflow2<-ggplot(LAFlow2, aes(DOY))+
   scale_x_continuous()+
   geom_point(aes(y=Sapflow, color=Section))+
   geom_point(aes(y=VPD, color = "VPD"))+
-  ggtitle("LB Plot Level Sapflow")
+  ggtitle("LA2 Plot Level Sapflow")
 
-ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LB.jpg", LBSapflow, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LA2.jpg", LASapflow2, height = 7, width = 10, units = "in", dpi = 500)
 
-LCSapflow<-ggplot(LCFlow, aes(DOY))+
+LASapflow3<-ggplot(LAFlow3, aes(DOY))+
   scale_x_continuous()+
   geom_point(aes(y=Sapflow, color=Section))+
   geom_point(aes(y=VPD, color = "VPD"))+
-  ggtitle("LC Plot Level Sapflow")
+  ggtitle("LA3 Plot Level Sapflow")
 
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LA3.jpg", LASapflow3, height = 7, width = 10, units = "in", dpi = 500)
 
-ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LC.jpg", LCSapflow, height = 7, width = 10, units = "in", dpi = 500)
-
-LOSapflow<-ggplot(LOFlow, aes(DOY))+
+LASapflow4<-ggplot(LAFlow4, aes(DOY))+
   scale_x_continuous()+
   geom_point(aes(y=Sapflow, color=Section))+
   geom_point(aes(y=VPD, color = "VPD"))+
-  ggtitle("LO Plot Level Sapflow")
+  ggtitle("LA4 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LA4.jpg", LASapflow4, height = 7, width = 10, units = "in", dpi = 500)
 
 
-ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LO.jpg", LOSapflow, height = 7, width = 10, units = "in", dpi = 500)
-
-HASapflow<-ggplot(HAFlow, aes(DOY))+
+LBSapflow1<-ggplot(LBFlow1, aes(DOY))+
   scale_x_continuous()+
   geom_point(aes(y=Sapflow, color=Section))+
   geom_point(aes(y=VPD, color = "VPD"))+
-  ggtitle("HA Plot Level Sapflow")
+  ggtitle("LB1 Plot Level Sapflow")
 
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LB1.jpg", LBSapflow1, height = 7, width = 10, units = "in", dpi = 500)
 
-ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HA.jpg", HASapflow, height = 7, width = 10, units = "in", dpi = 500)
-
-HBSapflow<-ggplot(HBFlow, aes(DOY))+
+LBSapflow2<-ggplot(LBFlow2, aes(DOY))+
   scale_x_continuous()+
   geom_point(aes(y=Sapflow, color=Section))+
   geom_point(aes(y=VPD, color = "VPD"))+
-  ggtitle("HB Plot Level Sapflow")
+  ggtitle("LB2 Plot Level Sapflow")
 
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LB2.jpg", LBSapflow2, height = 7, width = 10, units = "in", dpi = 500)
 
-ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HB.jpg", HBSapflow, height = 7, width = 10, units = "in", dpi = 500)
-
-HCSapflow<-ggplot(HCFlow, aes(DOY))+
+LBSapflow3<-ggplot(LBFlow3, aes(DOY))+
   scale_x_continuous()+
   geom_point(aes(y=Sapflow, color=Section))+
   geom_point(aes(y=VPD, color = "VPD"))+
-  ggtitle("HC Plot Level Sapflow")
+  ggtitle("LB3 Plot Level Sapflow")
 
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LB3.jpg", LBSapflow3, height = 7, width = 10, units = "in", dpi = 500)
 
-ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HC.jpg", HCSapflow, height = 7, width = 10, units = "in", dpi = 500)
-
-HOSapflow<-ggplot(HOFlow, aes(DOY))+
+LBSapflow4<-ggplot(LBFlow4, aes(DOY))+
   scale_x_continuous()+
   geom_point(aes(y=Sapflow, color=Section))+
   geom_point(aes(y=VPD, color = "VPD"))+
-  ggtitle("HO Plot Level Sapflow")
+  ggtitle("LB4 Plot Level Sapflow")
 
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LB4.jpg", LBSapflow4, height = 7, width = 10, units = "in", dpi = 500)
 
-ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO.jpg", HOSapflow, height = 7, width = 10, units = "in", dpi = 500)
+LCSapflow1<-ggplot(LCFlow1, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("LC1 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LC1.jpg", LCSapflow1, height = 7, width = 10, units = "in", dpi = 500)
+
+LCSapflow2<-ggplot(LCFlow2, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("LC2 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LC2.jpg", LCSapflow2, height = 7, width = 10, units = "in", dpi = 500)
+
+LCSapflow3<-ggplot(LCFlow3, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("LC3 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LC3.jpg", LCSapflow3, height = 7, width = 10, units = "in", dpi = 500)
+
+LCSapflow4<-ggplot(LCFlow4, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("LC4 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LC4.jpg", LCSapflow4, height = 7, width = 10, units = "in", dpi = 500)
+
+LOSapflow1<-ggplot(LOFlow1, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("LO1 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LO1.jpg", LOSapflow1, height = 7, width = 10, units = "in", dpi = 500)
+
+LOSapflow2<-ggplot(LOFlow2, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("LO2 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LO2.jpg", LOSapflow2, height = 7, width = 10, units = "in", dpi = 500)
+
+LOSapflow3<-ggplot(LOFlow3, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("LO3 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LO3.jpg", LOSapflow3, height = 7, width = 10, units = "in", dpi = 500)
+
+LOSapflow4<-ggplot(LOFlow4, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("LO4 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LO4.jpg", LOSapflow4, height = 7, width = 10, units = "in", dpi = 500)
+
+HASapflow1<-ggplot(HAFlow1, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HA1 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HA1.jpg", HASapflow1, height = 7, width = 10, units = "in", dpi = 500)
+
+HASapflow2<-ggplot(HAFlow2, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HA2 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HA2.jpg", HASapflow2, height = 7, width = 10, units = "in", dpi = 500)
+
+HASapflow3<-ggplot(HAFlow3, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HA3 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HA3.jpg", HASapflow3, height = 7, width = 10, units = "in", dpi = 500)
+
+HASapflow4<-ggplot(HAFlow4, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HA4 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HA4.jpg", HASapflow4, height = 7, width = 10, units = "in", dpi = 500)
+
+HBSapflow1<-ggplot(HBFlow1, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HB1 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HB1.jpg", HBSapflow1, height = 7, width = 10, units = "in", dpi = 500)
+
+HBSapflow2<-ggplot(HBFlow2, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HB2 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HB2.jpg", HBSapflow2, height = 7, width = 10, units = "in", dpi = 500)
+
+HBSapflow3<-ggplot(HBFlow3, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HB3 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HB3.jpg", HBSapflow3, height = 7, width = 10, units = "in", dpi = 500)
+
+HBSapflow4<-ggplot(HBFlow4, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HB4 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HB4.jpg", HBSapflow4, height = 7, width = 10, units = "in", dpi = 500)
+
+HCSapflow1<-ggplot(HCFlow1, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HC1 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HC1.jpg", HCSapflow1, height = 7, width = 10, units = "in", dpi = 500)
+
+HCSapflow2<-ggplot(HCFlow2, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HC2 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HC2.jpg", HCSapflow2, height = 7, width = 10, units = "in", dpi = 500)
+
+HCSapflow3<-ggplot(HCFlow3, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HC3 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HC3.jpg", HCSapflow3, height = 7, width = 10, units = "in", dpi = 500)
+
+HCSapflow4<-ggplot(HCFlow4, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HC4 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HC4.jpg", HCSapflow4, height = 7, width = 10, units = "in", dpi = 500)
+
+HOSapflow1<-ggplot(HOFlow1, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HO1 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO1.jpg", HOSapflow1, height = 7, width = 10, units = "in", dpi = 500)
+
+HOSapflow2<-ggplot(HOFlow2, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HO2 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO2.jpg", HOSapflow2, height = 7, width = 10, units = "in", dpi = 500)
+
+HOSapflow3<-ggplot(HOFlow3, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HO3 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO3.jpg", HOSapflow3, height = 7, width = 10, units = "in", dpi = 500)
+
+HOSapflow4<-ggplot(HOFlow4, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Sapflow, color=Section))+
+  geom_point(aes(y=VPD, color = "VPD"))+
+  ggtitle("HO4 Plot Level Sapflow")
+
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO4.jpg", HOSapflow4, height = 7, width = 10, units = "in", dpi = 500)
 ```
+
