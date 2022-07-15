@@ -30,6 +30,7 @@ D<-diameter%>%mutate("ID"= paste0(PLOT,space,clone,tree))%>%
 ```{r sapwood}
 library("readxl")
 DailyDiameter<-read_excel("../Data/Processed/Sapwood/17Diameter.xlsx")
+DailyDiameter<-DailyDiameter[-367,]
 
 r<-DailyDiameter%>%
   mutate_at(vars(2:752),
