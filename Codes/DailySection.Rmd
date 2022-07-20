@@ -19,13 +19,6 @@ diameter<-diameter[2:11]
 
 ```
 
-```{r group, eval=FALSE, include=FALSE}
-D<-diameter%>%mutate("ID"= paste0(PLOT,space,clone,tree))%>%
-  pivot_wider(names_from = "year", values_from = "DBH")
-  
-
-#write.csv(D, row.names = FALSE, file ="../Data/Processed/Sapwood/diameter.csv")
-```
 
 ```{r sapwood}
 library("readxl")

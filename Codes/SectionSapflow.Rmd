@@ -472,3 +472,356 @@ HOSapflow4<-ggplot(HOFlow4, aes(DOY))+
 ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO4.jpg", HOSapflow4, height = 7, width = 10, units = "in", dpi = 500)
 ```
 
+```{r}
+SapflowbySec<-read_excel("../Data/Processed/Sapflow/Jul17/PlotLevelSapflowBySec.xlsx")
+
+PlotLevel<-aggregate(SapflowbySec$Sapflow, by = list(SapflowbySec$DOY, SapflowbySec$Block, SapflowbySec$ID,SapflowbySec$VPD),FUN = "sum")
+names(PlotLevel)[1]<-"DOY"
+names(PlotLevel)[2]<-"Block"
+names(PlotLevel)[3]<-"ID"
+names(PlotLevel)[4]<-"VPD"
+names(PlotLevel)[5]<-"Sapflow"
+
+#write_xlsx(PlotLevel, "../Data/Processed/Sapflow/Jul17/PlotLevelSapflow.xlsx")
+```
+
+```{r}
+HA1<-PlotLevel%>%filter(Block==1 & ID == "HA")
+
+HAB1<-ggplot(HA1, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HA1 Plot Level Sapflow vs VPD")
+
+HAB1
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HA1.jpg", HAB1, height = 7, width = 10, units = "in", dpi = 500)
+
+HB1<-PlotLevel%>%filter(Block==1 & ID == "HB")
+
+HBB1<-ggplot(HB1, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HB1 Plot Level Sapflow vs VPD")
+
+HBB1
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HB1.jpg", HBB1, height = 7, width = 10, units = "in", dpi = 500)
+
+HC1<-PlotLevel%>%filter(Block==1 & ID == "HC")
+HCB1<-ggplot(HC1, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HC1 Plot Level Sapflow vs VPD")
+
+HCB1
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HC1.jpg", HCB1, height = 7, width = 10, units = "in", dpi = 500)
+
+HO1<-PlotLevel%>%filter(Block==1 & ID == "HO")
+
+HOB1<-ggplot(HO1, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HO1 Plot Level Sapflow vs VPD")
+
+HOB1
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO1.jpg", HOB1, height = 7, width = 10, units = "in", dpi = 500)
+
+#HAHBHCHO
+```
+
+```{r}
+HA2<-PlotLevel%>%filter(Block==2 & ID == "HA")
+
+HAB2<-ggplot(HA2, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HA2 Plot Level Sapflow vs VPD")
+
+HAB2
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HA2.jpg", HAB2, height = 7, width = 10, units = "in", dpi = 500)
+
+HB2<-PlotLevel%>%filter(Block==2 & ID == "HB")
+
+HBB2<-ggplot(HB2, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HB2 Plot Level Sapflow vs VPD")
+
+HBB2
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HB2.jpg", HBB2, height = 7, width = 10, units = "in", dpi = 500)
+
+HC2<-PlotLevel%>%filter(Block==2 & ID == "HC")
+HCB2<-ggplot(HC2, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HC2 Plot Level Sapflow vs VPD")
+
+HCB2
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HC2.jpg", HCB2, height = 7, width = 10, units = "in", dpi = 500)
+
+HO2<-PlotLevel%>%filter(Block==2 & ID == "HO")
+
+HOB2<-ggplot(HO2, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HO2 Plot Level Sapflow vs VPD")
+
+HOB2
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO2.jpg", HOB2, height = 7, width = 10, units = "in", dpi = 500)
+
+#HAHBHCHO
+```
+```{r}
+HA3<-PlotLevel%>%filter(Block==3 & ID == "HA")
+
+HAB3<-ggplot(HA3, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HA3 Plot Level Sapflow vs VPD")
+
+HAB3
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HA3.jpg", HAB3, height = 7, width = 10, units = "in", dpi = 500)
+
+HB3<-PlotLevel%>%filter(Block==3 & ID == "HB")
+
+HBB3<-ggplot(HB3, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HB3 Plot Level Sapflow vs VPD")
+
+HBB3
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HB3.jpg", HBB3, height = 7, width = 10, units = "in", dpi = 500)
+
+HC3<-PlotLevel%>%filter(Block==3 & ID == "HC")
+HCB3<-ggplot(HC3, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HC3 Plot Level Sapflow vs VPD")
+
+HCB3
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HC3.jpg", HCB3, height = 7, width = 10, units = "in", dpi = 500)
+
+HO3<-PlotLevel%>%filter(Block==3 & ID == "HO")
+
+HOB3<-ggplot(HO3, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HO3 Plot Level Sapflow vs VPD")
+
+HOB3
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO3.jpg", HOB3, height = 7, width = 10, units = "in", dpi = 500)
+
+#HAHBHCHO
+```
+```{r}
+HA4<-PlotLevel%>%filter(Block==4 & ID == "HA")
+
+HAB4<-ggplot(HA4, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HA4 Plot Level Sapflow vs VPD")
+
+HAB4
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HA4.jpg", HAB4, height = 7, width = 10, units = "in", dpi = 500)
+
+HB4<-PlotLevel%>%filter(Block==4 & ID == "HB")
+
+HBB4<-ggplot(HB4, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HB4 Plot Level Sapflow vs VPD")
+
+HBB4
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HB4.jpg", HBB4, height = 7, width = 10, units = "in", dpi = 500)
+
+HC4<-PlotLevel%>%filter(Block==4 & ID == "HC")
+HCB4<-ggplot(HC4, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HC4 Plot Level Sapflow vs VPD")
+
+HCB4
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HC4.jpg", HCB4, height = 7, width = 10, units = "in", dpi = 500)
+
+HO4<-PlotLevel%>%filter(Block==4 & ID == "HO")
+
+HOB4<-ggplot(HO4, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("HO4 Plot Level Sapflow vs VPD")
+
+HOB4
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO4.jpg", HOB4, height = 7, width = 10, units = "in", dpi = 500)
+
+#HAHBHCHO
+```
+
+
+```{r}
+LA1<-PlotLevel%>%filter(Block==1 & ID == "LA")
+
+LAB1<-ggplot(LA1, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LA1 Plot Level Sapflow vs VPD")
+
+LAB1
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LA1.jpg", LAB1, height = 7, width = 10, units = "in", dpi = 500)
+
+LB1<-PlotLevel%>%filter(Block==1 & ID == "LB")
+
+LBB1<-ggplot(LB1, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LB1 Plot Level Sapflow vs VPD")
+
+LBB1
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LB1.jpg", LBB1, height = 7, width = 10, units = "in", dpi = 500)
+
+LC1<-PlotLevel%>%filter(Block==1 & ID == "LC")
+LCB1<-ggplot(LC1, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LC1 Plot Level Sapflow vs VPD")
+
+LCB1
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LC1.jpg", LCB1, height = 7, width = 10, units = "in", dpi = 500)
+
+LO1<-PlotLevel%>%filter(Block==1 & ID == "LO")
+
+LOB1<-ggplot(LO1, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LO1 Plot Level Sapflow vs VPD")
+
+LOB1
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LO1.jpg", LOB1, height = 7, width = 10, units = "in", dpi = 500)
+
+#LALBLCLO
+```
+
+```{r}
+LA2<-PlotLevel%>%filter(Block==2 & ID == "LA")
+
+LAB2<-ggplot(LA2, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LA2 Plot Level Sapflow vs VPD")
+
+LAB2
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LA2.jpg", LAB2, height = 7, width = 10, units = "in", dpi = 500)
+
+LB2<-PlotLevel%>%filter(Block==2 & ID == "LB")
+
+LBB2<-ggplot(LB2, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LB2 Plot Level Sapflow vs VPD")
+
+LBB2
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LB2.jpg", LBB2, height = 7, width = 10, units = "in", dpi = 500)
+
+LC2<-PlotLevel%>%filter(Block==2 & ID == "LC")
+LCB2<-ggplot(LC2, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LC2 Plot Level Sapflow vs VPD")
+
+LCB2
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LC2.jpg", LCB2, height = 7, width = 10, units = "in", dpi = 500)
+
+LO2<-PlotLevel%>%filter(Block==2 & ID == "LO")
+
+LOB2<-ggplot(LO2, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LO2 Plot Level Sapflow vs VPD")
+
+LOB2
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LO2.jpg", LOB2, height = 7, width = 10, units = "in", dpi = 500)
+
+#LALBLCLO
+```
+```{r}
+LA3<-PlotLevel%>%filter(Block==3 & ID == "LA")
+
+LAB3<-ggplot(LA3, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LA3 Plot Level Sapflow vs VPD")
+
+LAB3
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LA3.jpg", LAB3, height = 7, width = 10, units = "in", dpi = 500)
+
+LB3<-PlotLevel%>%filter(Block==3 & ID == "LB")
+
+LBB3<-ggplot(LB3, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LB3 Plot Level Sapflow vs VPD")
+
+LBB3
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LB3.jpg", LBB3, height = 7, width = 10, units = "in", dpi = 500)
+
+LC3<-PlotLevel%>%filter(Block==3 & ID == "LC")
+LCB3<-ggplot(LC3, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LC3 Plot Level Sapflow vs VPD")
+
+LCB3
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LC3.jpg", LCB3, height = 7, width = 10, units = "in", dpi = 500)
+
+LO3<-PlotLevel%>%filter(Block==3 & ID == "LO")
+
+LOB3<-ggplot(LO3, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LO3 Plot Level Sapflow vs VPD")
+
+LOB3
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LO3.jpg", LOB3, height = 7, width = 10, units = "in", dpi = 500)
+
+#LALBLCLO
+```
+```{r}
+LA4<-PlotLevel%>%filter(Block==4 & ID == "LA")
+
+LAB4<-ggplot(LA4, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LA4 Plot Level Sapflow vs VPD")
+
+LAB4
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LA4.jpg", LAB4, height = 7, width = 10, units = "in", dpi = 500)
+
+LB4<-PlotLevel%>%filter(Block==4 & ID == "LB")
+
+LBB4<-ggplot(LB4, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LB4 Plot Level Sapflow vs VPD")
+
+LBB4
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LB4.jpg", LBB4, height = 7, width = 10, units = "in", dpi = 500)
+
+LC4<-PlotLevel%>%filter(Block==4 & ID == "LC")
+LCB4<-ggplot(LC4, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LC4 Plot Level Sapflow vs VPD")
+
+LCB4
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LC4.jpg", LCB4, height = 7, width = 10, units = "in", dpi = 500)
+
+LO4<-PlotLevel%>%filter(Block==4 & ID == "LO")
+
+LOB4<-ggplot(LO4, aes(Sapflow))+
+  scale_x_continuous()+
+  geom_point(aes(y=VPD))+
+  ggtitle("LO4 Plot Level Sapflow vs VPD")
+
+LOB4
+ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LO4.jpg", LOB4, height = 7, width = 10, units = "in", dpi = 500)
+
+#LALBLCLO
+```
