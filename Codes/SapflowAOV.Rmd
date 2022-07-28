@@ -1,0 +1,201 @@
+---
+title: "SapflowAOV"
+author: "Azura Liu"
+date: '2022-06-13'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("dplyr")
+library("tidyverse")
+library("lubridate")
+library("readxl")
+library("writexl")
+
+getwd()
+PlotLevel<-read_excel("../Data/Processed/Sapflow/Jul17/PlotLevelSapflow.xlsx")
+```
+
+
+```{r}
+HA1<-PlotLevel%>%filter(Block==1 & ID == "HA")
+mHA1<-lm(HA1$Sapflow~HA1$VPD)
+mHA1
+
+HB1<-PlotLevel%>%filter(Block==1 & ID == "HB")
+mHB1<-lm(HB1$Sapflow~HB1$VPD)
+mHB1
+
+
+HC1<-PlotLevel%>%filter(Block==1 & ID == "HC")
+mHC1<-lm(HC1$Sapflow~HC1$VPD)
+mHC1
+
+
+HO1<-PlotLevel%>%filter(Block==1 & ID == "HO")
+mHO1<-lm(HO1$Sapflow~HO1$VPD)
+mHO1
+
+HA2<-PlotLevel%>%filter(Block==2 & ID == "HA")
+mHA2<-lm(HA2$Sapflow~HA2$VPD)
+mHA2
+
+HB2<-PlotLevel%>%filter(Block==2 & ID == "HB")
+mHB2<-lm(HB2$Sapflow~HB2$VPD)
+mHB2
+
+
+HC2<-PlotLevel%>%filter(Block==2 & ID == "HC")
+mHC2<-lm(HC2$Sapflow~HC2$VPD)
+mHC2
+
+
+HO2<-PlotLevel%>%filter(Block==2 & ID == "HO")
+mHO2<-lm(HO2$Sapflow~HO2$VPD)
+mHO2
+
+HA3<-PlotLevel%>%filter(Block==3 & ID == "HA")
+mHA3<-lm(HA3$Sapflow~HA3$VPD)
+mHA3
+
+HB3<-PlotLevel%>%filter(Block==3 & ID == "HB")
+mHB3<-lm(HB3$Sapflow~HB3$VPD)
+mHB3
+
+
+HC3<-PlotLevel%>%filter(Block==3 & ID == "HC")
+mHC3<-lm(HC3$Sapflow~HC3$VPD)
+mHC3
+
+
+HO3<-PlotLevel%>%filter(Block==3 & ID == "HO")
+mHO3<-lm(HO3$Sapflow~HO3$VPD)
+mHO3
+
+HA4<-PlotLevel%>%filter(Block==4 & ID == "HA")
+mHA4<-lm(HA4$Sapflow~HA4$VPD)
+mHA4
+
+HB4<-PlotLevel%>%filter(Block==4 & ID == "HB")
+mHB4<-lm(HB4$Sapflow~HB4$VPD)
+mHB4
+
+
+HC4<-PlotLevel%>%filter(Block==4 & ID == "HC")
+mHC4<-lm(HC4$Sapflow~HC4$VPD)
+mHC4
+
+
+HO4<-PlotLevel%>%filter(Block==4 & ID == "HO")
+mHO4<-lm(HO4$Sapflow~HO4$VPD)
+mHO4
+
+```
+
+```{r}
+LA1<-PlotLevel%>%filter(Block==1 & ID == "LA")
+mLA1<-lm(LA1$Sapflow~LA1$VPD)
+mLA1
+
+LB1<-PlotLevel%>%filter(Block==1 & ID == "LB")
+mLB1<-lm(LB1$Sapflow~LB1$VPD)
+mLB1
+
+
+LC1<-PlotLevel%>%filter(Block==1 & ID == "LC")
+mLC1<-lm(LC1$Sapflow~LC1$VPD)
+mLC1
+
+
+LO1<-PlotLevel%>%filter(Block==1 & ID == "LO")
+mLO1<-lm(LO1$Sapflow~LO1$VPD)
+mLO1
+
+LA2<-PlotLevel%>%filter(Block==2 & ID == "LA")
+mLA2<-lm(LA2$Sapflow~LA2$VPD)
+mLA2
+
+LB2<-PlotLevel%>%filter(Block==2 & ID == "LB")
+mLB2<-lm(LB2$Sapflow~LB2$VPD)
+mLB2
+
+
+LC2<-PlotLevel%>%filter(Block==2 & ID == "LC")
+mLC2<-lm(LC2$Sapflow~LC2$VPD)
+mLC2
+
+
+LO2<-PlotLevel%>%filter(Block==2 & ID == "LO")
+mLO2<-lm(LO2$Sapflow~LO2$VPD)
+mLO2
+
+LA3<-PlotLevel%>%filter(Block==3 & ID == "LA")
+mLA3<-lm(LA3$Sapflow~LA3$VPD)
+mLA3
+
+LB3<-PlotLevel%>%filter(Block==3 & ID == "LB")
+mLB3<-lm(LB3$Sapflow~LB3$VPD)
+mLB3
+
+
+LC3<-PlotLevel%>%filter(Block==3 & ID == "LC")
+mLC3<-lm(LC3$Sapflow~LC3$VPD)
+mLC3
+
+
+LO3<-PlotLevel%>%filter(Block==3 & ID == "LO")
+mLO3<-lm(LO3$Sapflow~LO3$VPD)
+mLO3
+
+LA4<-PlotLevel%>%filter(Block==4 & ID == "LA")
+mLA4<-lm(LA4$Sapflow~LA4$VPD)
+mLA4
+
+LB4<-PlotLevel%>%filter(Block==4 & ID == "LB")
+mLB4<-lm(LB4$Sapflow~LB4$VPD)
+mLB4
+
+
+LC4<-PlotLevel%>%filter(Block==4 & ID == "LC")
+mLC4<-lm(LC4$Sapflow~LC4$VPD)
+mLC4
+
+
+LO4<-PlotLevel%>%filter(Block==4 & ID == "LO")
+mLO4<-lm(LO4$Sapflow~LO4$VPD)
+mLO4
+
+```
+```{r}
+ANOVADat<-read_excel("../Data/Processed/Sapflow/Jul17/ANOVADat.xlsx")
+
+Slope<-anova(lm(ANOVADat$Slope~ANOVADat$Group))
+Slope
+
+
+Intercept<-anova(lm(ANOVADat$Intercept~ANOVADat$Group))
+Intercept
+
+
+SlopeAov<-ggplot(ANOVADat, aes(x = Group, y = Slope, fill = Group)) +
+    geom_boxplot() +
+    geom_jitter(shape = 15,
+        color = "steelblue",
+        position = position_jitter(0.21)) +
+    ggtitle("Slope Variation")+
+    theme_classic()
+
+ggsave("../Data/Processed/Sapflow/Jul17/SlopeAov.jpg", SlopeAov, height = 7, width = 10, units = "in", dpi = 500)
+
+InterceptAov<-ggplot(ANOVADat, aes(x = Group, y = Intercept, fill = Group)) +
+    geom_boxplot() +
+    geom_jitter(shape = 15,
+        color = "steelblue",
+        position = position_jitter(0.21)) +
+    ggtitle("Intercept Variation")+
+    theme_classic()
+
+ggsave("../Data/Processed/Sapflow/Jul17/InterceptAov.jpg", InterceptAov, height = 7, width = 10, units = "in", dpi = 500)
+
+```

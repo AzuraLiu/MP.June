@@ -119,11 +119,14 @@ SapfluxJuly$DOY<-as.double(SapfluxJuly$DOY)
 JulySapflow<-inner_join(SectionJuly, SapfluxJuly,by = c("DOY", "Section", "ID"))%>%
   mutate(Sapflow=Sapflux*Area/10000)
 
-Weather<-read.csv("../Data/Processed/Sums/Converted/S1.Sum.7.csv")
+Weather<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap1.7.csv")
+Weather$DOY<-as.numeric(Weather$DOY)
+Weather$VPD<-as.numeric(Weather$VPD)
 
-VPD<-Weather%>%
-  filter(Interval=="24hr")%>%
-  select(DOY, VPD)
+VPD<-aggregate(Weather$VPD, by=list(Weather$DOY), mean)
+  names(VPD)[1]<-"DOY"
+  names(VPD)[2]<-"VPD"
+
 
 JulyMeta<-inner_join(JulySapflow, VPD, by="DOY")
 
@@ -213,7 +216,7 @@ HOFlow4<-JulyMeta%>%
   filter(ID == "HO" & Block == 4)
 ```
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 LASapflow1<-ggplot(LAFlow1, aes(DOY))+
   scale_x_continuous()+
   geom_point(aes(y=Sapflow, color=Section))+
@@ -475,12 +478,13 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO4.jpg", HOSapflow4, heig
 ```{r}
 SapflowbySec<-read_excel("../Data/Processed/Sapflow/Jul17/PlotLevelSapflowBySec.xlsx")
 
-PlotLevel<-aggregate(SapflowbySec$Sapflow, by = list(SapflowbySec$DOY, SapflowbySec$Block, SapflowbySec$ID,SapflowbySec$VPD),FUN = "sum")
+PlotLevel<-aggregate(SapflowbySec$Sapflow, by = list(SapflowbySec$DOY, SapflowbySec$Block, SapflowbySec$ID),FUN = "sum")
 names(PlotLevel)[1]<-"DOY"
 names(PlotLevel)[2]<-"Block"
 names(PlotLevel)[3]<-"ID"
-names(PlotLevel)[4]<-"VPD"
-names(PlotLevel)[5]<-"Sapflow"
+names(PlotLevel)[4]<-"Sapflow"
+
+PlotLevel<-inner_join(PlotLevel, VPD, by="DOY")
 
 #write_xlsx(PlotLevel, "../Data/Processed/Sapflow/Jul17/PlotLevelSapflow.xlsx")
 ```
@@ -488,9 +492,9 @@ names(PlotLevel)[5]<-"Sapflow"
 ```{r}
 HA1<-PlotLevel%>%filter(Block==1 & ID == "HA")
 
-HAB1<-ggplot(HA1, aes(Sapflow))+
+HAB1<-ggplot(HA1, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HA1 Plot Level Sapflow vs VPD")
 
 HAB1
@@ -498,18 +502,18 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HA1.jpg", HAB1, height = 7
 
 HB1<-PlotLevel%>%filter(Block==1 & ID == "HB")
 
-HBB1<-ggplot(HB1, aes(Sapflow))+
+HBB1<-ggplot(HB1, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HB1 Plot Level Sapflow vs VPD")
 
 HBB1
 ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HB1.jpg", HBB1, height = 7, width = 10, units = "in", dpi = 500)
 
 HC1<-PlotLevel%>%filter(Block==1 & ID == "HC")
-HCB1<-ggplot(HC1, aes(Sapflow))+
+HCB1<-ggplot(HC1, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HC1 Plot Level Sapflow vs VPD")
 
 HCB1
@@ -517,9 +521,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HC1.jpg", HCB1, height = 7
 
 HO1<-PlotLevel%>%filter(Block==1 & ID == "HO")
 
-HOB1<-ggplot(HO1, aes(Sapflow))+
+HOB1<-ggplot(HO1, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HO1 Plot Level Sapflow vs VPD")
 
 HOB1
@@ -531,9 +535,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO1.jpg", HOB1, height = 7
 ```{r}
 HA2<-PlotLevel%>%filter(Block==2 & ID == "HA")
 
-HAB2<-ggplot(HA2, aes(Sapflow))+
+HAB2<-ggplot(HA2, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HA2 Plot Level Sapflow vs VPD")
 
 HAB2
@@ -541,18 +545,18 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HA2.jpg", HAB2, height = 7
 
 HB2<-PlotLevel%>%filter(Block==2 & ID == "HB")
 
-HBB2<-ggplot(HB2, aes(Sapflow))+
+HBB2<-ggplot(HB2, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HB2 Plot Level Sapflow vs VPD")
 
 HBB2
 ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HB2.jpg", HBB2, height = 7, width = 10, units = "in", dpi = 500)
 
 HC2<-PlotLevel%>%filter(Block==2 & ID == "HC")
-HCB2<-ggplot(HC2, aes(Sapflow))+
+HCB2<-ggplot(HC2, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HC2 Plot Level Sapflow vs VPD")
 
 HCB2
@@ -560,9 +564,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HC2.jpg", HCB2, height = 7
 
 HO2<-PlotLevel%>%filter(Block==2 & ID == "HO")
 
-HOB2<-ggplot(HO2, aes(Sapflow))+
+HOB2<-ggplot(HO2, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HO2 Plot Level Sapflow vs VPD")
 
 HOB2
@@ -573,9 +577,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO2.jpg", HOB2, height = 7
 ```{r}
 HA3<-PlotLevel%>%filter(Block==3 & ID == "HA")
 
-HAB3<-ggplot(HA3, aes(Sapflow))+
+HAB3<-ggplot(HA3, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HA3 Plot Level Sapflow vs VPD")
 
 HAB3
@@ -583,18 +587,18 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HA3.jpg", HAB3, height = 7
 
 HB3<-PlotLevel%>%filter(Block==3 & ID == "HB")
 
-HBB3<-ggplot(HB3, aes(Sapflow))+
+HBB3<-ggplot(HB3, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HB3 Plot Level Sapflow vs VPD")
 
 HBB3
 ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HB3.jpg", HBB3, height = 7, width = 10, units = "in", dpi = 500)
 
 HC3<-PlotLevel%>%filter(Block==3 & ID == "HC")
-HCB3<-ggplot(HC3, aes(Sapflow))+
+HCB3<-ggplot(HC3, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HC3 Plot Level Sapflow vs VPD")
 
 HCB3
@@ -602,9 +606,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HC3.jpg", HCB3, height = 7
 
 HO3<-PlotLevel%>%filter(Block==3 & ID == "HO")
 
-HOB3<-ggplot(HO3, aes(Sapflow))+
+HOB3<-ggplot(HO3, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HO3 Plot Level Sapflow vs VPD")
 
 HOB3
@@ -615,9 +619,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO3.jpg", HOB3, height = 7
 ```{r}
 HA4<-PlotLevel%>%filter(Block==4 & ID == "HA")
 
-HAB4<-ggplot(HA4, aes(Sapflow))+
+HAB4<-ggplot(HA4, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HA4 Plot Level Sapflow vs VPD")
 
 HAB4
@@ -625,18 +629,18 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HA4.jpg", HAB4, height = 7
 
 HB4<-PlotLevel%>%filter(Block==4 & ID == "HB")
 
-HBB4<-ggplot(HB4, aes(Sapflow))+
+HBB4<-ggplot(HB4, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HB4 Plot Level Sapflow vs VPD")
 
 HBB4
 ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HB4.jpg", HBB4, height = 7, width = 10, units = "in", dpi = 500)
 
 HC4<-PlotLevel%>%filter(Block==4 & ID == "HC")
-HCB4<-ggplot(HC4, aes(Sapflow))+
+HCB4<-ggplot(HC4, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HC4 Plot Level Sapflow vs VPD")
 
 HCB4
@@ -644,9 +648,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HC4.jpg", HCB4, height = 7
 
 HO4<-PlotLevel%>%filter(Block==4 & ID == "HO")
 
-HOB4<-ggplot(HO4, aes(Sapflow))+
+HOB4<-ggplot(HO4, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("HO4 Plot Level Sapflow vs VPD")
 
 HOB4
@@ -659,9 +663,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/HO4.jpg", HOB4, height = 7
 ```{r}
 LA1<-PlotLevel%>%filter(Block==1 & ID == "LA")
 
-LAB1<-ggplot(LA1, aes(Sapflow))+
+LAB1<-ggplot(LA1, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LA1 Plot Level Sapflow vs VPD")
 
 LAB1
@@ -669,18 +673,18 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LA1.jpg", LAB1, height = 7
 
 LB1<-PlotLevel%>%filter(Block==1 & ID == "LB")
 
-LBB1<-ggplot(LB1, aes(Sapflow))+
+LBB1<-ggplot(LB1, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LB1 Plot Level Sapflow vs VPD")
 
 LBB1
 ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LB1.jpg", LBB1, height = 7, width = 10, units = "in", dpi = 500)
 
 LC1<-PlotLevel%>%filter(Block==1 & ID == "LC")
-LCB1<-ggplot(LC1, aes(Sapflow))+
+LCB1<-ggplot(LC1, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LC1 Plot Level Sapflow vs VPD")
 
 LCB1
@@ -688,9 +692,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LC1.jpg", LCB1, height = 7
 
 LO1<-PlotLevel%>%filter(Block==1 & ID == "LO")
 
-LOB1<-ggplot(LO1, aes(Sapflow))+
+LOB1<-ggplot(LO1, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LO1 Plot Level Sapflow vs VPD")
 
 LOB1
@@ -702,9 +706,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LO1.jpg", LOB1, height = 7
 ```{r}
 LA2<-PlotLevel%>%filter(Block==2 & ID == "LA")
 
-LAB2<-ggplot(LA2, aes(Sapflow))+
+LAB2<-ggplot(LA2, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LA2 Plot Level Sapflow vs VPD")
 
 LAB2
@@ -712,18 +716,18 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LA2.jpg", LAB2, height = 7
 
 LB2<-PlotLevel%>%filter(Block==2 & ID == "LB")
 
-LBB2<-ggplot(LB2, aes(Sapflow))+
+LBB2<-ggplot(LB2, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LB2 Plot Level Sapflow vs VPD")
 
 LBB2
 ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LB2.jpg", LBB2, height = 7, width = 10, units = "in", dpi = 500)
 
 LC2<-PlotLevel%>%filter(Block==2 & ID == "LC")
-LCB2<-ggplot(LC2, aes(Sapflow))+
+LCB2<-ggplot(LC2, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LC2 Plot Level Sapflow vs VPD")
 
 LCB2
@@ -731,9 +735,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LC2.jpg", LCB2, height = 7
 
 LO2<-PlotLevel%>%filter(Block==2 & ID == "LO")
 
-LOB2<-ggplot(LO2, aes(Sapflow))+
+LOB2<-ggplot(LO2, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LO2 Plot Level Sapflow vs VPD")
 
 LOB2
@@ -744,9 +748,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LO2.jpg", LOB2, height = 7
 ```{r}
 LA3<-PlotLevel%>%filter(Block==3 & ID == "LA")
 
-LAB3<-ggplot(LA3, aes(Sapflow))+
+LAB3<-ggplot(LA3, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LA3 Plot Level Sapflow vs VPD")
 
 LAB3
@@ -754,18 +758,18 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LA3.jpg", LAB3, height = 7
 
 LB3<-PlotLevel%>%filter(Block==3 & ID == "LB")
 
-LBB3<-ggplot(LB3, aes(Sapflow))+
+LBB3<-ggplot(LB3, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LB3 Plot Level Sapflow vs VPD")
 
 LBB3
 ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LB3.jpg", LBB3, height = 7, width = 10, units = "in", dpi = 500)
 
 LC3<-PlotLevel%>%filter(Block==3 & ID == "LC")
-LCB3<-ggplot(LC3, aes(Sapflow))+
+LCB3<-ggplot(LC3, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LC3 Plot Level Sapflow vs VPD")
 
 LCB3
@@ -773,9 +777,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LC3.jpg", LCB3, height = 7
 
 LO3<-PlotLevel%>%filter(Block==3 & ID == "LO")
 
-LOB3<-ggplot(LO3, aes(Sapflow))+
+LOB3<-ggplot(LO3, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LO3 Plot Level Sapflow vs VPD")
 
 LOB3
@@ -786,9 +790,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LO3.jpg", LOB3, height = 7
 ```{r}
 LA4<-PlotLevel%>%filter(Block==4 & ID == "LA")
 
-LAB4<-ggplot(LA4, aes(Sapflow))+
+LAB4<-ggplot(LA4, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LA4 Plot Level Sapflow vs VPD")
 
 LAB4
@@ -796,18 +800,18 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LA4.jpg", LAB4, height = 7
 
 LB4<-PlotLevel%>%filter(Block==4 & ID == "LB")
 
-LBB4<-ggplot(LB4, aes(Sapflow))+
+LBB4<-ggplot(LB4, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LB4 Plot Level Sapflow vs VPD")
 
 LBB4
 ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LB4.jpg", LBB4, height = 7, width = 10, units = "in", dpi = 500)
 
 LC4<-PlotLevel%>%filter(Block==4 & ID == "LC")
-LCB4<-ggplot(LC4, aes(Sapflow))+
+LCB4<-ggplot(LC4, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LC4 Plot Level Sapflow vs VPD")
 
 LCB4
@@ -815,9 +819,9 @@ ggsave("../Data/Processed/Sapflow/Jul17/SapflowGraphs/LC4.jpg", LCB4, height = 7
 
 LO4<-PlotLevel%>%filter(Block==4 & ID == "LO")
 
-LOB4<-ggplot(LO4, aes(Sapflow))+
+LOB4<-ggplot(LO4, aes(VPD))+
   scale_x_continuous()+
-  geom_point(aes(y=VPD))+
+  geom_point(aes(y=Sapflow))+
   ggtitle("LO4 Plot Level Sapflow vs VPD")
 
 LOB4

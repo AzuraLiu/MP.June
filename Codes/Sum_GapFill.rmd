@@ -111,10 +111,10 @@ write.csv(Sap4.Sum, row.names = FALSE, file ="../Data/Processed/Gap-Filled/Regre
 
 ```{r conversion}
 getwd()
-Sum1<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap1.Sum.5.csv")
-Sum2<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap2.Sum.5.csv")
-Sum3<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap3.Sum.5.csv")
-Sum4<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap4.Sum.8.csv")
+Sum1<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap1.Sum.9.csv")
+Sum2<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap2.Sum.9.csv")
+Sum3<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap3.Sum.9.csv")
+Sum4<-read.csv("../Data/Processed/Gap-Filled/RegressedSums/Regressed/Sap4.Sum.9.csv")
 
 library(dplyr)
 Converted1<- Sum1 %>% 
@@ -129,15 +129,15 @@ Converted3<- Sum3 %>%
   mutate_at(vars(5:36),
             .funs = funs((.*15*60) /1000))
 
-#Converted4<- Sum4 %>% 
- # mutate_at(vars(5:36),
-  #          .funs = funs((.*15*60) /1000))
+Converted4<- Sum4 %>% 
+  mutate_at(vars(5:36),
+            .funs = funs((.*15*60) /1000))
 ```
 ```{r}
-write.csv(Converted1, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S1.Sum.5.csv")
-write.csv(Converted2, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S2.Sum.5.csv")
-write.csv(Converted3, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S3.Sum.5.csv")
-#write.csv(Converted4, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S4.Sum.8.csv")
+write.csv(Converted1, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S1.Sum.9.csv")
+write.csv(Converted2, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S2.Sum.9.csv")
+write.csv(Converted3, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S3.Sum.9.csv")
+write.csv(Converted4, row.names = FALSE, file ="../Data/Processed/Sums/Converted/S4.Sum.9.csv")
 
 
 
