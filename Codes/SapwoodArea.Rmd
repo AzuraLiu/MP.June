@@ -1,0 +1,75 @@
+---
+title: "Sapwood Area"
+author: "Azura Liu"
+date: '2022-06-13'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("dplyr")
+library("tidyverse")
+library("lubridate")
+library("readxl")
+library("writexl")
+
+getwd()
+DailySection<-read_excel("../Data/Processed/Sapwood/17Sapwood.xlsx")
+```
+
+```{r}
+LA<-DailySection%>%
+  select(1, contains("LA"))%>%
+  pivot_longer(cols=c(2:97), names_to="ID", values_to="Sapwood")
+
+LB<-DailySection%>%
+  select(1, contains("LB"))%>%
+  pivot_longer(cols=c(2:95), names_to="ID", values_to="Sapwood")
+
+LC<-DailySection%>%
+  select(1, contains("LC"))%>%
+  pivot_longer(cols=c(2:98), names_to="ID", values_to="Sapwood")
+
+LO<-DailySection%>%
+  select(1, contains("LO"))%>%
+  pivot_longer(cols=c(2:87), names_to="ID", values_to="Sapwood")
+
+HA<-DailySection%>%
+  select(1, contains("HA"))%>%
+  pivot_longer(cols=c(2:100), names_to="ID", values_to="Sapwood")
+
+HB<-DailySection%>%
+  select(1, contains("HB"))%>%
+  pivot_longer(cols=c(2:97), names_to="ID", values_to="Sapwood")
+
+HC<-DailySection%>%
+  select(1, contains("HC"))%>%
+  pivot_longer(cols=c(2:99), names_to="ID", values_to="Sapwood")
+
+HO<-DailySection%>%
+  select(1, contains("HO"))%>%
+  pivot_longer(cols=c(2:86), names_to="ID", values_to="Sapwood")
+
+```
+
+```{r}
+summary(LA$Sapwood)
+summary(LB$Sapwood)
+summary(LC$Sapwood)
+summary(LO$Sapwood)
+summary(HA$Sapwood)
+summary(HB$Sapwood)
+summary(HC$Sapwood)
+summary(HO$Sapwood)
+
+install.packages("plotrix")
+library(plotrix)
+std.error(LA$Sapwood)
+std.error(LB$Sapwood)
+std.error(LC$Sapwood)
+std.error(LO$Sapwood)
+std.error(HA$Sapwood)
+std.error(HB$Sapwood)
+std.error(HC$Sapwood)
+std.error(HO$Sapwood)
+```
