@@ -18,58 +18,152 @@ DailySection<-read_excel("../Data/Processed/Sapwood/17Sapwood.xlsx")
 ```
 
 ```{r}
-LA<-DailySection%>%
-  select(1, contains("LA"))%>%
-  pivot_longer(cols=c(2:97), names_to="ID", values_to="Sapwood")
+LA1<-DailySection%>%
+   select(1,contains("1211LA"))%>%  pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+LA2<-DailySection%>%
+   select(1,contains("2211LA"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+LA3<-DailySection%>%
+   select(1,contains("3211LA"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+LA4<-DailySection%>%
+   select(1,contains("4211LA"))%>%   pivot_longer(cols=c(2:23), names_to="ID", values_to="Sapwood")
 
-LB<-DailySection%>%
-  select(1, contains("LB"))%>%
-  pivot_longer(cols=c(2:95), names_to="ID", values_to="Sapwood")
+LB1<-DailySection%>%
+   select(1,contains("1311LB"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+LB2<-DailySection%>%
+   select(1,contains("2311LB"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+LB3<-DailySection%>%
+   select(1,contains("3311LB"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+LB4<-DailySection%>%
+   select(1,contains("4311LB"))%>%   pivot_longer(cols=c(2:20), names_to="ID", values_to="Sapwood")
 
-LC<-DailySection%>%
-  select(1, contains("LC"))%>%
-  pivot_longer(cols=c(2:98), names_to="ID", values_to="Sapwood")
+LC1<-DailySection%>%
+     select(1,contains("1411LC"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+LC2<-DailySection%>%
+     select(1,contains("2411LC"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+LC3<-DailySection%>%
+     select(1,contains("3411LC"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+LC4<-DailySection%>%
+     select(1,contains("4411LC"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+LO1<-DailySection%>%
+     select(1,contains("1611LO"))%>%   pivot_longer(cols=c(2:23), names_to="ID", values_to="Sapwood")
+LO2<-DailySection%>%
+     select(1,contains("2611LO"))%>%   pivot_longer(cols=c(2:23), names_to="ID", values_to="Sapwood")
+LO3<-DailySection%>%
+     select(1,contains("3611LO"))%>%   pivot_longer(cols=c(2:20), names_to="ID", values_to="Sapwood")
+LO4<-DailySection%>%
+     select(1,contains("4611LO"))%>%   pivot_longer(cols=c(2:20), names_to="ID", values_to="Sapwood")
+HA1<-DailySection%>%
+     select(1,contains("1231HA"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+HA2<-DailySection%>%
+     select(1,contains("2231HA"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+HA3<-DailySection%>%
+     select(1,contains("3231HA"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+HA4<-DailySection%>%
+     select(1,contains("4231HA"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
 
-LO<-DailySection%>%
-  select(1, contains("LO"))%>%
-  pivot_longer(cols=c(2:87), names_to="ID", values_to="Sapwood")
+HB1<-DailySection%>%
+     select(1,contains("1331HB"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+HB2<-DailySection%>%
+     select(1,contains("2331HB"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+HB3<-DailySection%>%
+     select(1,contains("3331HB"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+HB4<-DailySection%>%
+     select(1,contains("4331HB"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
 
-HA<-DailySection%>%
-  select(1, contains("HA"))%>%
-  pivot_longer(cols=c(2:100), names_to="ID", values_to="Sapwood")
+HC1<-DailySection%>%
+     select(1,contains("1431HC"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+HC2<-DailySection%>%
+     select(1,contains("2431HC"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+HC3<-DailySection%>%
+     select(1,contains("3431HC"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+HC4<-DailySection%>%
+     select(1,contains("4431HC"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
 
-HB<-DailySection%>%
-  select(1, contains("HB"))%>%
-  pivot_longer(cols=c(2:97), names_to="ID", values_to="Sapwood")
+HO1<-DailySection%>%
+     select(1,contains("1631HO"))%>%   pivot_longer(cols=c(2:22), names_to="ID", values_to="Sapwood")
+HO2<-DailySection%>%
+     select(1,contains("2631HO"))%>%   pivot_longer(cols=c(2:22), names_to="ID", values_to="Sapwood")
+HO3<-DailySection%>%
+     select(1,contains("3631HO"))%>%   pivot_longer(cols=c(2:21), names_to="ID", values_to="Sapwood")
+HO4<-DailySection%>%
+     select(1,contains("4631HO"))%>%   pivot_longer(cols=c(2:20), names_to="ID", values_to="Sapwood")
 
-HC<-DailySection%>%
-  select(1, contains("HC"))%>%
-  pivot_longer(cols=c(2:99), names_to="ID", values_to="Sapwood")
-
-HO<-DailySection%>%
-  select(1, contains("HO"))%>%
-  pivot_longer(cols=c(2:86), names_to="ID", values_to="Sapwood")
 
 ```
 
 ```{r}
-summary(LA$Sapwood)
-summary(LB$Sapwood)
-summary(LC$Sapwood)
-summary(LO$Sapwood)
-summary(HA$Sapwood)
-summary(HB$Sapwood)
-summary(HC$Sapwood)
-summary(HO$Sapwood)
+summary(LA1$Sapwood)
+summary(LB1$Sapwood)
+summary(LC1$Sapwood)
+summary(LO1$Sapwood)
+summary(HA1$Sapwood)
+summary(HB1$Sapwood)
+summary(HC1$Sapwood)
+summary(HO1$Sapwood)
 
-install.packages("plotrix")
+summary(LA2$Sapwood)
+summary(LB2$Sapwood)
+summary(LC2$Sapwood)
+summary(LO2$Sapwood)
+summary(HA2$Sapwood)
+summary(HB2$Sapwood)
+summary(HC2$Sapwood)
+summary(HO2$Sapwood)
+
+summary(LA3$Sapwood)
+summary(LB3$Sapwood)
+summary(LC3$Sapwood)
+summary(LO3$Sapwood)
+summary(HA3$Sapwood)
+summary(HB3$Sapwood)
+summary(HC3$Sapwood)
+summary(HO3$Sapwood)
+
+summary(LA4$Sapwood)
+summary(LB4$Sapwood)
+summary(LC4$Sapwood)
+summary(LO4$Sapwood)
+summary(HA4$Sapwood)
+summary(HB4$Sapwood)
+summary(HC4$Sapwood)
+summary(HO4$Sapwood)
+
+#install.packages("plotrix")
 library(plotrix)
-std.error(LA$Sapwood)
-std.error(LB$Sapwood)
-std.error(LC$Sapwood)
-std.error(LO$Sapwood)
-std.error(HA$Sapwood)
-std.error(HB$Sapwood)
-std.error(HC$Sapwood)
-std.error(HO$Sapwood)
+std.error(LA1$Sapwood)
+std.error(LB1$Sapwood)
+std.error(LC1$Sapwood)
+std.error(LO1$Sapwood)
+std.error(HA1$Sapwood)
+std.error(HB1$Sapwood)
+std.error(HC1$Sapwood)
+std.error(HO1$Sapwood)
+
+std.error(LA2$Sapwood)
+std.error(LB2$Sapwood)
+std.error(LC2$Sapwood)
+std.error(LO2$Sapwood)
+std.error(HA2$Sapwood)
+std.error(HB2$Sapwood)
+std.error(HC2$Sapwood)
+std.error(HO2$Sapwood)
+
+std.error(LA3$Sapwood)
+std.error(LB3$Sapwood)
+std.error(LC3$Sapwood)
+std.error(LO3$Sapwood)
+std.error(HA3$Sapwood)
+std.error(HB3$Sapwood)
+std.error(HC3$Sapwood)
+std.error(HO3$Sapwood)
+
+std.error(LA4$Sapwood)
+std.error(LB4$Sapwood)
+std.error(LC4$Sapwood)
+std.error(LO4$Sapwood)
+std.error(HA4$Sapwood)
+std.error(HB4$Sapwood)
+std.error(HC4$Sapwood)
+std.error(HO4$Sapwood)
+
 ```
