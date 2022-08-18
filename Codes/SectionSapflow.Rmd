@@ -15,7 +15,7 @@ library("writexl")
 
 getwd()
 Sections<-read_excel("../Data/Processed/Sapwood/17SectionalSums.xlsx")
-Sapflux<-read_excel("../Data/Processed/Daytime/Sapflux/sapflow/Sapflux.xlsx")
+Sapflux<-read_excel("../Data/Processed/Daytime/sapflow/Sapflux.5.xlsx")
 ```
 
 ```{r}
@@ -47,19 +47,19 @@ LO<-Sapflux%>%
 
 LOFlux<-aggregate(LO[3:33], by = list(LO$Position,LO$ID),FUN = "mean")
 
-HA<-Sapflux%>%
-  mutate(ID = "HA")%>%
-  filter(grepl("HA",Tree))%>%
-  select(36, 4:35)
+#HA<-Sapflux%>%
+ # mutate(ID = "HA")%>%
+  #filter(grepl("HA",Tree))%>%
+  #select(36, 4:35)
 
-HAFlux<-aggregate(HA[3:33], by = list(HA$Position,HA$ID),FUN = "mean")
+#HAFlux<-aggregate(HA[3:33], by = list(HA$Position,HA$ID),FUN = "mean")
 
-HB<-Sapflux%>%
-  mutate(ID = "HB")%>%
-  filter(grepl("HB",Tree))%>%
-  select(36, 4:35)
+#HB<-Sapflux%>%
+ # mutate(ID = "HB")%>%
+#  filter(grepl("HB",Tree))%>%
+#  select(36, 4:35)
 
-HBFlux<-aggregate(HB[3:33], by = list(HB$Position,HB$ID),FUN = "mean")
+#HBFlux<-aggregate(HB[3:33], by = list(HB$Position,HB$ID),FUN = "mean")
 
 HC<-Sapflux%>%
   mutate(ID = "HC")%>%
@@ -76,7 +76,7 @@ HO<-Sapflux%>%
 HOFlux<-aggregate(HO[3:33], by = list(HO$Position,HO$ID),FUN = "mean")
 
 
-SapfluxbyPop<-rbind(LAFlux,LBFlux,LCFlux,LOFlux,HAFlux,HBFlux,HCFlux,HOFlux)
+SapfluxbyPop<-rbind(LAFlux,LBFlux,LCFlux,LOFlux,HCFlux,HOFlux)
 
 names(SapfluxbyPop)[1]<-"Section"
 names(SapfluxbyPop)[2]<-"ID"
@@ -113,13 +113,13 @@ SapfluxJuly<-rbind(SapfluxWrangle,Deep)
 
 ```{r}
 SectionJuly<-SectionWrangle%>%
-  subset(DOY>181 & DOY <213)
+  subset(DOY>120 & DOY <152)
 SapfluxJuly$DOY<-as.double(SapfluxJuly$DOY)
 
 JulySapflow<-inner_join(SectionJuly, SapfluxJuly,by = c("DOY", "Section", "ID"))%>%
   mutate(Sapflow=Sapflux*Area/10000)
 
-Weather<-read.csv("../Data/Processed/Gap-Filled/Regressed/Sap1.7.csv")
+Weather<-read.csv("../Data/Processed/Daytime/Sapflux/converted/Sap1.5.csv")
 Weather$DOY<-as.numeric(Weather$DOY)
 Weather$VPD<-as.numeric(Weather$VPD)
 
@@ -130,7 +130,6 @@ VPD<-aggregate(Weather$VPD, by=list(Weather$DOY), mean)
 
 JulyMeta<-inner_join(JulySapflow, VPD, by="DOY")
 
-#library("writexl")
 #write_xlsx(JulyMeta, "../Data/Processed/Sapflow/Jul17/PlotLevelSapflow.xlsx")
 ```
 
@@ -485,7 +484,7 @@ names(PlotLevel)[4]<-"Sapflow"
 
 PlotLevel<-inner_join(PlotLevel, VPD, by="DOY")
 
-#write_xlsx(PlotLevel, "../Data/Processed/Daytime/Sapflux/sapflow/Sapflow.xlsx")
+write_xlsx(PlotLevel, "../Data/Processed/Daytime/sapflow/Sapflow.5.xlsx")
 ```
 
 ```{r}
@@ -504,7 +503,7 @@ A<-ggplot(GA, aes(VPD))+
   ggtitle("Genotype A High vs Low Density")
 
 A
-ggsave("../Data/Processed/Daytime/Sapflux/sapflow/plots/A.jpg", A, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/5A.jpg", A, height = 7, width = 10, units = "in", dpi = 500)
 
 B<-ggplot(GB, aes(VPD))+
   scale_x_continuous()+
@@ -512,7 +511,7 @@ B<-ggplot(GB, aes(VPD))+
   ggtitle("Genotype B High vs Low Density")
 
 B
-ggsave("../Data/Processed/Daytime/Sapflux/sapflow/plots/B.jpg", B, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/5B.jpg", B, height = 7, width = 10, units = "in", dpi = 500)
 
 C<-ggplot(GC, aes(VPD))+
   scale_x_continuous()+
@@ -520,7 +519,7 @@ C<-ggplot(GC, aes(VPD))+
   ggtitle("Genotype C High vs Low Density")
 
 C
-ggsave("../Data/Processed/Daytime/Sapflux/sapflow/plots/C.jpg", C, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/5C.jpg", C, height = 7, width = 10, units = "in", dpi = 500)
 
 O<-ggplot(GO, aes(VPD))+
   scale_x_continuous()+
@@ -528,7 +527,7 @@ O<-ggplot(GO, aes(VPD))+
   ggtitle("Genotype O High vs Low Density")
 
 O
-ggsave("../Data/Processed/Daytime/Sapflux/sapflow/plots/O.jpg", O, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/5O.jpg", O, height = 7, width = 10, units = "in", dpi = 500)
 ```
 
 ```{r eval=FALSE, include=FALSE}
