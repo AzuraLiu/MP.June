@@ -12,10 +12,10 @@ library("tidyverse")
 library("lubridate")
 
 getwd()
-Sap1<-read.csv("../Data/Processed/Daytime/Sapflux/raw/Sap1.7.csv")
-Sap2<-read.csv("../Data/Processed/Daytime/Sapflux/raw/Sap2.7.csv")
-Sap3<-read.csv("../Data/Processed/Daytime/Sapflux/raw/Sap3.7.csv")
-Sap4<-read.csv("../Data/Processed/Daytime/Sapflux/raw/Sap4.7.csv")
+Sap1<-read.csv("../Data/Processed/Daytime/Sapflux/raw/Sap1.9.csv")
+Sap2<-read.csv("../Data/Processed/Daytime/Sapflux/raw/Sap2.9.csv")
+Sap3<-read.csv("../Data/Processed/Daytime/Sapflux/raw/Sap3.9.csv")
+Sap4<-read.csv("../Data/Processed/Daytime/Sapflux/raw/Sap4.9.csv")
 
 Sap1$Date<-as.Date(Sap1$Date, format = "%m/%d/%Y")
 Sap2$Date<-as.Date(Sap2$Date, format = "%m/%d/%Y")
@@ -55,16 +55,16 @@ names(Sap4.24)[2]<-"DOY"
 ```
 
 ```{r assign dn}
-Sap1$PAR <- gsub(1000,"Day",Sap1$PAR)
+Sap1$PAR[Sap1$PAR>0]<- "Day"
 Sap1$PAR <- gsub(0,"Night",Sap1$PAR)
 
-Sap2$PAR <- gsub(1000,"Day",Sap2$PAR)
+Sap2$PAR[Sap2$PAR>0]<- "Day"
 Sap2$PAR <- gsub(0,"Night",Sap2$PAR)
 
-Sap3$PAR <- gsub(1000,"Day",Sap3$PAR)
+Sap3$PAR[Sap3$PAR>0]<- "Day"
 Sap3$PAR <- gsub(0,"Night",Sap3$PAR)
 
-Sap4$PAR <- gsub(1000,"Day",Sap4$PAR)
+Sap4$PAR[Sap4$PAR>0]<- "Day"
 Sap4$PAR <- gsub(0,"Night",Sap4$PAR)
 ```
 
@@ -87,7 +87,7 @@ names(Sap2.dn)[3]<-"Interval"
 Sap2.dn<-inner_join(VPD, Sap2.dn, by=c("DOY","Interval"))
 
 
-Sap3.dn<-aggregate(Sap2[,c(7:38)], by = list(Sap2$Date,Sap2$DOY, Sap2$PAR),FUN = "sum")
+Sap3.dn<-aggregate(Sap3[,c(7:38)], by = list(Sap3$Date,Sap3$DOY, Sap3$PAR),FUN = "sum")
 names(Sap3.dn)[1]<-"Date"
 names(Sap3.dn)[2]<-"DOY"
 names(Sap3.dn)[3]<-"Interval"
@@ -131,10 +131,10 @@ Converted4<- Sap4.Sum %>%
             .funs = funs((.*15*60) /1000))
 ```
 ```{r}
-write.csv(Converted1, row.names = FALSE, file ="../Data/Processed/Daytime/Sapflux/converted/Sap1.7.csv")
-write.csv(Converted2, row.names = FALSE, file ="../Data/Processed/Daytime/Sapflux/converted/Sap2.7.csv")
-write.csv(Converted3, row.names = FALSE, file ="../Data/Processed/Daytime/Sapflux/converted/Sap3.7.csv")
-write.csv(Converted4, row.names = FALSE, file ="../Data/Processed/Daytime/Sapflux/converted/Sap4.7.csv")
+#write.csv(Converted1, row.names = FALSE, file ="../Data/Processed/Daytime/Sapflux/converted/Sap1.5.csv")
+#write.csv(Converted2, row.names = FALSE, file ="../Data/Processed/Daytime/Sapflux/converted/Sap2.5.csv")
+write.csv(Converted3, row.names = FALSE, file ="../Data/Processed/Daytime/Sapflux/converted/Sap3.9.csv")
+#write.csv(Converted4, row.names = FALSE, file ="../Data/Processed/Daytime/Sapflux/converted/Sap4.9.csv")
 
 
 ```

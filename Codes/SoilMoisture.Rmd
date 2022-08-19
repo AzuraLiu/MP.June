@@ -1,0 +1,183 @@
+---
+title: "SoMo"
+author: "Azura Liu"
+date: '2022-06-13'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library("dplyr")
+library("tidyverse")
+library("lubridate")
+library("readxl")
+library("writexl")
+
+getwd()
+raw<-read_excel("../Data/Original/Supplements/SoMo17.xlsx")
+raw<-raw%>%mutate_if(is.character, as.numeric)
+
+```
+
+```{r}
+C<-ggplot(raw, aes(doy))+
+  scale_x_continuous(breaks = c(32,60,91,121,152,182,213,244,274,305,335))+
+  scale_y_continuous(breaks = c (0.05,0.10,0.15,0.20,0.25,0.30,0.35))+
+  geom_point(aes(y=HC, color = "HC",size=2))+
+  geom_point(aes(y=LC, color = "LC",size=2))+
+ # geom_point(aes(y=HAON7, color = "HAON7",shape = "."))+
+#  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  xlab("DOY")+ylab("Soil Moisture")+ 
+  theme(text = element_text(size = 30))
+
+C
+ggsave("../Data/Processed/Env/SoMoPlots/C.jpg", C, height = 10, width = 45, units = "in", dpi = 500)
+
+```
+
+```{r}
+A<-ggplot(raw, aes(doy))+
+  scale_x_continuous(breaks = c(32,60,91,121,152,182,213,244,274,305,335))+
+  scale_y_continuous(breaks = c (0.05,0.10,0.15,0.20,0.25,0.30,0.35))+
+  geom_point(aes(y=HA, color = "HA",size=2))+
+  geom_point(aes(y=LA, color = "LA",size=2))+
+ # geom_point(aes(y=HAON7, color = "HAON7",shape = "."))+
+#  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  xlab("DOY")+ylab("Soil Moisture")+ 
+  theme(text = element_text(size = 30))
+
+A
+ggsave("../Data/Processed/Env/SoMoPlots/A.jpg", A, height = 10, width = 45, units = "in", dpi = 500)
+
+```
+
+
+```{r}
+B<-ggplot(raw, aes(doy))+
+  scale_x_continuous(breaks = c(32,60,91,121,152,182,213,244,274,305,335))+
+  scale_y_continuous(breaks = c (0.05,0.10,0.15,0.20,0.25,0.30,0.35))+
+  geom_point(aes(y=HB, color = "HB",size=2))+
+  geom_point(aes(y=LB, color = "LB",size=2))+
+ # geom_point(aes(y=HAON7, color = "HAON7",shape = "."))+
+#  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  xlab("DOY")+ylab("Soil Moisture")+ 
+  theme(text = element_text(size = 30))
+
+B
+ggsave("../Data/Processed/Env/SoMoPlots/B.jpg", B, height = 10, width = 45, units = "in", dpi = 500)
+
+```
+
+```{r}
+O<-ggplot(raw, aes(doy))+
+  scale_x_continuous(breaks = c(32,60,91,121,152,182,213,244,274,305,335))+
+  scale_y_continuous(breaks = c (0.05,0.10,0.15,0.20,0.25,0.30,0.35))+
+  geom_point(aes(y=HO, color = "HO",size=2))+
+  geom_point(aes(y=LO, color = "LO",size=2))+
+ # geom_point(aes(y=HAON7, color = "HAON7",shape = "."))+
+#  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  xlab("DOY")+ylab("Soil Moisture")+ 
+  theme(text = element_text(size = 30))
+
+O
+ggsave("../Data/Processed/Env/SoMoPlots/O.jpg", O, height = 10, width = 45, units = "in", dpi = 500)
+
+```
+
+```{r}
+S1<-ggplot(raw, aes(doy))+
+  scale_x_continuous(breaks = c(32,60,91,121,152,182,213,244,274,305,335))+
+  scale_y_continuous(breaks = c (0.05,0.10,0.15,0.20,0.25,0.30,0.35))+
+  geom_point(aes(y=HC, color = "HC",size=2))+
+  geom_point(aes(y=LO, color = "LO",size=2))+
+ # geom_point(aes(y=HAON7, color = "HAON7",shape = "."))+
+#  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  xlab("DOY")+ylab("Soil Moisture")+ 
+  theme(text = element_text(size = 30))
+
+S1
+ggsave("../Data/Processed/Env/SoMoPlots/S1.jpg", S1, height = 10, width = 45, units = "in", dpi = 500)
+
+```
+
+```{r}
+S2<-ggplot(raw, aes(doy))+
+  scale_x_continuous(breaks = c(32,60,91,121,152,182,213,244,274,305,335))+
+  scale_y_continuous(breaks = c (0.05,0.10,0.15,0.20,0.25,0.30,0.35))+
+  geom_point(aes(y=HO, color = "HO",size=2))+
+  geom_point(aes(y=LC, color = "LC",size=2))+
+ # geom_point(aes(y=HAON7, color = "HAON7",shape = "."))+
+#  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  xlab("DOY")+ylab("Soil Moisture")+ 
+  theme(text = element_text(size = 30))
+
+S2
+ggsave("../Data/Processed/Env/SoMoPlots/S2.jpg", S2, height = 10, width = 45, units = "in", dpi = 500)
+
+```
+
+
+```{r}
+S3<-ggplot(raw, aes(doy))+
+  scale_x_continuous(breaks = c(32,60,91,121,152,182,213,244,274,305,335))+
+  scale_y_continuous(breaks = c (0.05,0.10,0.15,0.20,0.25,0.30,0.35))+
+  geom_point(aes(y=LA, color = "LA",size=2))+
+  geom_point(aes(y=LB, color = "LB",size=2))+
+ # geom_point(aes(y=HAON7, color = "HAON7",shape = "."))+
+#  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  xlab("DOY")+ylab("Soil Moisture")+ 
+  theme(text = element_text(size = 30))
+
+S3
+ggsave("../Data/Processed/Env/SoMoPlots/S3.jpg", S3, height = 10, width = 45, units = "in", dpi = 500)
+
+```
+
+```{r}
+S4<-ggplot(raw, aes(doy))+
+  scale_x_continuous(breaks = c(32,60,91,121,152,182,213,244,274,305,335))+
+  scale_y_continuous(breaks = c (0.05,0.10,0.15,0.20,0.25,0.30,0.35))+
+  geom_point(aes(y=HA, color = "HA",size=2))+
+  geom_point(aes(y=HB, color = "HB",size=2))+
+ # geom_point(aes(y=HAON7, color = "HAON7",shape = "."))+
+#  geom_point(aes(y=VPD*30, color = "VPD", shape = "."))+
+  xlab("DOY")+ylab("Soil Moisture")+ 
+  theme(text = element_text(size = 30))
+
+S4
+ggsave("../Data/Processed/Env/SoMoPlots/S4.jpg", S4, height = 10, width = 45, units = "in", dpi = 500)
+
+```
+
+```{r}
+SoMo<-pivot_longer(raw, cols=2:9,names_to = "ID", values_to = "SoMo")
+SoMo$Site<- case_when(
+    SoMo$ID == "HC"|SoMo$ID =="LO"  ~"DryS1" ,
+    SoMo$ID == "LC" | SoMo$ID =="HO"~"InterS2",
+    SoMo$ID =="LA"|SoMo$ID =="LB" ~"WetS3",
+    SoMo$ID == "HA" | SoMo$ID =="HB" ~"InterS4" )
+
+SoMo$Density<-substr(SoMo$ID, 0,1)
+SoMo$Geno<-substr(SoMo$ID,2,2)
+```
+
+```{r}
+m1<-anova(lm(SoMo$SoMo~SoMo$Geno*SoMo$Site*SoMo$Density))
+m1
+plot(m1)
+
+m2<-lm(SoMo$SoMo~SoMo$Geno*SoMo$Site*SoMo$Density)
+summary.aov(m2)
+plot(m2)
+m2
+
+TukeyHSD(aov(m2))
+plot(TukeyHSD(aov(m2)),cex.axis = 0.5)
+
+m3<-lm(SoMo$SoMo~SoMo$Geno+SoMo$Site+SoMo$Density)
+anova(m2,m3)
+summary.aov(m3)
+m3
+TukeyHSD(aov(m3))
+plot(TukeyHSD(aov(m3)))
+```
