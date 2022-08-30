@@ -1,0 +1,62 @@
+---
+title: "REW"
+author: "Azura Liu"
+date: "2022-08-30"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rstatix)
+library("dplyr")
+library("tidyverse")
+library("lubridate")
+library("readxl")
+library("writexl")
+library(datarium)
+library(lme4)
+library(lmerTest)
+
+getwd()
+raw<-read_excel("../Data/Processed/ENV/SoMo17_Original.xlsx")
+summary(raw)
+```
+
+```{r}
+
+REW<-raw%>%
+  mutate(HC = (HC-min(HC))/(max(HC)-min(HC)))%>%    
+  mutate(LO = (LO-min(LO))/(max(LO)-min(LO)))%>%
+  mutate(LC = (LC-min(LC))/(max(LC)-min(LC)))%>%
+  mutate(HO = (HO-min(HO))/(max(HO)-min(HO)))%>%
+  mutate(LA = (LA-min(LA))/(max(LA)-min(LA)))%>%
+  mutate(LB = (LB-min(LB))/(max(LB)-min(LB)))%>%
+  mutate(HA = (HA-min(HA))/(max(HA)-min(HA)))%>%
+  mutate(HB = (HB-min(HB))/(max(HB)-min(HB)))
+
+
+#write_xlsx(REW, "../Data/Processed/ENV/REW.xlsx")
+```
+
+```{r}
+Sapflow<-read_excel("../Data/Processed/Daytime/sapflow/Join_4Blocks.xlsx")
+
+Sapflow<-Sapflow%>%
+  filter(Block == 1)
+REW<-REW%>%
+  pivot_longer(cols=HC:HB, names_to = "ID", values_to = "REW")%>%
+  subset(DOY>151 & DOY <274)
+
+Join<-inner_join(Sapflow, REW, by=c("DOY","ID"))
+
+#write_xlsx(Join, "../Data/Processed/ENV/Join_1Block.xlsx")
+
+```
+
+```{r}
+m <- lmer(SapflowPerGroundArea ~ Density*Geno +VPD + REW + (1| DOY),
+          data = Join)
+
+summary(m)
+```
+

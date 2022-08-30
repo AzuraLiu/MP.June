@@ -7,18 +7,90 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(rstatix)
 library("dplyr")
 library("tidyverse")
 library("lubridate")
 library("readxl")
 library("writexl")
+library(datarium)
+library(lme4)
+library(lmerTest)
 
 getwd()
-PlotLevel<-read_excel("../Data/Processed/Sapflow/Jul17/PlotLevelSapflow.xlsx")
+Sapwood<-read_xlsx("../Data/Processed/Sapwood/PlotLevelSapwood.xlsx")
+Sapflow6<-read_xlsx("../Data/Processed/Daytime/sapflow/Sapflow.6.xlsx")
+Sapflow7<-read_xlsx("../Data/Processed/Daytime/sapflow/Sapflow.7.xlsx")
+Sapflow8<-read_xlsx("../Data/Processed/Daytime/sapflow/Sapflow.8.xlsx")
+Sapflow9<-read_xlsx("../Data/Processed/Daytime/sapflow/Sapflow.9.xlsx")
+```
+
+```{r}
+Sapflow<-rbind(Sapflow6,Sapflow7,Sapflow8,Sapflow9)
+Sapflow$Density<-substr(Sapflow$ID, 0,1)
+Sapflow$Geno<-substr(Sapflow$ID,2,2)
+Sapflow[,c(1,2,4,5)]<-Sapflow[,c(1,2,4,5)]%>%mutate_if(is.character, as.numeric)
+Sapwood[,c(1,2)]<-Sapwood[,c(1,2)]%>%mutate_if(is.character, as.numeric)
+
+Join<-inner_join(Sapflow, Sapwood, by=c("DOY","ID","Density","Geno"))
+names(Join)[8]<-"SapwoodArea"
+
+Join$GroundArea<- case_when(
+    Join$Density == "H"  ~ 134.505 ,
+    Join$Density == "L"  ~404.43 )
+
+
+Join<-Join%>%
+  mutate(SapflowPerGroundArea=Sapflow/GroundArea)
+
+Join$UniqueID<-paste0(Join$ID, Join$Block)
+
+#write_xlsx(Join, "../Data/Processed/Daytime/sapflow/Join_4Blocks.xlsx")
+
+#Join$DOY<-cut(Join$DOY, 122)
+#Join<-Join%>%
+ # subset(select = c(UniqueID,Density,Geno,DOY,SapflowPerGroundArea))
+  
+#Join<-Join%>%pivot_wider(names_from = DOY, values_from = SapflowPerGroundArea)
+
 ```
 
 
+
 ```{r}
+JoinAOV <- Join %>%
+  convert_as_factor(UniqueID, Block,DOY,Density,Geno,ID)%>%
+  subset (select = c(UniqueID,Density,Geno,DOY,SapflowPerGroundArea))
+summary(JoinAOV)
+
+class(JoinAOV$DOY)
+
+res.aov<-anova_test(data=JoinAOV,dv = SapflowPerGroundArea, wid = UniqueID, within = DOY, between =c(Density, Geno))
+get_anova_table(res.aov)                   
+```
+```{r}
+
+
+m <- lmer(SapflowPerGroundArea ~ Density+Geno + (1| DOY),
+          data = JoinAOV)
+m1 <- lmer(SapflowPerGroundArea ~ Density*Geno + VPD+(1| DOY)+(1|Block),
+          data = Join)
+
+AIC(m,m1)
+m
+
+summary(m1)
+```
+```{r}
+JoinAOV1<-JoinAOV%>%
+  mutate(Group=paste0(JoinAOV$Density, JoinAOV$Geno))
+GroupPlot<-ggplot(JoinAOV1, aes(x=Group,y=SapflowPerGroundArea))+
+  geom_boxplot()
+  
+GroupPlot
+
+```
+```{r eval=FALSE, include=FALSE}
 HA1<-PlotLevel%>%filter(Block==1 & ID == "HA")
 mHA1<-lm(HA1$Sapflow~HA1$VPD)
 mHA1
@@ -93,7 +165,7 @@ mHO4
 
 ```
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 LA1<-PlotLevel%>%filter(Block==1 & ID == "LA")
 mLA1<-lm(LA1$Sapflow~LA1$VPD)
 mLA1
@@ -167,7 +239,7 @@ mLO4<-lm(LO4$Sapflow~LO4$VPD)
 mLO4
 
 ```
-```{r}
+```{r eval=FALSE, include=FALSE}
 ANOVADat<-read_excel("../Data/Processed/Sapflow/Jul17/ANOVADat.xlsx")
 
 Slope<-anova(lm(ANOVADat$Slope~ANOVADat$Group))

@@ -14,7 +14,7 @@ library("readxl")
 library("writexl")
 
 getwd()
-raw<-read_excel("../Data/Original/Supplements/SoMo17.xlsx")
+raw<-read_excel("../Data/Processed/ENV/SoMo17_Original.xlsx")
 raw<-raw%>%mutate_if(is.character, as.numeric)
 
 ```

@@ -17,15 +17,19 @@ getwd()
 DailySection<-read_excel("../Data/Processed/Sapwood/17Sapwood.xlsx")
 ```
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 LA1<-DailySection%>%
-   select(1,contains("1211LA"))%>%  pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+   select(1,contains("1211LA"))%>%  
+  pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
 LA2<-DailySection%>%
-   select(1,contains("2211LA"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+   select(1,contains("2211LA"))%>%   
+  pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
 LA3<-DailySection%>%
    select(1,contains("3211LA"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
 LA4<-DailySection%>%
    select(1,contains("4211LA"))%>%   pivot_longer(cols=c(2:23), names_to="ID", values_to="Sapwood")
+
+LA<-rbind(LA1,LA2,LA3,LA4)
 
 LB1<-DailySection%>%
    select(1,contains("1311LB"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
@@ -90,6 +94,149 @@ HO4<-DailySection%>%
 
 
 ```
+
+```{r eval=FALSE, include=FALSE}
+LA1<-DailySection%>%
+   select(1,contains("1211LA"))%>%  pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+LA2<-DailySection%>%
+   select(1,contains("2211LA"))%>%   pivot_longer(cols=c(2:26), names_to="ID", values_to="Sapwood")
+LA3<-DailySection%>%
+   select(1,contains("3211LA"))%>%   pivot_longer(cols=c(2:26), names_to="ID", values_to="Sapwood")
+LA4<-DailySection%>%
+   select(1,contains("4211LA"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+
+LA<-rbind(LA1,LA2,LA3,LA4)
+LASapwood<-aggregate(LA$Sapwood, by = list(LA$DOY),FUN = "sum")%>%
+  mutate("ID"="LA")
+names(LASapwood)[1]<-"DOY"
+names(LASapwood)[2]<-"Area"
+
+LB1<-DailySection%>%
+   select(1,contains("1311LB"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+LB2<-DailySection%>%
+   select(1,contains("2311LB"))%>%   pivot_longer(cols=c(2:26), names_to="ID", values_to="Sapwood")
+LB3<-DailySection%>%
+   select(1,contains("3311LB"))%>%   pivot_longer(cols=c(2:26), names_to="ID", values_to="Sapwood")
+LB4<-DailySection%>%
+   select(1,contains("4311LB"))%>%   pivot_longer(cols=c(2:21), names_to="ID", values_to="Sapwood")
+LB<-rbind(LB1,LB2,LB3,LB4)
+LBSapwood<-aggregate(LB$Sapwood, by = list(LB$DOY),FUN = "sum")%>%
+  mutate("ID"="LB")
+names(LBSapwood)[1]<-"DOY"
+names(LBSapwood)[2]<-"Area"
+
+
+
+LC1<-DailySection%>%
+     select(1,contains("1411LC"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+LC2<-DailySection%>%
+     select(1,contains("2411LC"))%>%   pivot_longer(cols=c(2:26), names_to="ID", values_to="Sapwood")
+LC3<-DailySection%>%
+     select(1,contains("3411LC"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+LC4<-DailySection%>%
+     select(1,contains("4411LC"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+LC<-rbind(LC1,LC2,LC3,LC4)
+LCSapwood<-aggregate(LC$Sapwood, by = list(LC$DOY),FUN = "sum")%>%
+  mutate("ID"="LC")
+names(LCSapwood)[1]<-"DOY"
+names(LCSapwood)[2]<-"Area"
+
+
+LO1<-DailySection%>%
+     select(1,contains("1611LO"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+LO2<-DailySection%>%
+     select(1,contains("2611LO"))%>%   pivot_longer(cols=c(2:24), names_to="ID", values_to="Sapwood")
+LO3<-DailySection%>%
+     select(1,contains("3611LO"))%>%   pivot_longer(cols=c(2:21), names_to="ID", values_to="Sapwood")
+LO4<-DailySection%>%
+     select(1,contains("4611LO"))%>%   pivot_longer(cols=c(2:21), names_to="ID", values_to="Sapwood")
+LO<-rbind(LO1,LO2,LO3,LO4)
+LOSapwood<-aggregate(LO$Sapwood, by = list(LO$DOY),FUN = "sum")%>%
+  mutate("ID"="LO")
+names(LOSapwood)[1]<-"DOY"
+names(LOSapwood)[2]<-"Area"
+
+
+HA1<-DailySection%>%
+     select(1,contains("1231HA"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+HA2<-DailySection%>%
+     select(1,contains("2231HA"))%>%   pivot_longer(cols=c(2:26), names_to="ID", values_to="Sapwood")
+HA3<-DailySection%>%
+     select(1,contains("3231HA"))%>%   pivot_longer(cols=c(2:26), names_to="ID", values_to="Sapwood")
+HA4<-DailySection%>%
+     select(1,contains("4231HA"))%>%   pivot_longer(cols=c(2:26), names_to="ID", values_to="Sapwood")
+HA<-rbind(HA1,HA2,HA3,HA4)
+HASapwood<-aggregate(HA$Sapwood, by = list(HA$DOY),FUN = "sum")%>%
+  mutate("ID"="HA")
+names(HASapwood)[1]<-"DOY"
+names(HASapwood)[2]<-"Area"
+
+
+HB1<-DailySection%>%
+     select(1,contains("1331HB"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+HB2<-DailySection%>%
+     select(1,contains("2331HB"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+HB3<-DailySection%>%
+     select(1,contains("3331HB"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+HB4<-DailySection%>%
+     select(1,contains("4331HB"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+HB<-rbind(HB1,HB2,HB3,HB4)
+HBSapwood<-aggregate(HB$Sapwood, by = list(HB$DOY),FUN = "sum")%>%
+  mutate("ID"="HB")
+names(HBSapwood)[1]<-"DOY"
+names(HBSapwood)[2]<-"Area"
+
+
+
+HC1<-DailySection%>%
+     select(1,contains("1431HC"))%>%   pivot_longer(cols=c(2:26), names_to="ID", values_to="Sapwood")
+HC2<-DailySection%>%
+     select(1,contains("2431HC"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+HC3<-DailySection%>%
+     select(1,contains("3431HC"))%>%   pivot_longer(cols=c(2:26), names_to="ID", values_to="Sapwood")
+HC4<-DailySection%>%
+     select(1,contains("4431HC"))%>%   pivot_longer(cols=c(2:25), names_to="ID", values_to="Sapwood")
+HC<-rbind(HC1,HC2,HC3,HC4)
+HCSapwood<-aggregate(HC$Sapwood, by = list(HC$DOY),FUN = "sum")%>%
+  mutate("ID"="HC")
+names(HCSapwood)[1]<-"DOY"
+names(HCSapwood)[2]<-"Area"
+
+
+
+HO1<-DailySection%>%
+     select(1,contains("1631HO"))%>%   pivot_longer(cols=c(2:23), names_to="ID", values_to="Sapwood")
+HO2<-DailySection%>%
+     select(1,contains("2631HO"))%>%   pivot_longer(cols=c(2:23), names_to="ID", values_to="Sapwood")
+HO3<-DailySection%>%
+     select(1,contains("3631HO"))%>%   pivot_longer(cols=c(2:22), names_to="ID", values_to="Sapwood")
+HO4<-DailySection%>%
+     select(1,contains("4631HO"))%>%   pivot_longer(cols=c(2:21), names_to="ID", values_to="Sapwood")
+HO<-rbind(HO1,HO2,HO3,HO4)
+HOSapwood<-aggregate(HO$Sapwood, by = list(HO$DOY),FUN = "sum")%>%
+  mutate("ID"="HO")
+names(HOSapwood)[1]<-"DOY"
+names(HOSapwood)[2]<-"Area"
+
+PlotLevel<-rbind(LASapwood,LBSapwood,LCSapwood,LOSapwood,HASapwood,HBSapwood,HCSapwood,HOSapwood)
+PlotLevel$Density<-substr(PlotLevel$ID, 0,1)
+PlotLevel$Geno<-substr(PlotLevel$ID,2,2)
+
+#write_xlsx(PlotLevel, "../Data/Processed/Sapwood/PlotLevelSapwood.xlsx")
+
+```
+
+
+```{r}
+PlotLevelSapwoodArea<-ggplot(PlotLevel, aes(DOY))+
+  scale_x_continuous()+
+  geom_point(aes(y=Area, color=ID))+
+  ggtitle("Plot Level Sapwood Area")
+PlotLevelSapwoodArea
+
+ggsave("../Data/Processed/Sapwood/PlotLevelSapwoodArea.jpg", PlotLevelSapwoodArea, height = 7, width = 10, units = "in", dpi = 500)
+```
+
 
 ```{r}
 summary(LA1$Sapwood)
