@@ -71,13 +71,13 @@ get_anova_table(res.aov)
 ```{r}
 
 
-m <- lmer(SapflowPerGroundArea ~ Density+Geno + (1| DOY),
-          data = JoinAOV)
-m1 <- lmer(SapflowPerGroundArea ~ Density*Geno + VPD+(1| DOY)+(1|Block),
+m <- aov(SapflowPerGroundArea ~ Density*Geno + (1| DOY)+(1|Block),
+          data = Join)
+m1 <- lmer(SapflowPerGroundArea ~ Density+Geno +Density:Geno +(1| DOY)+(1|Block),
           data = Join)
 
 AIC(m,m1)
-m
+summary(m)
 
 summary(m1)
 ```
