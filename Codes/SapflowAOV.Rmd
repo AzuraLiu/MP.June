@@ -57,17 +57,7 @@ Join$UniqueID<-paste0(Join$ID, Join$Block)
 
 
 
-```{r}
-JoinAOV <- Join %>%
-  convert_as_factor(UniqueID, Block,DOY,Density,Geno,ID)%>%
-  subset (select = c(UniqueID,Density,Geno,DOY,SapflowPerGroundArea))
-summary(JoinAOV)
 
-class(JoinAOV$DOY)
-
-res.aov<-anova_test(data=JoinAOV,dv = SapflowPerGroundArea, wid = UniqueID, within = DOY, between =c(Density, Geno))
-get_anova_table(res.aov)                   
-```
 ```{r}
 
 
@@ -75,10 +65,11 @@ m <- aov(SapflowPerGroundArea ~ Density*Geno + (1| DOY)+(1|Block),
           data = Join)
 m1 <- lmer(SapflowPerGroundArea ~ Density+Geno +Density:Geno +(1| DOY)+(1|Block),
           data = Join)
-
+m
 AIC(m,m1)
 summary(m)
 
+m$coefficients
 summary(m1)
 ```
 ```{r}

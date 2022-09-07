@@ -18,13 +18,131 @@ library(lme4)
 library(lmerTest)
 
 getwd()
-raw<-read_excel("../Data/Processed/Daytime/sapflow/Join_4Blocks.xlsx")
+Join<-read_excel("../Data/Processed/Daytime/sapflow/Join_4Blocks.xlsx")
+REW<-read_excel("../Data/Processed/ENV/REW.xlsx")
 ```
 
 ```{r}
-summary(raw$SapflowPerGroundArea)
+REW<-REW%>%
+  pivot_longer(cols=HC:HB, names_to = "ID", values_to = "REW")%>%
+  subset(DOY>151 & DOY <274)
+
+raw<-inner_join(Join, REW, by=c("DOY","ID"))
+
+raw$Month<-as.factor(ifelse(raw$DOY <182, 'June',
+                     ifelse(raw$DOY <213, 'July', 
+                     ifelse(raw$DOY <244, 'August', 
+                     ifelse(raw$DOY <274, 'September')))))
+
+June<-raw%>%
+  filter(Month == "June")
+July<-raw%>%
+  filter(Month == "July")
+August<-raw%>%
+  filter(Month == "August")
+September<-raw%>%
+  filter(Month == "September")
+
+June.Low<-June%>%
+  filter(Density=="L")
+Low.Density.June<-ggplot(June.Low, aes(x=DOY, y = SapflowPerGroundArea, shape = Geno))+
+  geom_point(aes(color = Geno, size = 1, alpha = 0.9, stroke = 2))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 20))
+Low.Density.June
+
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/Low.Density.June.jpg", Low.Density.June, height = 10, width = 20, units = "in", dpi = 500)
+
+July.Low<-July%>%
+  filter(Density=="L")
+Low.Density.July<-ggplot(July.Low, aes(x=DOY, y = SapflowPerGroundArea, shape = Geno))+
+  geom_point(aes(color = Geno, size = 1, alpha = 0.9, stroke = 2))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 20))
+Low.Density.July
+
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/Low.Density.July.jpg", Low.Density.July, height = 10, width = 20, units = "in", dpi = 500)
+
+August.Low<-August%>%
+  filter(Density=="L")
+Low.Density.August<-ggplot(August.Low, aes(x=DOY, y = SapflowPerGroundArea, shape = Geno))+
+  geom_point(aes(color = Geno, size = 1, alpha = 0.9, stroke = 2))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 20))
+Low.Density.August
+
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/Low.Density.August.jpg", Low.Density.August, height = 10, width = 20, units = "in", dpi = 500)
+
+September.Low<-September%>%
+  filter(Density=="L")
+Low.Density.September<-ggplot(September.Low, aes(x=DOY, y = SapflowPerGroundArea, shape = Geno))+
+  geom_point(aes(color = Geno, size = 1, alpha = 0.9, stroke = 2))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 20))
+Low.Density.September
+
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/Low.Density.September.jpg", Low.Density.September, height = 10, width = 20, units = "in", dpi = 500)
 
 
+
+June.High<-June%>%
+  filter(Density=="H")
+High.Density.June<-ggplot(June.High, aes(x=DOY, y = SapflowPerGroundArea, shape = Geno))+
+  geom_point(aes(color = Geno, size = 1, alpha = 0.9, stroke = 2))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 20))
+High.Density.June
+
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/High.Density.June.jpg", High.Density.June, height = 10, width = 20, units = "in", dpi = 500)
+
+July.High<-July%>%
+  filter(Density=="H")
+High.Density.July<-ggplot(July.High, aes(x=DOY, y = SapflowPerGroundArea, shape = Geno))+
+  geom_point(aes(color = Geno, size = 1, alpha = 0.9, stroke = 2))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 20))
+High.Density.July
+
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/High.Density.July.jpg", High.Density.July, height = 10, width = 20, units = "in", dpi = 500)
+
+August.High<-August%>%
+  filter(Density=="H")
+High.Density.August<-ggplot(August.High, aes(x=DOY, y = SapflowPerGroundArea, shape = Geno))+
+  geom_point(aes(color = Geno, size = 1, alpha = 0.9, stroke = 2))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 20))
+High.Density.August
+
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/High.Density.August.jpg", High.Density.August, height = 10, width = 20, units = "in", dpi = 500)
+
+September.High<-September%>%
+  filter(Density=="H")
+High.Density.September<-ggplot(September.High, aes(x=DOY, y = SapflowPerGroundArea, shape = Geno))+
+  geom_point(aes(color = Geno, size = 1, alpha = 0.9, stroke = 2))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 20))
+High.Density.September
+
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/High.Density.September.jpg", High.Density.September, height = 10, width = 20, units = "in", dpi = 500)
+```
+
+```{r}
 A<-raw%>%
   filter(Geno=="A")
 A6<-A%>%
@@ -72,15 +190,98 @@ O9<-O%>%
 ```
 
 ```{r}
-A6789<-ggplot(C, aes(DOY))+
+Sapflow<-aggregate(raw$SapflowPerGroundArea,by = list (raw$DOY, raw$Density), FUN = mean)
+names(Sapflow)[1]<-"DOY"
+names(Sapflow)[2]<-"Density"
+names(Sapflow)[3]<-"Sapflow"
+VPD<-aggregate(raw$VPD,by = list (raw$DOY, raw$Density), FUN = mean)
+names(VPD)[1]<-"DOY"
+names(VPD)[2]<-"Density"
+names(VPD)[3]<-"VPD"
+REWmean<-aggregate(raw$REW,by = list (raw$DOY, raw$Density), FUN = mean)
+names(REWmean)[1]<-"DOY"
+names(REWmean)[2]<-"Density"
+names(REWmean)[3]<-"REW"
+
+Sapflow.VPD<-inner_join(Sapflow,VPD, by = c("DOY","Density"))
+Join2<-  inner_join(Sapflow.VPD,REWmean, by = c("DOY","Density")   ) 
+
+
+
+
+
+
+
+A.6<-ggplot(Join2,aes(x= REW, y= Sapflow,  color = Density, size = 1))+
+  scale_x_continuous()+
+ # ylim(0,4.5)+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)+
+ # geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 30))
+
+A.6
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/Density.jpg", A.6, height = 10, width = 15, units = "in", dpi = 500)
+   
+
+```
+
+```{r}
+summary(A$VPD)
+ENV<-ggplot(O, aes(DOY))+
+  scale_x_continuous()+
+  ylim(0,1.6)+
+  #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
+#  geom_point(aes(y= VPD, color = "VPD", size = 1))+
+  xlab("DOY")+ylab("REW")+ 
+  theme(text = element_text(size = 30)) 
+
+ENV
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/O6789.jpg", ENV, height = 10, width = 15, units = "in", dpi = 500)
+
+
+A6789<-ggplot(A, aes(VPD))+
   scale_x_continuous()+
   ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
-  xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+
+ # geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
+  #geom_point(aes(y=VPD))+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 A6789
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/C.jpg", A6789, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/A6789.jpg", A6789, height = 10, width = 10, units = "in", dpi = 500)
+
+B6789<-ggplot(B, aes(VPD))+
+  scale_x_continuous()+
+  ylim(0,4.5)+
+  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 30)) 
+
+B6789
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/B.jpg", B6789, height = 10, width = 10, units = "in", dpi = 500)
+
+C6789<-ggplot(C, aes(VPD))+
+  scale_x_continuous()+
+  ylim(0,4.5)+
+  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 30)) 
+
+C6789
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/C.jpg", C6789, height = 10, width = 10, units = "in", dpi = 500)
+
+O6789<-ggplot(O, aes(VPD))+
+  scale_x_continuous()+
+  ylim(0,4.5)+
+  geom_point(aes(y= REW, color = ID,size=1))+
+  xlab("VPD")+ylab("REW")+ 
+  theme(text = element_text(size = 30)) 
+
+O6789
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/OEBV.jpg", O6789, height = 10, width = 10, units = "in", dpi = 500)
 
 ```
 
@@ -88,42 +289,43 @@ ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/C.jpg", A67
 A.6<-ggplot(A6, aes(DOY))+
   scale_x_continuous()+
   ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+
+ # geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 A.6
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/A.6.jpg", A.6, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/A.6.jpg", A.6, height = 10, width = 15, units = "in", dpi = 500)
 
 A.7<-ggplot(A7, aes(DOY))+
   scale_x_continuous()+
- ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  ylim(0,4.5)+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 A.7
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/A.7.jpg", A.7, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/A.7.jpg", A.7, height = 10, width = 15, units = "in", dpi = 500)
 
 A.8<-ggplot(A8, aes(DOY))+
   scale_x_continuous()+
  ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 A.8
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/A.8.jpg", A.8, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/A.8.jpg", A.8, height = 10, width = 15, units = "in", dpi = 500)
 
 A.9<-ggplot(A9, aes(DOY))+
   scale_x_continuous()+
  ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 A.9
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/A.9.jpg", A.9, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/A.9.jpg", A.9, height = 10, width = 15, units = "in", dpi = 500)
 
 ```
 
@@ -132,42 +334,42 @@ ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/A.9.jpg", A
 B.6<-ggplot(B6, aes(DOY))+
   scale_x_continuous()+
  ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 B.6
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/B.6.jpg", B.6, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/B.6.jpg", B.6, height = 10, width = 15, units = "in", dpi = 500)
 
 B.7<-ggplot(B7, aes(DOY))+
   scale_x_continuous()+
  ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 B.7
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/B.7.jpg", B.7, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/B.7.jpg", B.7, height = 10, width = 15, units = "in", dpi = 500)
 
 B.8<-ggplot(B8, aes(DOY))+
   scale_x_continuous()+
  ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 B.8
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/B.8.jpg", B.8, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/B.8.jpg", B.8, height = 10, width = 15, units = "in", dpi = 500)
 
 B.9<-ggplot(B9, aes(DOY))+
   scale_x_continuous()+
  ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 B.9
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/B.9.jpg", B.9, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/B.9.jpg", B.9, height = 10, width = 15, units = "in", dpi = 500)
 
 ```
 
@@ -175,42 +377,42 @@ ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/B.9.jpg", B
 C.6<-ggplot(C6, aes(DOY))+
   scale_x_continuous()+
  ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 C.6
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/C.6.jpg", C.6, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/C.6.jpg", C.6, height = 10, width = 15, units = "in", dpi = 500)
 
 C.7<-ggplot(C7, aes(DOY))+
   scale_x_continuous()+
  ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 C.7
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/C.7.jpg", C.7, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/C.7.jpg", C.7, height = 10, width = 15, units = "in", dpi = 500)
 
 C.8<-ggplot(C8, aes(DOY))+
   scale_x_continuous()+
  ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 C.8
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/C.8.jpg", C.8, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/C.8.jpg", C.8, height = 10, width = 15, units = "in", dpi = 500)
 
 C.9<-ggplot(C9, aes(DOY))+
   scale_x_continuous()+
  ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 C.9
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/C.9.jpg", C.9, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/C.9.jpg", C.9, height = 10, width = 15, units = "in", dpi = 500)
 
 ```
 
@@ -218,41 +420,41 @@ ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/C.9.jpg", C
 O.6<-ggplot(O6, aes(DOY))+
   scale_x_continuous()+
  ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 O.6
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/O.6.jpg", O.6, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/O.6.jpg", O.6, height = 10, width = 15, units = "in", dpi = 500)
 
 O.7<-ggplot(O7, aes(DOY))+
   scale_x_continuous()+
  ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 O.7
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/O.7.jpg", O.7, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/O.7.jpg", O.7, height = 10, width = 15, units = "in", dpi = 500)
 
 O.8<-ggplot(O8, aes(DOY))+
   scale_x_continuous()+
  ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 O.8
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/O.8.jpg", O.8, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/O.8.jpg", O.8, height = 10, width = 15, units = "in", dpi = 500)
 
 O.9<-ggplot(O9, aes(DOY))+
   scale_x_continuous()+
  ylim(0,4.5)+
-  geom_point(aes(y= SapflowPerGroundArea, color = ID,size=1))+
+  geom_point(aes(y= SapflowPerGroundArea, color = REW, shape = ID, size = 1))+   #geom_point(aes(y= REW, color = ID, shape = "REW", size = 1))+
   xlab("DOY")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
   theme(text = element_text(size = 30)) 
 
 O.9
-ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/O.9.jpg", O.9, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/O.9.jpg", O.9, height = 10, width = 15, units = "in", dpi = 500)
 
 ```
