@@ -41,22 +41,55 @@ REW<-raw%>%
 ```{r}
 Sapflow<-read_excel("../Data/Processed/Daytime/sapflow/Join_4Blocks.xlsx")
 
-Sapflow<-Sapflow%>%
-  filter(Block == 1)
+#Sapflow<-Sapflow%>%
+ # filter(Block == 1)
 REW<-REW%>%
   pivot_longer(cols=HC:HB, names_to = "ID", values_to = "REW")%>%
   subset(DOY>151 & DOY <274)
 
 Join<-inner_join(Sapflow, REW, by=c("DOY","ID"))
 
+Join$SoMo<-as.factor(ifelse(Join$REW <0.4, 'Dry',
+                     ifelse(Join$REW <0.6, 'Intermediate', 
+                     ifelse(Join$REW <1, 'Wet'))))
+
 #write_xlsx(Join, "../Data/Processed/ENV/Join_1Block.xlsx")
 
 ```
 
 ```{r}
-m <- lmer(SapflowPerGroundArea ~ Density*Geno +VPD + REW + (1| DOY),
+m1 <- aov(SapflowPerGroundArea ~ Density*Geno*SoMo+ (1| DOY)+ (1| Block),
           data = Join)
 
 summary(m)
+m
+
+Low<-Join%>%
+  filter(SoMo == "Dry")
+
+High<-Join%>%
+  filter(SoMo == "Wet")
+
+mLow<-aov(SapflowPerGroundArea ~ Density*Geno+  + (1| DOY) +(1|Block),
+          data = Low)
+
+mHigh<-aov(SapflowPerGroundArea ~ Density*Geno+  + (1| DOY) +(1|Block),
+          data = High)
+
+mHigh
+
+
+summary(mHigh)
+coef(mHigh)
+
+AIC(m,m1)
+
+anova(m1,m)
+Tukey<-TukeyHSD(m1)
+plot(Tukey, las = 1)
+
+boxplot(Join$SapflowPerGroundArea ~ Join$Density*Join$Geno*Join$SoMo,par(cex.axis=0.8))
+
+tapply(High$SapflowPerGroundArea, High$ID, mean)
 ```
 

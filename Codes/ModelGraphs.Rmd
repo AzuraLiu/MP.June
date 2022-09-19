@@ -27,13 +27,20 @@ REW<-REW%>%
   pivot_longer(cols=HC:HB, names_to = "ID", values_to = "REW")%>%
   subset(DOY>151 & DOY <274)
 
-raw<-inner_join(Join, REW, by=c("DOY","ID"))
+new<-aggregate(Join[,c(5,10)], by = list(Join$DOY,Join$ID),FUN = "mean")
+names(new)[1]<-"DOY"
+names(new)[2]<-"ID"
+
+
+raw<-inner_join(new, REW, by=c("DOY","ID"))
 
 raw$Month<-as.factor(ifelse(raw$DOY <182, 'June',
                      ifelse(raw$DOY <213, 'July', 
                      ifelse(raw$DOY <244, 'August', 
                      ifelse(raw$DOY <274, 'September')))))
 
+raw$Density<-substr(raw$ID, 0,1)
+raw$Geno<-substr(raw$ID,2,2)
 June<-raw%>%
   filter(Month == "June")
 July<-raw%>%
@@ -53,7 +60,7 @@ Low.Density.June<-ggplot(June.Low, aes(x=DOY, y = SapflowPerGroundArea, shape = 
   theme(text = element_text(size = 20))
 Low.Density.June
 
-ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/Low.Density.June.jpg", Low.Density.June, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/byMonth/Low.Density.June.jpg", Low.Density.June, height = 10, width = 20, units = "in", dpi = 500)
 
 July.Low<-July%>%
   filter(Density=="L")
@@ -65,7 +72,7 @@ Low.Density.July<-ggplot(July.Low, aes(x=DOY, y = SapflowPerGroundArea, shape = 
   theme(text = element_text(size = 20))
 Low.Density.July
 
-ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/Low.Density.July.jpg", Low.Density.July, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/byMonth/Low.Density.July.jpg", Low.Density.July, height = 10, width = 20, units = "in", dpi = 500)
 
 August.Low<-August%>%
   filter(Density=="L")
@@ -77,7 +84,7 @@ Low.Density.August<-ggplot(August.Low, aes(x=DOY, y = SapflowPerGroundArea, shap
   theme(text = element_text(size = 20))
 Low.Density.August
 
-ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/Low.Density.August.jpg", Low.Density.August, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/byMonth/Low.Density.August.jpg", Low.Density.August, height = 10, width = 20, units = "in", dpi = 500)
 
 September.Low<-September%>%
   filter(Density=="L")
@@ -89,7 +96,7 @@ Low.Density.September<-ggplot(September.Low, aes(x=DOY, y = SapflowPerGroundArea
   theme(text = element_text(size = 20))
 Low.Density.September
 
-ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/Low.Density.September.jpg", Low.Density.September, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/byMonth/Low.Density.September.jpg", Low.Density.September, height = 10, width = 20, units = "in", dpi = 500)
 
 
 
@@ -103,7 +110,7 @@ High.Density.June<-ggplot(June.High, aes(x=DOY, y = SapflowPerGroundArea, shape 
   theme(text = element_text(size = 20))
 High.Density.June
 
-ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/High.Density.June.jpg", High.Density.June, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/byMonth/High.Density.June.jpg", High.Density.June, height = 10, width = 20, units = "in", dpi = 500)
 
 July.High<-July%>%
   filter(Density=="H")
@@ -115,7 +122,7 @@ High.Density.July<-ggplot(July.High, aes(x=DOY, y = SapflowPerGroundArea, shape 
   theme(text = element_text(size = 20))
 High.Density.July
 
-ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/High.Density.July.jpg", High.Density.July, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/byMonth/High.Density.July.jpg", High.Density.July, height = 10, width = 20, units = "in", dpi = 500)
 
 August.High<-August%>%
   filter(Density=="H")
@@ -127,7 +134,7 @@ High.Density.August<-ggplot(August.High, aes(x=DOY, y = SapflowPerGroundArea, sh
   theme(text = element_text(size = 20))
 High.Density.August
 
-ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/High.Density.August.jpg", High.Density.August, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/byMonth/High.Density.August.jpg", High.Density.August, height = 10, width = 20, units = "in", dpi = 500)
 
 September.High<-September%>%
   filter(Density=="H")
@@ -139,7 +146,7 @@ High.Density.September<-ggplot(September.High, aes(x=DOY, y = SapflowPerGroundAr
   theme(text = element_text(size = 20))
 High.Density.September
 
-ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Sapflow/High.Density.September.jpg", High.Density.September, height = 10, width = 20, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/byMonth/High.Density.September.jpg", High.Density.September, height = 10, width = 20, units = "in", dpi = 500)
 ```
 
 ```{r}
