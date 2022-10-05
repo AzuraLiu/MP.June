@@ -228,13 +228,27 @@ PlotLevel$Geno<-substr(PlotLevel$ID,2,2)
 
 
 ```{r}
-PlotLevelSapwoodArea<-ggplot(PlotLevel, aes(DOY))+
+getwd()
+PlotLevelSapwood<-read_xlsx( "../Data/Processed/Sapwood/PlotLevelSapwood.xlsx")
+PlotLevelSapwood<-PlotLevelSapwood%>%
+  select(c(1:3))
+ByID<-pivot_wider(PlotLevelSapwood, names_from=ID, values_from=Area)
+
+summary(ByID)
+write_xlsx(ByID, "../Data/Processed/Sapwood/PlotLevelSapwood.xlsx")
+
+GS<-PlotLevelSapwood%>%
+  filter(DOY>151 & DOY < 174)
+sd(ByID$LA)
+PlotLevelSapwoodArea<-ggplot(GS, aes(DOY))+
   scale_x_continuous()+
-  geom_point(aes(y=Area, color=ID))+
-  ggtitle("Plot Level Sapwood Area")
+  geom_point(aes(y=Area, color=ID, size= 0.1))+
+  xlab("DOY")+ylab("Sapwood Area (m^2)")+
+   theme(text = element_text(size = 30))
+
 PlotLevelSapwoodArea
 
-ggsave("../Data/Processed/Sapwood/PlotLevelSapwoodArea.jpg", PlotLevelSapwoodArea, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Sapwood/GrowingSZNSapwoodArea.jpg", PlotLevelSapwoodArea, height = 7, width = 10, units = "in", dpi = 500)
 ```
 
 

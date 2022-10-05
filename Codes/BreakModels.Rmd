@@ -1,0 +1,315 @@
+---
+title: "BreakModels"
+author: "Azura Liu"
+date: "2022-09-23"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rstatix)
+library("dplyr")
+library("tidyverse")
+library("lubridate")
+library("readxl")
+library("writexl")
+library(datarium)
+library(lme4)
+library(lmerTest)
+#install.packages("emmeans")
+library(emmeans)
+
+getwd()
+Meta<-read_xlsx("../Data/Processed/Daytime/sapflow/Join_4Blocks.xlsx")
+```
+
+```{r }
+Meta$REW<-as.factor(ifelse(Meta$REW <0.4, 'Dry',
+                     ifelse(Meta$REW <0.6, 'Intermediate', 
+                     ifelse(Meta$REW <1, 'Wet'))))
+Meta.Low<-Meta%>%filter(Density == "L")
+Meta.High<-Meta%>%filter(Density == "H")
+
+June <-Meta %>%
+  filter(Month == "June")
+July <-Meta %>%
+  filter(Month == "July")
+August <-Meta %>%
+  filter(Month == "August")
+September <-Meta %>%
+  filter(Month == "September")
+
+June.Low<-Meta.Low%>%
+  filter(Month == "June")
+July.Low<-Meta.Low%>%
+  filter(Month == "July")
+August.Low<-Meta.Low%>%
+  filter(Month == "August")
+September.Low<-Meta.Low%>%
+  filter(Month == "September")
+
+June.High<-Meta.High%>%
+  filter(Month == "June")
+July.High<-Meta.High%>%
+  filter(Month == "July")
+August.High<-Meta.High%>%
+  filter(Month == "August")
+September.High<-Meta.High%>%
+  filter(Month == "September")
+
+```
+
+```{r all}
+m <- aov(SapflowPerGroundArea ~ Density*Geno+REW*VPD + (1| DOY)+(1|Block),
+          data = Meta)
+m
+summary(m)
+
+emmeans(m, ~Density:Geno,data=Meta,pbkrtest.limit = 3904)
+
+All.All<-ggplot(Meta, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = ID))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+All.All
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/AllAll.jpg", All.All, height = 10, width = 20, units = "in", dpi = 500)
+
+All.Low<-ggplot(Meta.Low, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = ID))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+All.Low
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/AllLow.jpg", All.Low, height = 10, width = 20, units = "in", dpi = 500)
+
+
+All.High<-ggplot(Meta.High, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = Geno))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+All.High
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/AllHigh.jpg", All.High, height = 10, width = 20, units = "in", dpi = 500)
+
+```
+
+```{r June}
+m6 <- lmer(SapflowPerGroundArea ~ Density*Geno+REW*VPD + (1| DOY)+(1|Block),
+          data = June)
+m6
+summary(m6)
+
+emmeans(m6, ~Density:Geno,data=June,pbkrtest.limit = 3904)
+
+June.All<-ggplot(June, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = ID))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+ June.All
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/JuneAll.jpg",  June.All, height = 10, width = 20, units = "in", dpi = 500)
+
+Low6<-ggplot(June.Low, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = ID))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+Low6
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/JunLow.jpg", Low6, height = 10, width = 20, units = "in", dpi = 500)
+
+
+High6<-ggplot(June.High, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = Geno))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+High6
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/JuneHigh.jpg", High6, height = 10, width = 20, units = "in", dpi = 500)
+
+
+```
+
+
+
+```{r July}
+m7 <- lmer(SapflowPerGroundArea ~ Density*Geno+REW*VPD + (1| DOY)+(1|Block),
+          data = July)
+m7
+summary(m7)
+
+emmeans(m7, ~Density:Geno,data=July,pbkrtest.limit = 3904)
+
+July.All<-ggplot(July, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = ID))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+ July.All
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/JulyAll.jpg",  July.All, height = 10, width = 20, units = "in", dpi = 500)
+
+Low7<-ggplot(July.Low, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = ID))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+Low7
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/JulyLow.jpg", Low7, height = 10, width = 20, units = "in", dpi = 500)
+
+
+High7<-ggplot(July.High, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = Geno))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+High7
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/JulyHigh.jpg", High7, height = 10, width = 20, units = "in", dpi = 500)
+
+
+```
+
+```{r Aug}
+m8 <- lmer(SapflowPerGroundArea ~ Density*Geno+REW*VPD + (1| DOY)+(1|Block),
+          data = August)
+m8
+summary(m8)
+
+emmeans(m8, ~Density:Geno,data=August,pbkrtest.limit = 3904)
+
+August.All<-ggplot(August, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = ID))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+ August.All
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/AugustAll.jpg",  August.All, height = 10, width = 20, units = "in", dpi = 500)
+
+Low8<-ggplot(August.Low, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = ID))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+Low8
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/AugustLow.jpg", Low8, height = 10, width = 20, units = "in", dpi = 500)
+
+
+High8<-ggplot(August.High, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = Geno))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+High8
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/AugustHigh.jpg", High8, height = 10, width = 20, units = "in", dpi = 500)
+
+
+```
+```{r Sept}
+m9 <- lmer(SapflowPerGroundArea ~ Density*Geno+REW*VPD + (1| DOY)+(1|Block),
+          data = September)
+m9
+summary(m9)
+
+emmeans(m9, ~Density:Geno,data=September,pbkrtest.limit = 3904)
+
+September.All<-ggplot(September, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = ID))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+ September.All
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/SeptemberAll.jpg",  September.All, height = 10, width = 20, units = "in", dpi = 500)
+
+Low9<-ggplot(September.Low, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = ID))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+Low9
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/SeptemberLow.jpg", Low9, height = 10, width = 20, units = "in", dpi = 500)
+
+
+High9<-ggplot(September.High, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = Geno))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 10))
+High9
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/SeptemberHigh.jpg", High9, height = 10, width = 20, units = "in", dpi = 500)
+
+
+```
+
+
+```{r drought}
+drought1<-Meta%>%
+  filter(DOY>204 & DOY <224)
+drought2<-Meta%>%
+  filter(DOY>230 & DOY<245)
+drought3<-Meta%>%filter(DOY>259 & DOY<274)
+
+drought<-rbind(drought1, drought2,drought3)
+summary(drought$REW)
+m10 <- lmer(SapflowPerGroundArea ~ Density*Geno+REW*VPD + (1| DOY)+(1|Block),
+          data = drought)
+anova(m10)
+summary(m10)
+
+emmeans(m10, ~Density:Geno,data=drought)
+
+August.All<-ggplot(drought, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = ID))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 20))
+ August.All
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/DryingDAys.jpg",  August.All, height = 10, width = 20, units = "in", dpi = 500)
+
+
+
+```
+
+```{r}
+#install.packages("usefun")
+library(usefun)
+Wet<-setdiff(Meta,drought)
+m11 <- lmer(SapflowPerGroundArea ~ Density*Geno+REW*VPD + (1| DOY)+(1|Block),
+          data = Wet)
+anova(m11)
+summary(m11)
+summary(Wet$REW)
+emmeans(m11, ~Density:Geno,data=Wet,pbkrtest.limit = 3904)
+
+Wet.Periods<-ggplot(Wet, aes(x=REW, y = SapflowPerGroundArea))+
+  geom_boxplot(aes(color = ID))+
+ # scale_x_continuous()+
+  ylim(0,4.5)+
+  xlab("REW")+ylab("Sapflow per Ground Area (kg/m^2)")+ 
+  theme(text = element_text(size = 20))
+ Wet.Periods
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/WetPeriods.jpg",  Wet.Periods, height = 10, width = 20, units = "in", dpi = 500)
+
+```
+
+
+
+
+
+
+

@@ -47,8 +47,10 @@ REW<-REW%>%
   pivot_longer(cols=HC:HB, names_to = "ID", values_to = "REW")%>%
   subset(DOY>151 & DOY <274)
 
-Join<-inner_join(Sapflow, REW, by=c("DOY","ID"))
+Join<-inner_join(Sapflow, REW, by=c("DOY","ID"))%>%
+  select(1:13)
 
+names(Join)[13]<-"REW"
 Join$SoMo<-as.factor(ifelse(Join$REW <0.4, 'Dry',
                      ifelse(Join$REW <0.6, 'Intermediate', 
                      ifelse(Join$REW <1, 'Wet'))))
@@ -57,13 +59,56 @@ Join$SoMo<-as.factor(ifelse(Join$REW <0.4, 'Dry',
 
 ```
 
-```{r}
-m1 <- aov(SapflowPerGroundArea ~ Density*Geno*SoMo+ (1| DOY)+ (1| Block),
+
+```{r eval=FALSE, include=FALSE}
+Join1<-  aggregate(Join$REW, by = list(Join$DOY,Join$Density),FUN = "mean")
+names(Join1)[1]<-"DOY"
+names(Join1)[2]<-"Density"
+names(Join1)[3]<-"REW"
+
+High.REW<-Join1%>%filter(Density == "H")
+
+Low.REW<-Join1%>%filter(Density == "L")
+
+High.D.REW<-ggplot(Join1, aes(x=DOY, y = REW))+
+  geom_point(aes(color = Density,size=1))+
+   scale_x_continuous(breaks = pretty(Join1$DOY, n = 10))+
+  ylim(0,1)+
+  xlab("DOY")+ylab("REW (%)")+
+ theme(text = element_text(size = 30))
+
+High.D.REW
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REW/AverageREW.jpg",  High.D.REW, height = 10, width = 20, units = "in", dpi = 500)
+
+
+```
+
+
+```{r eval=FALSE, include=FALSE}
+m<-lm(SapflowPerGroundArea ~ SoMo+ (1| DOY)+ (1| Block)  ,
+          data = Join)
+mm<-aov(m)
+Tukey<-TukeyHSD(mm)
+plot(Tukey, las = 1)
+
+
+
+
+m
+summary(m)
+anova(m)
+m1 <- lm(SapflowPerGroundArea ~ ID+VPD+ (1| DOY)+ (1| Block),
           data = Join)
 
-summary(m)
-m
-
+coef(m1)
+Join %>% 
+    group_by(ID) %>% 
+    do({
+      mod = lm(SapflowPerGroundArea ~ VPD, data =Join)
+      data.frame(Intercept = coef(mod)[1],
+                 Slope = coef(mod)[2])
+    })
+m<-lm(SapflowPerGroundArea ~ VPD, data =Join)
 Low<-Join%>%
   filter(SoMo == "Dry")
 
@@ -85,11 +130,55 @@ coef(mHigh)
 AIC(m,m1)
 
 anova(m1,m)
-Tukey<-TukeyHSD(m1)
+Tukey<-TukeyHSD(m)
 plot(Tukey, las = 1)
 
 boxplot(Join$SapflowPerGroundArea ~ Join$Density*Join$Geno*Join$SoMo,par(cex.axis=0.8))
 
 tapply(High$SapflowPerGroundArea, High$ID, mean)
+```
+
+```{r}
+
+VPD.group<-ggplot(Join, aes(x=VPD, y=SapflowPerGroundArea, shape=ID, color=ID)) + 
+  geom_point(size=4, alpha=0.5)+
+  stat_smooth(method=lm, size=3)+
+  xlab("VPD")+ylab("Sapflow per Ground Area (L/m^2)")+
+ theme(text = element_text(size = 30),legend.key.size = unit(3, 'cm'))
+
+VPD.group
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/VPD/VPDbyGroup.jpg",  VPD.group, height = 20, width = 20, units = "in", dpi = 100)
+
+
+VPD.group<-ggplot(Join, aes(x=VPD, y=log(SapflowPerGroundArea), shape=ID, color=ID)) + 
+  geom_point(size=4, alpha=0.5)+
+  geom_smooth(method=lm, formula=log(y)~x, size=3,se=FALSE)+
+  xlab("VPD (kPa)")+ylab("Sapflow per Ground Area (L/m^3)")+
+ theme(text = element_text(size = 30),legend.key.size = unit(3, 'cm'))
+
+
+
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/VPD/VPDbyGrouplogy.jpg",  VPD.group, height = 20, width = 20, units = "in", dpi = 100)
+
+VPD.group<-ggplot(Join, aes(x=log(VPD), y=log(SapflowPerGroundArea), shape=ID, color=ID)) + 
+  geom_point(size=4, alpha=0.5)+
+  geom_smooth(method=lm, formula=log(y)~log(x), size=3,se=FALSE)+
+  xlab("VPD (kPa)")+ylab("Sapflow per Ground Area (L/m^3)")+
+ theme(text = element_text(size = 30),legend.key.size = unit(3, 'cm'))
+
+
+
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/VPD/VPDbyGrouploglog.jpg",  VPD.group, height = 20, width = 20, units = "in", dpi = 100)
+
+
+VPD.group<-ggplot(Join, aes(x=log(VPD), y=SapflowPerGroundArea, shape=ID, color=ID)) + 
+  geom_point(size=4, alpha=0.5)+
+  geom_smooth(method=lm, formula=y~log(x), size=3,se=FALSE)+
+  xlab("VPD (kPa)")+ylab("Sapflow per Ground Area (L/m^3)")+
+ theme(text = element_text(size = 30),legend.key.size = unit(3, 'cm'))
+
+
+
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/VPD/VPDbyGrouplogx.jpg",  VPD.group, height = 20, width = 20, units = "in", dpi = 100)
 ```
 

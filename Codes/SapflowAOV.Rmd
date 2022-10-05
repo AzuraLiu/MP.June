@@ -16,6 +16,8 @@ library("writexl")
 library(datarium)
 library(lme4)
 library(lmerTest)
+#install.packages("emmeans")
+library(emmeans)
 
 getwd()
 Sapwood<-read_xlsx("../Data/Processed/Sapwood/PlotLevelSapwood.xlsx")
@@ -23,6 +25,7 @@ Sapflow6<-read_xlsx("../Data/Processed/Daytime/sapflow/Sapflow.6.xlsx")
 Sapflow7<-read_xlsx("../Data/Processed/Daytime/sapflow/Sapflow.7.xlsx")
 Sapflow8<-read_xlsx("../Data/Processed/Daytime/sapflow/Sapflow.8.xlsx")
 Sapflow9<-read_xlsx("../Data/Processed/Daytime/sapflow/Sapflow.9.xlsx")
+REW<-read_xlsx("../Data/Processed/Daytime/sapflow/Join_1Block.xlsx")
 ```
 
 ```{r}
@@ -32,19 +35,36 @@ Sapflow$Geno<-substr(Sapflow$ID,2,2)
 Sapflow[,c(1,2,4,5)]<-Sapflow[,c(1,2,4,5)]%>%mutate_if(is.character, as.numeric)
 Sapwood[,c(1,2)]<-Sapwood[,c(1,2)]%>%mutate_if(is.character, as.numeric)
 
-Join<-inner_join(Sapflow, Sapwood, by=c("DOY","ID","Density","Geno"))
-names(Join)[8]<-"SapwoodArea"
-
-Join$GroundArea<- case_when(
-    Join$Density == "H"  ~ 134.505 ,
-    Join$Density == "L"  ~404.43 )
 
 
-Join<-Join%>%
+
+
+Sapflow$GroundArea<- case_when(
+    Sapflow$Density == "H"  ~ 134.505 ,
+    Sapflow$Density == "L"  ~404.43 )
+
+
+Sapflow<-Sapflow%>%
   mutate(SapflowPerGroundArea=Sapflow/GroundArea)
 
-Join$UniqueID<-paste0(Join$ID, Join$Block)
+Sapflow$UniqueID<-paste0(Join$ID, Join$Block)
+Sapflow$Month<-as.factor(ifelse(Join$DOY <182, 'June',
+                     ifelse(Join$DOY <213, 'July', 
+                     ifelse(Join$DOY <244, 'August', 
+                     ifelse(Join$DOY <274, 'September')))))
 
+Join<-inner_join(Sapflow, Sapwood, by=c("DOY","ID","Density","Geno"))
+names(Join)[8]<-"SapwoodArea"
+SapflowSummary<-Sapflow%>%
+  select(c(1:3,9))
+SapflowSummary<-aggregate(SapflowSummary$SapflowPerGroundArea, by = list(SapflowSummary$DOY,SapflowSummary$ID),FUN = "mean")
+names(SapflowSummary)[1]<-"DOY"
+names(SapflowSummary)[2]<-"ID"
+names(SapflowSummary)[3]<-"Sapflow"
+
+SapflowSummary<-SapflowSummary%>%pivot_wider( names_from = "ID", values_from = "Sapflow")
+
+summary(SapflowSummary)
 #write_xlsx(Join, "../Data/Processed/Daytime/sapflow/Join_4Blocks.xlsx")
 
 #Join$DOY<-cut(Join$DOY, 122)
@@ -55,14 +75,32 @@ Join$UniqueID<-paste0(Join$ID, Join$Block)
 
 ```
 
+```{r}
+June<-Join%>%
+  filter(Month == "June")
+July<-Join%>%
+  filter(Month == "July")
+August<-Join%>%
+  filter(Month == "August")
+September<-Join%>%
+  filter(Month == "September")
+```
+
 
 
 
 ```{r}
 
 
-m <- aov(SapflowPerGroundArea ~ Density*Geno + (1| DOY)+(1|Block),
-          data = Join)
+m <- lmer(SapflowPerGroundArea ~ Density*Geno + VPD*REW +(1| DOY)+(1|Block),
+          data = REW)
+
+m
+summary(m)
+emmeans(m, ~Density:Geno,data=Join)
+
+
+
 m1 <- lmer(SapflowPerGroundArea ~ Density+Geno +Density:Geno +(1| DOY)+(1|Block),
           data = Join)
 m
@@ -73,10 +111,12 @@ m$coefficients
 summary(m1)
 ```
 ```{r}
-JoinAOV1<-JoinAOV%>%
-  mutate(Group=paste0(JoinAOV$Density, JoinAOV$Geno))
-GroupPlot<-ggplot(JoinAOV1, aes(x=Group,y=SapflowPerGroundArea))+
-  geom_boxplot()
+JoinAOV1<-Join%>%
+  mutate(Group=paste0(Join$Density, Join$Geno))
+ggplot(Join, aes(x=ID,y=SapflowPerGroundArea, fill = ID))+
+  geom_boxplot()+
+  xlab("Treatment Groups")+ylab("Sapflow per Ground Area(L/m^2)")
+  
   
 GroupPlot
 
