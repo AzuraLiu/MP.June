@@ -64,6 +64,7 @@ names(SapflowSummary)[3]<-"Sapflow"
 
 SapflowSummary<-SapflowSummary%>%pivot_wider( names_from = "ID", values_from = "Sapflow")
 
+
 summary(SapflowSummary)
 #write_xlsx(Join, "../Data/Processed/Daytime/sapflow/Join_4Blocks.xlsx")
 

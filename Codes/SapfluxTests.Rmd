@@ -1,0 +1,199 @@
+---
+title: "SapfluxTests"
+author: "Azura Liu"
+date: "2022-10-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rstatix)
+library("dplyr")
+library("tidyverse")
+library("lubridate")
+library("readxl")
+library("writexl")
+library(datarium)
+library(lme4)
+library(lmerTest)
+#install.packages("emmeans")
+library(emmeans)
+library(ggpubr)
+
+getwd()
+Raw<-read_xlsx("../Data/Processed/Daytime/sapflow/Sapflux.xlsx")%>%
+  pivot_longer(cols=c(8:129), names_to="DOY", values_to="Sapflux")%>%
+  select(c(1,3:9))
+
+```
+
+```{r}
+Sapflux<-Raw%>%pivot_wider(names_from="Position",values_from = "Sapflux")%>%
+  na.omit()%>%
+  mutate(Treatment=paste0(Density,Genotype))
+Sapflux1<-Sapflux%>%pivot_longer(cols=c(7:8),names_to="Position",values_to="Sapflux")%>%
+ # mutate(ID = paste0(Density, Genotype, Tree))%>%
+  mutate(Treatment=paste0(Density,Genotype))
+Sapflux2<-aggregate(Sapflux1$Sapflux, by=list(Sapflux1$DOY,Sapflux1$Treatment,Sapflux1$Position),mean)
+
+names(Sapflux2)[1]<-"DOY"
+names(Sapflux2)[2]<-"Treatment"
+names(Sapflux2)[3]<-"Position"
+names(Sapflux2)[4]<-"Sapflux"
+
+Sapflux3<-Sapflux2%>%pivot_wider(values_from="Sapflux", names_from="Position")
+summary<-group_by(Sapflux1, Orientation) %>%
+  summarise(
+    count = n(),
+    mean = mean(Sapflux, na.rm = TRUE),
+    sd = sd(Sapflux, na.rm = TRUE)
+  )
+print(summary)
+
+write.table(summary , file = "../Data/Processed/Daytime/sapflow/sapfluxsummary.csv")
+```
+
+```{r}
+
+t.test(Sapflux$I,Sapflux$O,data=Sapflux,paired=TRUE)
+
+```
+```{r}
+summary(Raw)
+HA<-Sapflux2%>%filter(Treatment == "HA")
+LA<-Sapflux2%>%filter(Treatment == "LA")
+HB<-Sapflux2%>%filter(Treatment == "HB")
+LB<-Sapflux2%>%filter(Treatment == "LB")
+HC<-Sapflux2%>%filter(Treatment == "HC")
+LC<-Sapflux2%>%filter(Treatment == "LC")
+HO<-Sapflux2%>%filter(Treatment == "HO")
+LO<-Sapflux2%>%filter(Treatment == "LO")
+
+HAIO<-ggplot(HA,aes(x=DOY,y=Sapflux,color=Position,group=Position))+geom_point(size=2)+geom_line(size=1,alpha=0.8)+
+  scale_x_discrete(breaks = c("150","175","200","225","250","275"))+
+  theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm")) +
+  ylim(0,4000)+ theme(axis.text = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_text(size = 20))+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20))
+
+
+HAIO
+
+LAIO<-ggplot(LA,aes(x=DOY,y=Sapflux,color=Position,group=Position))+geom_point(size=2)+geom_line(size=1,alpha=0.8)+
+  scale_x_discrete(breaks = c("150","175","200","225","250","275"))+
+  theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm")) +
+  ylim(0,4000)+ theme(axis.text = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_text(size = 20))+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20))
+
+
+LAIO
+
+HBIO<-ggplot(HB,aes(x=DOY,y=Sapflux,color=Position,group=Position))+geom_point(size=2)+geom_line(size=1,alpha=0.8)+
+  scale_x_discrete(breaks = c("150","175","200","225","250","275"))+
+  theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm")) +
+  ylim(0,4000)+ theme(axis.text = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_text(size = 20))+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20))
+
+
+HBIO
+
+LBIO<-ggplot(LB,aes(x=DOY,y=Sapflux,color=Position,group=Position))+geom_point(size=2)+geom_line(size=1,alpha=0.8)+
+  scale_x_discrete(breaks = c("150","175","200","225","250","275"))+
+  theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm")) +
+  ylim(0,4000)+ theme(axis.text = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_text(size = 20))+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20))
+
+
+LBIO
+
+HCIO<-ggplot(HC,aes(x=DOY,y=Sapflux,color=Position,group=Position))+geom_point(size=2)+geom_line(size=1,alpha=0.8)+
+  scale_x_discrete(breaks = c("150","175","200","225","250","275"))+
+  theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm")) +
+  ylim(0,4000)+ theme(axis.text = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_text(size = 20))+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20))
+
+
+HCIO
+
+LCIO<-ggplot(LC,aes(x=DOY,y=Sapflux,color=Position,group=Position))+geom_point(size=2)+geom_line(size=1,alpha=0.8)+
+  scale_x_discrete(breaks = c("150","175","200","225","250","275"))+
+  theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm")) +
+  ylim(0,4000)+ theme(axis.text = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_text(size = 20))+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20))
+
+LCIO
+
+HOIO<-ggplot(HO,aes(x=DOY,y=Sapflux,color=Position,group=Position))+geom_point(size=2)+geom_line(size=1,alpha=0.8)+
+  scale_x_discrete(breaks = c("150","175","200","225","250","275"))+
+  theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm"))+
+  ylim(0,4000) + theme(axis.text = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_text(size = 20))+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20))
+
+
+HOIO
+
+
+LOIO<-ggplot(LO,aes(x=DOY,y=Sapflux,color=Position,group=Position))+geom_point(size=2)+geom_line(size=1,alpha=0.8)+
+  scale_x_discrete(breaks = c("150","175","200","225","250","275"))+
+  theme(plot.margin = margin(0.5,0.5,0.5,0.5, "cm")) +
+  ylim(0,4000)+ theme(axis.text = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_text(size = 20))+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20))
+
+
+
+
+
+LOIO
+
+ggsave("../Data/Processed/Daytime/Sapflux/Plots/HAIO.jpg", HAIO, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/Sapflux/Plots/LAIO.jpg", LAIO, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/Sapflux/Plots/HBIO.jpg", HBIO, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/Sapflux/Plots/LBIO.jpg", LBIO, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/Sapflux/Plots/HCIO.jpg", HCIO, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/Sapflux/Plots/LCIO.jpg", LCIO, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/Sapflux/Plots/HOIO.jpg", HOIO, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Daytime/Sapflux/Plots/LOIO.jpg", LOIO, height = 7, width = 10, units = "in", dpi = 500)
+
+
+#par(mfrow=c(4,2))
+  
+
+
+
+
+```
+
+
+
+```{r}
+IvsO<-ggarrange(HAIO,LAIO,HBIO,LBIO,HCIO,LCIO,HOIO,LOIO+ rremove("x.text"), common.legend = TRUE,
+          labels = c("HA", "LA", "HB","LB","HC","LC","HO","LO"),
+          ncol = 2, nrow = 4)
+IvsO
+ggsave("../Data/Processed/Daytime/Sapflux/Plots/IvsO.jpg", IvsO, height = 14, width = 10, units = "in", dpi = 500)
+
+
+```

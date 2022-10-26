@@ -43,9 +43,24 @@ Sapflow<-read_excel("../Data/Processed/Daytime/sapflow/Join_4Blocks.xlsx")
 
 #Sapflow<-Sapflow%>%
  # filter(Block == 1)
-REW<-REW%>%
-  pivot_longer(cols=HC:HB, names_to = "ID", values_to = "REW")%>%
-  subset(DOY>151 & DOY <274)
+REW<-  aggregate(Sapflow[,c(5,13)],by = list(Sapflow$DOY,Sapflow$Density),FUN = "mean")
+names(REW)[1]<-"DOY"
+names(REW)[2]<-"Density"
+
+Environ<-ggplot(REW,aes(x=DOY))+
+  geom_point(aes(y=REW, color = Density),size = 4)+
+  geom_point(aes(y=VPD, color = "VPD"),size = 4)+
+  scale_y_continuous(
+    name = "REW",
+    sec.axis = sec_axis(~.,name = "VPD")
+  )+ theme(axis.text = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_text(size = 20))+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20)) +
+  guides(shape = guide_legend(override.aes = list(size = 40)))
+Environ
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REWnVPD.jpg",  Environ, height = 10, width = 20, units = "in", dpi = 200)
 
 Join<-inner_join(Sapflow, REW, by=c("DOY","ID"))%>%
   select(1:13)

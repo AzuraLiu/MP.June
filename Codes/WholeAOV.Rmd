@@ -12,12 +12,15 @@ library("dplyr")
 library("tidyverse")
 library("lubridate")
 library("readxl")
-library("writexl")
+library(writexl)
 library(datarium)
 library(lme4)
 library(lmerTest)
-#install.packages("emmeans")
 library(emmeans)
+library(drc)
+library(nlme)
+library(nlstools)
+library(multcomp)
 
 getwd()
 Sapflow<-read_xlsx("../Data/Processed/Daytime/sapflow/Join_4Blocks.xlsx")
@@ -25,9 +28,14 @@ Sapflow<-read_xlsx("../Data/Processed/Daytime/sapflow/Join_4Blocks.xlsx")
 ```
 
 ```{r}
-m0<-lm(SapflowPerGroundArea~Density*Geno*DOY+(1|Block), data = Sapflow)
+m0<-aov(SapflowPerGroundArea~REW+ID+(1|Block), data = Sapflow)
 
-m0
+Anova(m0,type="II")
+
+postHocs <- glht(m0, linfct = mcp(technique = "Tukey"))
+summary(postHocs)
+
+
 summary(m0)
 aov(m0)
 
@@ -41,9 +49,93 @@ emmeans(m0a, ~Density:Geno,data=Sapflow)
 Sapflow$Week <- cut(Sapflow$DOY,
               breaks=c(0, 156,161,166,171,176,181,186,191,196,201,206,211,216,221,226,231,236,241,246,251,256,261,266,271,276),
               labels=c('1', '2', '3', '4',"5","6","7","8","9","10","11","12","13","14","15","16", "17","18","19","20", "21","22", "23","24","25" ))
+Sapflow$SapwoodPerGroundArea<-Sapflow$SapwoodArea/Sapflow$GroundArea
+
+m0<-aov(SapflowPerGroundArea~VPD+Density*Geno*DOY+(1|Block), data = Sapflow,type="II")
+summary(m0)
+
+emmeans(m0, ~Density:Geno,data=Sapflow)
+
+pwc <- Sapflow %>% 
+  emmeans_test(
+    SapflowPerGroundArea ~ Geno, covariate = VPD,
+    p.adjust.method = "bonferroni"
+    )
+pwc
+
+write.table(pwc , file = "../Data/Processed/Daytime/sapflow/pwc.csv")
+
+res.aov <- Sapflow %>% 
+  anova_test(SapflowPerGroundArea ~ VPD+REW + Density*Geno*DOY+(1|Block))
+get_anova_table(res.aov)
+
+
+
 
 ```
 
+```{r}
+Full<-aggregate(cbind(REW, VPD,SapwoodPerGroundArea,SapflowPerGroundArea)~Week+Density+Geno, data=Sapflow, mean)
+#write_xlsx(Full, "../Data/Processed/Daytime/sapflow/WeeklyAverages.xlsx")
+
+Full<-read_xlsx( "../Data/Processed/Daytime/sapflow/WeeklyAverages.xlsx")%>%
+  mutate(ID=paste0(Density,Geno))
+
+
+HA<-Full%>%filter(ID=="HA")
+LA<-Full%>%filter(ID=="LA")
+HB<-Full%>%filter(ID=="HB")
+LB<-Full%>%filter(ID=="LB")
+HC<-Full%>%filter(ID=="HC")
+LC<-Full%>%filter(ID=="LC")
+HO<-Full%>%filter(ID=="HO")
+LO<-Full%>%filter(ID=="LO")
+
+REWLM<-ggplot(Full,aes(x=REW,y=SapflowPerGroundArea,color=ID))+
+  geom_point()+
+  geom_smooth(method=lm,se = FALSE)
+REWLM   
+
+plot(HA$REW,HA$SapflowPerGroundArea)
+print(NLSstAsymptotic(sortedXyData(expression(VPD),
+                                    expression(SapflowPerGroundArea),
+                                    HO)),digits=3)
+
+
+
+with(Full, plot(VPD, SapflowPerGroundArea, xlim=c(0, 30), ylim=c(0,75)))
+curve(fx(x, Asym=p["Asym"], R0=p["R0"], lrc=p["lrc"]), 
+      add=T, col="red")
+
+a<-ggplot(Full,aes(x=log(REW),y=(SapflowPerGroundArea),color=ID))+
+  geom_point(size=4,alpha=0.9)+
+  geom_smooth(method=lm,se = FALSE, alpha=0.5)+
+  ylab("Sapflow per Ground Area (kg/m^2)")
+a
+ggsave("../Data/Processed/Daytime/sapflow/plots/REWSapflowbyGroup.jpg", a, height = 7, width = 10, units = "in", dpi = 500)
+
+
+```
+
+```{r}
+Environ<-ggplot(REW,aes(x=DOY))+
+  geom_point(aes(y=REW, color = Density,size = 1))+
+  geom_point(aes(y=VPD, color = "VPD", size = 1))+
+  scale_y_continuous(
+    name = "REW",
+    sec.axis = sec_axis(~.,name = "VPD")
+  )+ theme(axis.text = element_text(size = 20))+
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_text(size = 20))+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20)) +
+  guides(shape = guide_legend(override.aes = list(size = 40)))
+Environ
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REWnVPD.jpg",  Environ, height = 10, width = 20, units = "in", dpi = 200)
+
+ggsave("../Data/Processed/Daytime/sapflow/plots/WeeklyAverages/REWbyGroup.jpg", REW, height = 10, width = 10, units = "in", dpi = 500)
+
+```
 
 ```{r}
 Week<-Sapflow%>%

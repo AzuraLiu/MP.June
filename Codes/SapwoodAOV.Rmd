@@ -1,0 +1,40 @@
+---
+title: "SapwoodAOV"
+author: "Azura Liu"
+date: "2022-10-21"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rstatix)
+library("dplyr")
+library("tidyverse")
+library("lubridate")
+library("readxl")
+library("writexl")
+library(datarium)
+library(lme4)
+library(lmerTest)
+#install.packages("emmeans")
+library(emmeans)
+
+getwd()
+Sapwood<-read_xlsx("../Data/Processed/Sapwood/PlotLevelSapwood.xlsx")
+
+```
+
+```{r}
+Sapwood<-Sapwood%>%filter(DOY>151 & DOY<274)
+m0<-lm(SapwoodPerGroundArea~Density*Geno*DOY+(1|Block), data = Sapwood)
+
+m0
+summary(m0)
+aov(m0)
+
+m0a<-aov(SapwoodPerGroundArea~Density*Geno*DOY+(1|Block), data = Sapwood)
+summary(m0a)
+emmeans(m0a, ~Density:Geno,data=Sapwood)
+
+```
