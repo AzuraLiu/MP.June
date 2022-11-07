@@ -27,14 +27,31 @@ Sapwood<-read_xlsx("../Data/Processed/Sapwood/PlotLevelSapwood.xlsx")
 
 ```{r}
 Sapwood<-Sapwood%>%filter(DOY>151 & DOY<274)
-m0<-lm(SapwoodPerGroundArea~Density*Geno*DOY+(1|Block), data = Sapwood)
+Sapwood<-Sapwood[c(1,2,4,5,6,8)]
+m0<-aov(SapwoodPerGroundArea~ID*DOY+(1|Block), data = Sapwood)
 
 m0
 summary(m0)
 aov(m0)
-
+TukeyHSD(m0,"ID")
 m0a<-aov(SapwoodPerGroundArea~Density*Geno*DOY+(1|Block), data = Sapwood)
 summary(m0a)
 emmeans(m0a, ~Density:Geno,data=Sapwood)
 
+```
+
+```{r}
+Increment<-Sapwood%>%filter(DOY == 152 | DOY == 273)
+Increment<-Increment%>%pivot_wider(names_from="DOY", values_from="SapwoodPerGroundArea")
+names(Increment)[5]<-"Start"
+names(Increment)[6]<-"End"
+
+Increment<- Increment%>%mutate(Increment= End-Start)
+
+m1<-aov(Increment~Density*Geno+(1|Block), data = Increment)
+
+m1
+TukeyHSD(m1)
+summary(m1)
+emmeans(m1, ~Density:Geno,data=Increment)
 ```

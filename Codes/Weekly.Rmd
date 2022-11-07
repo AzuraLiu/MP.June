@@ -1,0 +1,80 @@
+---
+title: "Weekly"
+author: "Azura Liu"
+date: "2022-11-07"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rstatix)
+library("dplyr")
+library("tidyverse")
+library("lubridate")
+library("readxl")
+library(writexl)
+library(datarium)
+library(lme4)
+library(lmerTest)
+library(emmeans)
+library(drc)
+library(nlme)
+library(nlstools)
+library(multcomp)
+library(ggpubr)
+
+getwd()
+Sapflow<-read_xlsx("../Data/Processed/Daytime/sapflow/WeeklyAverages.xlsx")
+```
+
+```{r}
+Low<-Sapflow%>%filter(Density== "L")
+High<-Sapflow%>%filter(Density == "H")
+
+summary(High)
+summary(Low)
+
+```
+
+
+```{r}
+HighDensity<-ggplot(High,aes(x=Week, y=SapflowPerGroundArea))+
+  geom_point(aes( color = Geno, shape=Density), size = 5)+
+  geom_line(aes(color=Geno, group=Geno),size=2)+
+  scale_y_continuous(name = "Sapflow (L/m^2)")+
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_text(size = 20))+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20))+ theme(axis.text = element_text(size = 20)) 
+
+LowDensity<-ggplot(Low,aes(x=Week, y=SapflowPerGroundArea))+
+  geom_point(aes( color = Geno, shape=Density),size = 5)+
+  geom_line(aes(color=Geno, group=Geno),linetype=2,size=2)+
+  scale_y_continuous(name = "Sapflow(L/m^2)")+
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_text(size = 20))+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20)) + theme(axis.text = element_text(size = 20)) 
+
+
+HighDensity
+LowDensity
+
+Weekly<-ggarrange(HighDensity,LowDensity+ rremove("x.text"), common.legend = TRUE,
+          labels = c("High Density", "Low Density"),
+          ncol = 1, nrow = 2)
+Weekly
+ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/Weekly.jpg",  Weekly, height = 10, width = 20, units = "in", dpi = 200)
+```
+
+
+```{r}
+
+
+```
+
+
+```{r}
+
+
+```

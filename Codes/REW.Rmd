@@ -48,8 +48,8 @@ names(REW)[1]<-"DOY"
 names(REW)[2]<-"Density"
 
 Environ<-ggplot(REW,aes(x=DOY))+
-  geom_point(aes(y=REW, color = Density),size = 4)+
-  geom_point(aes(y=VPD, color = "VPD"),size = 4)+
+  geom_line(aes(y=REW, color = Density),size = 4)+
+  geom_line(aes(y=VPD, color = "VPD"),size = 4)+
   scale_y_continuous(
     name = "REW",
     sec.axis = sec_axis(~.,name = "VPD")
@@ -58,12 +58,18 @@ Environ<-ggplot(REW,aes(x=DOY))+
   theme(axis.title.x = element_text(size = 20))+
   theme(legend.text = element_text(size = 20))+ 
   theme(legend.title = element_text(size = 20)) +
-  guides(shape = guide_legend(override.aes = list(size = 40)))
-Environ
-ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REWnVPD.jpg",  Environ, height = 10, width = 20, units = "in", dpi = 200)
+  guides(shape = guide_legend(override.aes = list(size = 40)))+guides(color = guide_legend(title = ""))
 
+Environ
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REWnVPD2.jpg",  Environ, height = 10, width = 20, units = "in", dpi = 200)
+summary(Sapflow)
 Join<-inner_join(Sapflow, REW, by=c("DOY","ID"))%>%
   select(1:13)
+Low<-Sapflow%>%filter(Density== "L")
+High<-Sapflow%>%filter(Density == "H")
+
+summary(High)
+summary(Low)
 
 names(Join)[13]<-"REW"
 Join$SoMo<-as.factor(ifelse(Join$REW <0.4, 'Dry',
@@ -154,15 +160,54 @@ tapply(High$SapflowPerGroundArea, High$ID, mean)
 ```
 
 ```{r}
-
-VPD.group<-ggplot(Join, aes(x=VPD, y=SapflowPerGroundArea, shape=ID, color=ID)) + 
-  geom_point(size=4, alpha=0.5)+
-  stat_smooth(method=lm, size=3)+
-  xlab("VPD")+ylab("Sapflow per Ground Area (L/m^2)")+
+NonZero<-Sapflow%>%filter(VPD>0)
+names(NonZero)[7]<-"Genotype"
+VPD.group<-ggplot(NonZero, aes(x=VPD, y=SapflowPerGroundArea, shape=Density, linetype=Density,color=Genotype)) + 
+  geom_point(size=4, alpha=0.3)+
+  stat_smooth(method=lm, formula=y~log(x), size=5, se=FALSE)+
+  xlab("VPD")+ylab("Sapflow (L/m^2)")+
  theme(text = element_text(size = 30),legend.key.size = unit(3, 'cm'))
 
 VPD.group
-ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/VPD/VPDbyGroup.jpg",  VPD.group, height = 20, width = 20, units = "in", dpi = 100)
+
+REW.group<-ggplot(NonZero, aes(x=REW, y=SapflowPerGroundArea, shape=Density, linetype=Density, color=Genotype)) + 
+  geom_point(size=4, alpha=0.3)+
+  stat_smooth(method=lm, formula=y~log(x), size=5, se=FALSE)+
+  xlab("REW")+ylab("Sapflow (L/m^2)")+
+ theme(text = element_text(size = 30),legend.key.size = unit(3, 'cm'))
+
+REW.group
+
+
+
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REWbyGroup.jpg", REW.group, height = 20, width = 20, units = "in", dpi = 100)
+
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/VPDbyGroup.jpg", VPD.group, height = 20, width = 20, units = "in", dpi = 100)
+
+Comparison<-ggarrange(VPD.group,REW.group+ rremove("x.text"), common.legend = TRUE,
+          labels = c("VPD","REW"),
+          ncol = 1, nrow = 2)
+Comparison 
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Comparison.jpg", Comparison, height = 30, width = 20, units = "in", dpi = 100)
+
+```
+
+```{r}
+summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "HA", ]))
+summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "LA", ]))
+summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "HB", ]))
+summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "LB", ]))
+summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "HC", ]))
+summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "LC", ]))
+summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "HO", ]))
+summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "LO", ]))
+
+
+```
+
+```{r}
+
+
 
 
 VPD.group<-ggplot(Join, aes(x=VPD, y=log(SapflowPerGroundArea), shape=ID, color=ID)) + 

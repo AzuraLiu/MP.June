@@ -289,17 +289,23 @@ names(PlotLevelSapwood)[1]<-"DOY"
 names(PlotLevelSapwood)[2]<-"ID"
 names(PlotLevelSapwood)[3]<-"Sapwood"
 
-PlotLevelSapwoodArea<-ggplot(PlotLevelSapwood, aes(DOY))+
+PlotLevelSapwood<-PlotLevelSapwood%>%mutate(Density=substr(PlotLevelSapwood$ID,1,1))
+
+PlotLevelSapwood<-PlotLevelSapwood%>%mutate(Genotype=str_sub(PlotLevelSapwood$ID,-1,-1))
+
+
+
+PlotLevelSapwoodArea<-ggplot(PlotLevelSapwood, aes(x=DOY, y=Sapwood, color=Genotype, linetype=Density))+
   scale_x_continuous()+
-  geom_point(aes(y=Sapwood, color=ID))+
-  xlab("DOY")+ylab("Sapwood per Ground Area (cm^2/m^2)")+
+  geom_line(size=3)+
+  xlab("DOY")+ylab("Sapwood (cm^2/m^2)")+
    theme(text = element_text(size = 20))+
    geom_vline(xintercept = 152)+
   geom_vline(xintercept = 273)
 
 PlotLevelSapwoodArea
 
-ggsave("../Data/Processed/Sapwood/SapwoodPerGroundGS.jpeg", PlotLevelSapwoodArea, height = 7, width = 10, units = "in", dpi = 500)
+ggsave("../Data/Processed/Sapwood/SapwoodPerGroundLegend.jpeg", PlotLevelSapwoodArea, height = 7, width = 10, units = "in", dpi = 500)
 ```
 
 
