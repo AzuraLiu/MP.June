@@ -162,6 +162,22 @@ tapply(High$SapflowPerGroundArea, High$ID, mean)
 ```{r}
 NonZero<-Sapflow%>%filter(VPD>0)
 names(NonZero)[7]<-"Genotype"
+
+
+
+
+
+HA<-Raw%>%filter(Treatment == "HA")
+LA<-Raw%>%filter(Treatment == "LA")
+HB<-Raw%>%filter(Treatment == "HB")
+LB<-Raw%>%filter(Treatment == "LB")
+HC<-Raw%>%filter(Treatment == "HC")
+LC<-Raw%>%filter(Treatment == "LC")
+HO<-Raw%>%filter(Treatment == "HO")
+LO<-Raw%>%filter(Treatment == "LO")
+```
+
+```{r}
 VPD.group<-ggplot(NonZero, aes(x=VPD, y=SapflowPerGroundArea, shape=Density, linetype=Density,color=Genotype)) + 
   geom_point(size=4, alpha=0.3)+
   stat_smooth(method=lm, formula=y~log(x), size=5, se=FALSE)+
@@ -184,7 +200,7 @@ ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REWbyGroup.jpg", REW.group, 
 
 ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/VPDbyGroup.jpg", VPD.group, height = 20, width = 20, units = "in", dpi = 100)
 
-Comparison<-ggarrange(VPD.group,REW.group+ rremove("x.text"), common.legend = TRUE,
+Comparison<-ggarrange(VPD.group,REW.group, common.legend = TRUE,
           labels = c("VPD","REW"),
           ncol = 1, nrow = 2)
 Comparison 
@@ -193,7 +209,10 @@ ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Comparison.jpg", Comparison,
 ```
 
 ```{r}
-summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "HA", ]))
+summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "HA"&NonZero$Block=="1", ]))
+summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "HA"&NonZero$Block=="2", ]))
+summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "HA"&NonZero$Block=="3", ]))
+summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "HA"&NonZero$Block=="4", ]))
 summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "LA", ]))
 summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "HB", ]))
 summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "LB", ]))
@@ -201,6 +220,7 @@ summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "HC", ]))
 summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "LC", ]))
 summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "HO", ]))
 summary(lm(SapflowPerGroundArea ~ log(REW), NonZero[NonZero$ID == "LO", ]))
+
 
 
 ```

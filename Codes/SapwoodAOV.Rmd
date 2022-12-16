@@ -28,6 +28,7 @@ Sapwood<-read_xlsx("../Data/Processed/Sapwood/PlotLevelSapwood.xlsx")
 ```{r}
 Sapwood<-Sapwood%>%filter(DOY>151 & DOY<274)
 Sapwood<-Sapwood[c(1,2,4,5,6,8)]
+
 m0<-aov(SapwoodPerGroundArea~ID*DOY+(1|Block), data = Sapwood)
 
 m0

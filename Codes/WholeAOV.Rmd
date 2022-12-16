@@ -35,12 +35,20 @@ library(emmeans)
 
 
 getwd()
-Sapflow<-read_xlsx("../Data/Processed/Daytime/sapflow/Join_4Blocks.xlsx")
+Sapflow<-read_xlsx("../Data/Processed/Daytime/sapflow/Join_4Blocks.xlsx")%>%mutate("ratio"=Increment/Sapflow)
+```
+
+```{r}
+m0<-aov(ratio~Density*Geno+(1|Block), data = Sapflow)
+
+
+emmeans(m0, ~Density:Geno,data=Sapflow)
 
 ```
 
 ```{r}
-m0<-aov(SapflowPerGroundArea~REW+ID+(1|Block), data = Sapflow)
+m0<-aov(~Density*Geno+(1|DOY)+(1|Block), data = Sapflow)
+TukeyHSD(m0)
 
 Anova(m0,type="II")
 
@@ -52,7 +60,7 @@ summary(m0)
 aov(m0)
 
 m0a<-aov(SapflowPerGroundArea~Density*Geno*DOY+(1|Block), data = Sapflow)
-emmeans(m0a, ~Density:Geno,data=Sapflow)
+emmeans(m0, ~Density:Geno,data=Sapflow)
 
 ```
 

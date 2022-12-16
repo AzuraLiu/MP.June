@@ -25,7 +25,65 @@ library(ggpubr)
 
 getwd()
 Sapflow<-read_xlsx("../Data/Processed/Daytime/sapflow/WeeklyAverages.xlsx")
+names(Sapflow)[3]<-"Genotype"
+Sapflow<-Sapflow%>%mutate(Treatment = paste0(Density,Genotype))
 ```
+
+```{r}
+HA<-Sapflow%>%filter(Treatment == "HA")
+LA<-Sapflow%>%filter(Treatment == "LA")
+HB<-Sapflow%>%filter(Treatment == "HB")
+LB<-Sapflow%>%filter(Treatment == "LB")
+HC<-Sapflow%>%filter(Treatment == "HC")
+LC<-Sapflow%>%filter(Treatment == "LC")
+HO<-Sapflow%>%filter(Treatment == "HO")
+LO<-Sapflow%>%filter(Treatment == "LO")
+
+VPD.group<-ggplot(Sapflow, aes(x=VPD, y=SapflowPerGroundArea, shape=Genotype, linetype=Density,color=Genotype)) + 
+  geom_point(size=9, alpha=0.5)+
+  stat_smooth(method=lm, formula=y~log(x), size=5, se=FALSE)+
+  xlab("VPD (kPa)")+ylab("Sapflow (L/m^2)")+
+ theme(text = element_text(size = 40),legend.key.size = unit(3, 'cm'))
+
+VPD.group
+
+REW.group<-ggplot(Sapflow, aes(x=REW, y=SapflowPerGroundArea, shape=Genotype, linetype=Density, color=Genotype)) + 
+  geom_point(size=9, alpha=0.5)+
+  stat_smooth(method=lm, formula=y~log(x), size=5, se=FALSE)+
+  xlab("REW")+ylab("Sapflow (L/m^2)")+
+ theme(text = element_text(size = 40),legend.key.size = unit(3, 'cm'))
+
+REW.group
+
+
+
+#ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/REWbyGroup.jpg", REW.group, height = 20, width = 20, units = "in", dpi = 100)
+
+#ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/VPDbyGroup.jpg", VPD.group, height = 20, width = 20, units = "in", dpi = 100)
+
+Comparison<-ggarrange(VPD.group,REW.group, common.legend = TRUE,
+          labels = c("VPD","REW"),font.label = list(size = 40),
+          ncol = 1, nrow = 2)
+Comparison 
+ggsave("../Data/Processed/Daytime/sapflow/plots/ENV/Comparison.jpg", Comparison, height = 30, width = 20, units = "in", dpi = 100)
+
+```
+
+```{r}
+
+
+summary(lm(SapflowPerGroundArea ~ log(VPD), HA[Sapflow$Block == "1", ]))
+summary(lm(SapflowPerGroundArea ~ log(VPD), Sapflow[Sapflow$ID == "LA", ]))
+summary(lm(SapflowPerGroundArea ~ log(VPD), Sapflow[Sapflow$ID == "HB", ]))
+summary(lm(SapflowPerGroundArea ~ log(VPD), Sapflow[Sapflow$ID == "LB", ]))
+summary(lm(SapflowPerGroundArea ~ log(VPD), Sapflow[Sapflow$ID == "HC", ]))
+summary(lm(SapflowPerGroundArea ~ log(VPD), Sapflow[Sapflow$ID == "LC", ]))
+summary(lm(SapflowPerGroundArea ~ log(VPD), Sapflow[Sapflow$ID == "HO", ]))
+summary(lm(SapflowPerGroundArea ~ log(VPD), Sapflow[Sapflow$ID == "LO", ]))
+
+
+```
+
 
 ```{r}
 Low<-Sapflow%>%filter(Density== "L")
@@ -39,18 +97,20 @@ summary(Low)
 
 ```{r}
 HighDensity<-ggplot(High,aes(x=Week, y=SapflowPerGroundArea))+
-  geom_point(aes( color = Geno, shape=Density), size = 5)+
-  geom_line(aes(color=Geno, group=Geno),size=2)+
+  geom_point(aes( color = Genotype, shape=Genotype), size = 5)+
+  geom_line(aes(color=Genotype, group=Genotype),size=2)+
   scale_y_continuous(name = "Sapflow (L/m^2)")+
+  ylim(0, 3.5)+
   theme(axis.title.y = element_text(size = 20))+ 
   theme(axis.title.x = element_text(size = 20))+
   theme(legend.text = element_text(size = 20))+ 
   theme(legend.title = element_text(size = 20))+ theme(axis.text = element_text(size = 20)) 
 
 LowDensity<-ggplot(Low,aes(x=Week, y=SapflowPerGroundArea))+
-  geom_point(aes( color = Geno, shape=Density),size = 5)+
-  geom_line(aes(color=Geno, group=Geno),linetype=2,size=2)+
+  geom_point(aes( color = Genotype, shape=Genotype),size = 5)+
+  geom_line(aes(color=Genotype, group=Genotype),linetype=2,size=2)+
   scale_y_continuous(name = "Sapflow(L/m^2)")+
+  ylim(0, 3.5)+
   theme(axis.title.y = element_text(size = 20))+ 
   theme(axis.title.x = element_text(size = 20))+
   theme(legend.text = element_text(size = 20))+ 
@@ -61,7 +121,7 @@ HighDensity
 LowDensity
 
 Weekly<-ggarrange(HighDensity,LowDensity+ rremove("x.text"), common.legend = TRUE,
-          labels = c("High Density", "Low Density"),
+          labels = c("High Density", "Low Density"),font.label = list(size = 30),
           ncol = 1, nrow = 2)
 Weekly
 ggsave("../Data/Processed/Daytime/sapflow/plots/SapflowPerGroundArea/Weekly.jpg",  Weekly, height = 10, width = 20, units = "in", dpi = 200)

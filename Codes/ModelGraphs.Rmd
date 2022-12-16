@@ -32,44 +32,67 @@ Means<-read_excel("../Data/Processed/Daytime/sapflow/SapwoodAOV.xlsx")
 
 ```{r}
 
-data_summary <- function(Means, Sapflux, groupnames){
-  require(plyr)
-  summary_func <- function(x, col){
-    c(mean = mean(x[[col]], na.rm=TRUE),
-      sd = sd(x[[col]], na.rm=TRUE))
-  }
-  data_sum<-ddply(data, groupnames, .fun=summary_func,
-                  varname)
-  data_sum <- rename(data_sum, c("mean" = varname))
- return(data_sum)
-}
-
 
 
 Sapflux<-ggplot(data=Means, aes(x=Genotype,y=Sapflux,fill=Density))+
   geom_bar(stat="identity",position=position_dodge())+
   ylab("Sapflux (g/m^2/s)")+
-  geom_errorbar(aes(ymin=Sapflux-sd, ymax=Sapflux+sd), width=.2,
-                 position=position_dodge(.9)) 
-
+  geom_errorbar(aes(ymin=Sapflux-40, ymax=Sapflux+40), width=.2,
+                 position=position_dodge(.9)) +
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_blank())+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20))+ 
+ theme(axis.text.x = element_blank(),
+          axis.text.y = element_text(size=20))+
+  theme(plot.margin = margin(1,0.5,1,0.5, "cm"))
 
 Sapflux
+
 Sapwood<-ggplot(data=Means, aes(x=Genotype,y=Sapwood,fill=Density))+
   geom_bar(stat="identity",position=position_dodge())+
-  ylab("Sapwood (cm^2/m^2)")
+  ylab("Sapwood (cm^2/m^2)")+
+  geom_errorbar(aes(ymin=Sapwood-0.0878, ymax=Sapwood+0.0878), width=.2,
+                 position=position_dodge(.9)) +
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_blank())+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20))+ 
+ theme(axis.text.x = element_blank(),
+          axis.text.y = element_text(size=20))+
+  theme(plot.margin = margin(1,0.5,1,0.5, "cm"))
 
 
 SapwoodIncrement<-ggplot(data=Means, aes(x=Genotype,y=Means$`Sapwood Increment`,fill=Density))+
   geom_bar(stat="identity",position=position_dodge())+
-  ylab("Sapwood Increment(cm^2/m^2)")
+  ylab("Sapwood Increment(cm^2/m^2)")+
+  geom_errorbar(aes(ymin=Means$`Sapwood Increment`-0.189, ymax=Means$`Sapwood Increment`+0.189), width=.2,
+                 position=position_dodge(.9)) +
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_text(size=20))+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20))+ 
+ theme(axis.text.x = element_text(size=20),
+          axis.text.y = element_text(size=20))+
+  theme(plot.margin = margin(1,0.5,1,0.5, "cm"))
 
 Sapflow<-ggplot(data=Means, aes(x=Genotype,y=Sapflow,fill=Density))+
   geom_bar(stat="identity",position=position_dodge())+
-  ylab("Sapflow(L/m^2)")
+  ylab("Sapflow(L/m^2)")+
+  geom_errorbar(aes(ymin=Sapflow-0.0275, ymax=Sapflow+0.0275), width=.2,
+                 position=position_dodge(.9)) +
+  theme(axis.title.y = element_text(size = 20))+ 
+  theme(axis.title.x = element_text(size=20))+
+  theme(legend.text = element_text(size = 20))+ 
+  theme(legend.title = element_text(size = 20))+ 
+ theme(axis.text.x = element_text(size=20),
+          axis.text.y = element_text(size=20))+
+  theme(plot.margin = margin(1,0.5,1,0.5, "cm"))
 
-Comparison<-ggarrange(Sapflux,Sapwood,SapwoodIncrement,Sapflow+ rremove("x.text"), common.legend = TRUE,
-          labels = c("Sapflux", "Sapwood Area","Sapwood Increment","Sapflow"),
-          ncol = 2, nrow = 2)
+Sapflow
+Comparison<-ggarrange(Sapflux,Sapwood,SapwoodIncrement,Sapflow, common.legend = TRUE,
+          labels = c("Sapflux", "Sapwood Area","Sapwood Increment","Sapflow"),font.label = list(size = 20),hjust=-0.5,
+          ncol = 2, nrow = 2,align="v")
 Comparison
 ggsave("../Data/Processed/Daytime/sapflow/Comparison.jpg",  Comparison, height = 10, width = 20, units = "in", dpi = 200)
 ```
